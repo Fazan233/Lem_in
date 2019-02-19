@@ -47,7 +47,7 @@ t_verticle	*partition(t_verticle **start, t_verticle **finish)
 				swap_2link_item(&iter, &target);
 				opt = !opt;
 			}
-		if (opt) 
+		if (opt)
 			iter = iter->prev;
 		else
 			iter = iter->next;

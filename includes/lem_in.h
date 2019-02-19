@@ -63,5 +63,7 @@ typedef struct			s_used_vert
 	struct s_used_vert	*next;
 }						t_used_vert;
 
+void		swap_2link_item(t_verticle **a, t_verticle **b);
+void		quick_sort(t_verticle *start, t_verticle *finish);
 
 #endif

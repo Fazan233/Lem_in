@@ -5,6 +5,8 @@
 #ifndef LEM_IN_H
 #define LEM_IN_H
 
+#include "ft_printf.h"
+
 typedef struct			s_lemin
 {
 	int					ants;
@@ -65,5 +67,6 @@ typedef struct			s_used_vert
 
 void		swap_2link_item(t_verticle **a, t_verticle **b);
 void		quick_sort(t_verticle *start, t_verticle *finish);
+void	print_list(t_verticle *start, t_verticle *end);
 
 #endif

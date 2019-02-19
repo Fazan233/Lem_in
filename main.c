@@ -24,14 +24,16 @@ int main()
 	lst[3].weight = 23;
 	lst[4].weight = 32;
 
+	print_list(&lst[0], &lst[4]);
 	quick_sort(&lst[0], &lst[4]);
-	int i = 0;
-	ls = &lst[1];
-	while (i < 5)
-	{
-		ft_printf("%d\n", ls->weight);
-		ls = ls->next;
-		i++;
-	}
+	print_list(&lst[1], &lst[2]);
+//	int i = 0;
+//	ls = &lst[1];
+//	while (i < 5)
+//	{
+//		ft_printf("%d\n", ls->weight);
+//		ls = ls->next;
+//		i++;
+//	}
 	return 0;
 }

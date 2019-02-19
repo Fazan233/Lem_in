@@ -10,4 +10,4 @@ add_library(LIBFT STATIC ${LIB_SRCS} ${PF_SRCS})
 # Specify the foulder with headers for library (or executable)
 target_include_directories(LIBFT PUBLIC ./includes)
 # Specify compile options for library
-target_compile_options(LIBFT PUBLIC -Wall -Wextra -Werror)
+target_compile_options(LIBFT PUBLIC -Wall -Wextra)

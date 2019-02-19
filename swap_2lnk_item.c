@@ -22,10 +22,13 @@ void		swap_2link_item(t_verticle **a, t_verticle **b)
 		tmp = (*a)->prev;
 		(*a)->prev->next = *b;
 		(*b)->next->prev = *a;
-		(*a)->prev = *b;
-		(*a)->next = (*b)->next;
-		(*b)->prev = tmp->next;
-		(*b)->next = *a;
+//		(*a)->prev = *b;
+//		(*b)->next = *a;
+//		(*a)->next = (*b)->next;
+//		(*b)->prev = tmp;
+		swap_pointer(&(*a)->prev, &(*b)->next);
+		swap_pointer(&(*a)->next, &(*a)->prev);
+		swap_pointer(&(*b)->next, &(*b)->prev);
 	}
 	else
 	{

@@ -31,6 +31,7 @@ t_verticle	*partition(t_verticle **start, t_verticle **finish)
 					*finish = target;
 				swap_2link_item(&target, &iter);
 				opt = !opt;
+				print_list(*start, *finish);
 			}
 		}
 		else
@@ -46,6 +47,7 @@ t_verticle	*partition(t_verticle **start, t_verticle **finish)
 					*finish = target;
 				swap_2link_item(&iter, &target);
 				opt = !opt;
+				print_list(*start, *finish);
 			}
 		if (opt)
 			iter = iter->prev;

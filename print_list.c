@@ -2,6 +2,7 @@
 // Created by User on 19.02.2019.
 //
 
+#include <printf.h>
 #include "lem_in.h"
 
 void	print_list(t_verticle *start, t_verticle *end)

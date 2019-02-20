@@ -1,39 +1,43 @@
-#include <ft_printf.h>
+#include <fcntl.h>
 #include "lem_in.h"
+#define SIZE 10
+
+
 
 int main()
 {
-	t_verticle lst[5];
-	t_verticle *ls;
-
-	lst[0].next = &lst[1];
-	lst[1].next = &lst[2];
-	lst[2].next = &lst[3];
-	lst[3].next = &lst[4];
-	lst[4].next = &lst[0];
-
-	lst[0].prev = &lst[4];
-	lst[1].prev = &lst[0];
-	lst[2].prev = &lst[1];
-	lst[3].prev = &lst[2];
-	lst[4].prev = &lst[3];
-
-	lst[0].weight = 25;
-	lst[1].weight = 11;
-	lst[2].weight = 83;
-	lst[3].weight = 23;
-	lst[4].weight = 32;
-
-	print_list(&lst[0], &lst[4]);
-	quick_sort(&lst[0], &lst[4]);
-	print_list(&lst[1], &lst[2]);
-//	int i = 0;
-//	ls = &lst[1];
-//	while (i < 5)
+//	t_verticle	*vert;
+//	int 		fd;
+////	char 		*line;
+//	srandom(836661);
+//	fd = open("verts", O_RDONLY);
+//	vert = NULL;
+//	unsigned long i = 0;
+//	while (i < 10000)
 //	{
-//		ft_printf("%d\n", ls->weight);
-//		ls = ls->next;
+//		add_new_vert(&vert, create_new_vert(random() % 20));
 //		i++;
 //	}
+//	print_list(vert, vert->prev);
+//	vert = quick_sort(vert, vert->prev);
+//	print_list(vert, vert->prev);
+
+	int *mas;
+	int i;
+
+	mas = (int*)malloc(sizeof(int) * SIZE);
+	i = 0;
+	while (i < SIZE)
+	{
+		mas[i] = random() % 10000;
+		i++;
+	}
+	quick_sort_for_intmas(mas, mas + SIZE - 1);
+	i = 0;
+	while (i < SIZE)
+	{
+		ft_printf("%d ", mas[i]);
+		i++;
+	}
 	return 0;
 }

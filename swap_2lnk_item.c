@@ -4,7 +4,7 @@
 
 #include "lem_in.h"
 
-static void	swap_pointer(t_verticle **a, t_verticle **b)
+void		swap_pointer(t_verticle **a, t_verticle **b)
 {
 	t_verticle	*tmp;
 
@@ -15,31 +15,18 @@ static void	swap_pointer(t_verticle **a, t_verticle **b)
 
 void		swap_2link_item(t_verticle **a, t_verticle **b)
 {
-	t_verticle	*tmp;
-
+	(*a)->prev->next = *b;
+	(*b)->next->prev = *a;
 	if ((*a)->next == *b || (*a)->prev == *b)
 	{
-		tmp = (*a)->prev;
-		(*a)->prev->next = *b;
-		(*b)->next->prev = *a;
-//		(*a)->prev = *b;
-//		(*b)->next = *a;
-//		(*a)->next = (*b)->next;
-//		(*b)->prev = tmp;
 		swap_pointer(&(*a)->prev, &(*b)->next);
 		swap_pointer(&(*a)->next, &(*a)->prev);
 		swap_pointer(&(*b)->next, &(*b)->prev);
 	}
 	else
 	{
-		//	if ((*a)->prev->next != *b)
-		(*a)->prev->next = *b;
-//	if ((*a)->next->prev != *b)
 		(*a)->next->prev = *b;
-//	if ((*b)->prev->next != *a)
 		(*b)->prev->next = *a;
-//	if ((*b)->next->prev != *a)
-		(*b)->next->prev = *a;
 		swap_pointer(&(*a)->next, &(*b)->next);
 		swap_pointer(&(*a)->prev, &(*b)->prev);
 	}

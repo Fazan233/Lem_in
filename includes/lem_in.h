@@ -65,8 +65,19 @@ typedef struct			s_used_vert
 	struct s_used_vert	*next;
 }						t_used_vert;
 
+typedef struct			s_partition
+{
+	t_verticle	*target;
+	t_verticle	*iter;
+	int			opt;
+}						t_partition;
+
 void		swap_2link_item(t_verticle **a, t_verticle **b);
-void		quick_sort(t_verticle *start, t_verticle *finish);
-void	print_list(t_verticle *start, t_verticle *end);
+t_verticle	*quick_sort(t_verticle *start, t_verticle *finish);
+void		print_list(t_verticle *start, t_verticle *end);
+void		add_new_vert(t_verticle **vert, t_verticle *new_vert);
+t_verticle	*create_new_vert(int weight);
+void	swap_pointer(t_verticle **a, t_verticle **b);
+void	quick_sort_for_intmas(int *start, int *finish);
 
 #endif

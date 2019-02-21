@@ -4,6 +4,7 @@
 
 #ifndef LEM_IN_H
 #define LEM_IN_H
+#define INF 2000000000
 
 #include "ft_printf.h"
 

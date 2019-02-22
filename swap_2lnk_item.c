@@ -15,8 +15,10 @@ void		swap_pointer(t_verticle **a, t_verticle **b)
 
 void		swap_2link_item(t_verticle **a, t_verticle **b)
 {
-	(*a)->prev->next = *b;
-	(*b)->next->prev = *a;
+	if ((*a)->prev)
+		(*a)->prev->next = *b;
+	if ((*a)->next)
+		(*b)->next->prev = *a;
 	if ((*a)->next == *b || (*a)->prev == *b)
 	{
 		swap_pointer(&(*a)->prev, &(*b)->next);

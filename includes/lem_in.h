@@ -80,5 +80,7 @@ void		add_new_vert(t_verticle **vert, t_verticle *new_vert);
 t_verticle	*create_new_vert(int weight);
 void	swap_pointer(t_verticle **a, t_verticle **b);
 void	quick_sort_for_intmas(int *start, int *finish);
+t_verticle		*get_min_vert(t_verticle *v);
+void	add_new_vert_to_way(t_way **way, t_verticle *vert);
 
 #endif

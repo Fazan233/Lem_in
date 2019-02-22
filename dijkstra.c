@@ -6,13 +6,14 @@
 #define BELONG_TO_EDGE (curr_vert == edge->a || curr_vert == edge->b)
 #define GET_OTHER_VERT(curr, edge) curr == edge->a ? edge->b : edge->a
 
-void	set_begin_vals(t_verticle *v, t_lemin *lem, t_edge **edge)
+void	set_begin_vals(t_verticle **v, t_lemin *lem, t_edge **edge)
 {
-	while (v != NULL)
+	t_verticle	*begin = *v;
+	while (begin != NULL)
 	{
-		v->weight = INF;
-		v->short_way = NULL;
-		v = v->next;
+		begin->weight = INF;
+		begin->short_way = NULL;
+		begin = begin->next;
 	}
 	lem->start_vert->weight = 0;
 	if (lem->start_vert->prev)
@@ -20,23 +21,25 @@ void	set_begin_vals(t_verticle *v, t_lemin *lem, t_edge **edge)
 		lem->start_vert->prev->next = lem->start_vert->next;
 		if (lem->start_vert->next)
 			lem->start_vert->next->prev = lem->start_vert->prev;
-		while (v->prev != NULL)
-			v = v->prev;
-		lem->start_vert->next = v;
+		lem->start_vert->next = *v;
 		lem->start_vert->prev = NULL;
+		(*v)->prev = lem->start_vert; //kostyl
 	}
 	*edge = lem->graph;
+	*v = lem->start_vert;
 }
 // take second elem of list!!
 void	dijkstra_sort(t_verticle *v)
 {
 	t_verticle	*tmp;
 
-	while (v && v->weight >= v->prev->weight)
+	if (!v)
+		return ;
+	while (v && v->prev && v->weight >= v->prev->weight)
 		v = v->next;
 	tmp = v->prev;
 	if (v)
-		while (tmp->prev)
+		while (tmp && tmp->prev)
 		{
 			if (tmp->weight <= v->weight)
 			{
@@ -73,7 +76,7 @@ t_way	*dijkstra(t_verticle *v, t_lemin *lem)
 	t_verticle	*other_vert;
 	t_edge		*edge;
 
-	set_begin_vals(v, lem, &edge);
+	set_begin_vals(&v, lem, &edge);
 	while (1)
 	{
 		curr_vert = get_min_vert(lem->start_vert);
@@ -86,7 +89,7 @@ t_way	*dijkstra(t_verticle *v, t_lemin *lem)
 				curr_vert->weight + 1 < other_vert->weight)
 			{
 				other_vert->weight = curr_vert->weight + 1;
-				dijkstra_sort(lem->start_vert);
+				dijkstra_sort(v->next);
 				other_vert->short_way = edge;
 			}
 			edge = edge->next;

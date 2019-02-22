@@ -4,7 +4,7 @@
 
 #include "lem_in.h"
 
-t_verticle	*create_new_vert(int weight)
+t_verticle	*create_new_vert(char *name)
 {
 	t_verticle	*vert;
 
@@ -13,7 +13,7 @@ t_verticle	*create_new_vert(int weight)
 	{
 		vert->next = NULL;
 		vert->prev = NULL;
-		vert->weight = weight;
+		vert->name = ft_strdup(name);
 		return (vert);
 	}
 	ft_printf("Memory didn't allocate (");
@@ -23,19 +23,46 @@ t_verticle	*create_new_vert(int weight)
 void	add_new_vert(t_verticle **vert, t_verticle *new_vert)
 {
 	if (*vert == NULL)
-	{
 		*vert = new_vert;
-		(*vert)->next = *vert;
-		(*vert)->prev = *vert;
-	}
 	else
 	{
-		new_vert->next = *vert;
-		new_vert->prev = (*vert)->prev;
-		(*vert)->prev->next = new_vert;
-		if (new_vert->prev == (*vert))
-			(*vert)->next = new_vert;
 		(*vert)->prev = new_vert;
+		new_vert->next = (*vert);
+		*vert = new_vert;
+//		new_vert->next = *vert;
+//		new_vert->prev = (*vert)->prev;
+//		(*vert)->prev->next = new_vert;
+//		if (new_vert->prev == (*vert))
+//			(*vert)->next = new_vert;
+//		(*vert)->prev = new_vert;
+	}
+}
+
+t_edge	*create_edge(t_verticle *a, t_verticle *b)
+{
+	t_edge	*edge;
+
+	edge = (t_edge*)malloc(sizeof(t_edge));
+	if (edge)
+	{
+		edge->a = a;
+		edge->b = b;
+		edge->available = 1;
+		edge->next = NULL;
+		return (edge);
+	}
+	ft_printf("Memory couldn't allocate (");
+	exit(1);
+}
+
+void	add_new_edge(t_edge **graph, t_edge *edge)
+{
+	if (*graph == NULL)
+		*graph = edge;
+	else
+	{
+		edge->next = *graph;
+		*graph = edge;
 	}
 }
 
@@ -46,9 +73,8 @@ t_way	*create_new_way(t_verticle *v)
 	way = (t_way*)malloc(sizeof(t_way));
 	if (way)
 	{
-		way->next = NULL;
-		way->prev = NULL;
 		way->vert = v;
+		way->ant = 0;
 		return (way);
 	}
 	ft_printf("Memory couldn't allocate (");

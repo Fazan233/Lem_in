@@ -58,7 +58,7 @@ typedef struct			s_mas_ways
 {
 	int					iter;
 	struct s_ways		*ways;
-	struct s_mas_ways	*naxt;
+	struct s_mas_ways	*next;
 }						t_mas_ways;
 
 typedef struct			s_used_vert
@@ -85,7 +85,10 @@ t_verticle		*get_min_vert(t_verticle *v);
 void	add_new_vert_to_way(t_way **way, t_verticle *vert);
 void	add_new_edge(t_edge **graph, t_edge *edge);
 t_edge	*create_edge(t_verticle *a, t_verticle *b);
-t_way	*dijkstra(t_verticle *v, t_lemin *lem);
+t_way	*dijkstra(t_lemin *lem);
 void	print_way(t_way *way);
+void	add_new_way_to_ways(t_ways **ways, t_way *way);
+t_ways		*find_list_ways(t_lemin *lem);
+void	print_ways(t_ways *ways);
 
 #endif

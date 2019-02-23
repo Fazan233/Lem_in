@@ -75,13 +75,13 @@ t_way	*get_short_way(t_lemin *lem)
 	return (way);
 }
 
-t_way	*dijkstra(t_verticle *v, t_lemin *lem)
+t_way	*dijkstra(t_lemin *lem)
 {
 	t_verticle	*curr_vert;
 	t_verticle	*other_vert;
 	t_edge		*edge;
 
-	set_begin_vals(&v, lem, &edge);
+	set_begin_vals(&lem->vert, lem, &edge);
 	while (1)
 	{
 		curr_vert = get_min_vert(lem->start_vert);
@@ -95,7 +95,7 @@ t_way	*dijkstra(t_verticle *v, t_lemin *lem)
 				curr_vert->weight + 1 < other_vert->weight)
 			{
 				other_vert->weight = curr_vert->weight + 1;
-				dijkstra_sort(v->next);
+				dijkstra_sort(lem->vert->next);
 				other_vert->short_way = edge;
 			}
 			edge = edge->next;

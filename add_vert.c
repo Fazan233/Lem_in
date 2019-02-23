@@ -3,6 +3,7 @@
 //
 
 #include "lem_in.h"
+#define ERROR_ALLOCATE "Memory didn't allocate ("
 
 t_verticle	*create_new_vert(char *name)
 {
@@ -16,7 +17,7 @@ t_verticle	*create_new_vert(char *name)
 		vert->name = ft_strdup(name);
 		return (vert);
 	}
-	ft_printf("Memory didn't allocate (");
+	ft_printf(ERROR_ALLOCATE);
 	exit(1);
 }
 
@@ -51,7 +52,7 @@ t_edge	*create_edge(t_verticle *a, t_verticle *b)
 		edge->next = NULL;
 		return (edge);
 	}
-	ft_printf("Memory couldn't allocate (");
+	ft_printf(ERROR_ALLOCATE);
 	exit(1);
 }
 
@@ -77,7 +78,7 @@ t_way	*create_new_way(t_verticle *v)
 		way->ant = 0;
 		return (way);
 	}
-	ft_printf("Memory couldn't allocate (");
+	ft_printf(ERROR_ALLOCATE);
 	exit(1);
 }
 
@@ -102,5 +103,32 @@ void	add_new_vert_to_way(t_way **way, t_verticle *vert)
 			(*way)->prev->next = new_way;
 		(*way)->prev = new_way;
 		*way = new_way;
+	}
+}
+
+void	add_new_way_to_ways(t_ways **ways, t_way *way)
+{
+	t_ways	*tmp;
+
+	tmp = (t_ways*)malloc(sizeof(t_ways));
+	if (tmp)
+	{
+		tmp->way = way;
+		tmp->len = 0;
+		if (*ways == NULL)
+		{
+			tmp->next = NULL;
+			*ways = tmp;
+		}
+		else
+		{
+			tmp->next = *ways;
+			*ways = tmp;
+		}
+	}
+	else
+	{
+		ft_printf(ERROR_ALLOCATE);
+		exit(1);
 	}
 }

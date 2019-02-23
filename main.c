@@ -1,6 +1,5 @@
 #include <fcntl.h>
 #include "lem_in.h"
-#define SIZE 10
 
 t_verticle	*find_vert(t_verticle *v, char *name)
 {
@@ -40,9 +39,9 @@ int main()
 	lem->end_vert = find_vert(vert, "8");
 	lem->graph = graph;
 //	graph->available = 0;
-
-	t_way *way = dijkstra(vert, lem);
-	print_way(way);
+	lem->mas_ways = NULL;
+	t_ways *ways = find_list_ways(lem);
+	print_ways(ways);
 //	print_list(vert, vert->prev);
 //	vert = quick_sort(vert, vert->prev);
 //	print_list(vert, vert->prev);

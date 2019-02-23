@@ -6,8 +6,6 @@
 
 void	print_list(t_verticle *start, t_verticle *end)
 {
-	int	i;
-
 	while (start != end)
 	{
 		ft_printf("%d ", start->weight);
@@ -28,7 +26,7 @@ void	print_way(t_way *way)
 			if (way == end)
 			{
 				ft_printf("{RED}%s{EOC}\n", way->vert->name);
-				break;
+				break ;
 			}
 			if (way == end->next)
 				ft_printf("{GREEN}%s{EOC} -> ", way->vert->name);
@@ -37,5 +35,20 @@ void	print_way(t_way *way)
 			way = way->next;
 		}
 	}
-	ft_printf("The way is not exist\n");
+	else
+		ft_printf("The way is not exist\n");
+}
+
+void	print_ways(t_ways *ways)
+{
+	if (ways)
+	{
+		while (ways)
+		{
+			print_way(ways->way);
+			ways = ways->next;
+		}
+	}
+	else
+		ft_printf("The ways is not exist\n");
 }

@@ -73,7 +73,7 @@ typedef struct			s_partition
 	int			opt;
 }						t_partition;
 
-void		swap_2link_item(t_verticle **a, t_verticle **b);
+void		swap_2link_item(t_verticle *a, t_verticle *b);
 t_verticle	*quick_sort(t_verticle *start, t_verticle *finish);
 void		print_list(t_verticle *start, t_verticle *end);
 void		add_new_vert(t_verticle **vert, t_verticle *new_vert);

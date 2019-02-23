@@ -19,7 +19,6 @@ int main()
 	t_edge		*graph;
 	int 		fd;
 	char 		*line;
-	srandom(836661);
 	fd = open("verts", O_RDONLY);
 	vert = NULL;
 	graph = NULL;

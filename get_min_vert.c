@@ -18,7 +18,7 @@ static void		add_to_used(t_used_vert **used, t_verticle *v)
 			*used = (*used)->next;
 		(*used)->next = (t_used_vert*)malloc(sizeof(t_used_vert));
 		(*used)->next->next = NULL;
-		(*used)->vert = v;
+		(*used)->next->vert = v;
 	}
 }
 
@@ -61,9 +61,9 @@ t_verticle		*get_min_vert(t_verticle *v)
 	{
 		used_tmp = used;
 		while (used_tmp)
-			if (!is_in_used_list(used_tmp, v))
+			if (!is_in_used_list(used, v))
 			{
-				add_to_used(&used, v);
+				add_to_used(&used_tmp, v);
 				return (v);
 			}
 			else

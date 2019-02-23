@@ -33,17 +33,16 @@ void	dijkstra_sort(t_verticle *v)
 {
 	t_verticle	*tmp;
 
+	while (v && v->weight >= v->prev->weight)
+		v = v->next;
 	if (!v)
 		return ;
-	while (v && v->prev && v->weight >= v->prev->weight)
-		v = v->next;
 	tmp = v->prev;
-	if (v)
-		while (tmp && tmp->prev)
+		while (tmp)
 		{
 			if (tmp->weight <= v->weight)
 			{
-				swap_2link_item(&tmp, &v);
+				swap_2link_item(tmp->next, v);
 				return ;
 			}
 			tmp = tmp->prev;
@@ -82,6 +81,7 @@ t_way	*dijkstra(t_verticle *v, t_lemin *lem)
 		curr_vert = get_min_vert(lem->start_vert);
 		if (curr_vert == lem->end_vert || curr_vert == NULL)
 			break ;
+		edge = lem->graph;
 		while (edge)
 		{
 			if (edge->available && BELONG_TO_EDGE &&

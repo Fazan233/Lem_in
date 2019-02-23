@@ -8,7 +8,9 @@
 
 void	set_begin_vals(t_verticle **v, t_lemin *lem, t_edge **edge)
 {
-	t_verticle	*begin = *v;
+	t_verticle	*begin;
+
+	begin = *v;
 	while (begin != NULL)
 	{
 		begin->weight = INF;
@@ -61,6 +63,10 @@ t_way	*get_short_way(t_lemin *lem)
 	while (1)
 	{
 		add_new_vert_to_way(&way, v);
+		if (v == lem->end_vert)
+			way->short_way = NULL;
+		else
+			way->short_way = way->next->vert->short_way;
 		if (v->short_way == NULL)
 			break ;
 		else

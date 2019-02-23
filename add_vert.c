@@ -101,5 +101,6 @@ void	add_new_vert_to_way(t_way **way, t_verticle *vert)
 		else
 			(*way)->prev->next = new_way;
 		(*way)->prev = new_way;
+		*way = new_way;
 	}
 }

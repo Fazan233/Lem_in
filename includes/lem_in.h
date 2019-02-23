@@ -41,6 +41,7 @@ typedef struct			s_edge
 typedef struct			s_way
 {
 	struct s_verticle	*vert;
+	struct s_edge		*short_way;
 	struct s_way		*next;
 	struct s_way		*prev;
 	int					ant;
@@ -85,5 +86,6 @@ void	add_new_vert_to_way(t_way **way, t_verticle *vert);
 void	add_new_edge(t_edge **graph, t_edge *edge);
 t_edge	*create_edge(t_verticle *a, t_verticle *b);
 t_way	*dijkstra(t_verticle *v, t_lemin *lem);
+void	print_way(t_way *way);
 
 #endif

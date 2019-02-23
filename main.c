@@ -24,23 +24,25 @@ int main()
 	graph = NULL;
 	while (get_next_line(fd, &line) > 0)
 		add_new_vert(&vert, create_new_vert(line));
-	add_new_edge(&graph, create_edge(find_vert(vert, "s"), find_vert(vert, "1")));
-	add_new_edge(&graph, create_edge(find_vert(vert, "s"), find_vert(vert, "3")));
-	add_new_edge(&graph, create_edge(find_vert(vert, "s"), find_vert(vert, "5")));
-	add_new_edge(&graph, create_edge(find_vert(vert, "4"), find_vert(vert, "3")));
-	add_new_edge(&graph, create_edge(find_vert(vert, "2"), find_vert(vert, "1")));
+	add_new_edge(&graph, create_edge(find_vert(vert, "1"), find_vert(vert, "2")));
+	add_new_edge(&graph, create_edge(find_vert(vert, "2"), find_vert(vert, "5")));
+	add_new_edge(&graph, create_edge(find_vert(vert, "3"), find_vert(vert, "6")));
+	add_new_edge(&graph, create_edge(find_vert(vert, "3"), find_vert(vert, "4")));
+	add_new_edge(&graph, create_edge(find_vert(vert, "4"), find_vert(vert, "7")));
 	add_new_edge(&graph, create_edge(find_vert(vert, "5"), find_vert(vert, "6")));
-	add_new_edge(&graph, create_edge(find_vert(vert, "2"), find_vert(vert, "4")));
-	add_new_edge(&graph, create_edge(find_vert(vert, "2"), find_vert(vert, "e")));
-	add_new_edge(&graph, create_edge(find_vert(vert, "6"), find_vert(vert, "e")));
+	add_new_edge(&graph, create_edge(find_vert(vert, "6"), find_vert(vert, "8")));
+	add_new_edge(&graph, create_edge(find_vert(vert, "7"), find_vert(vert, "8")));
+	add_new_edge(&graph, create_edge(find_vert(vert, "1"), find_vert(vert, "3")));
 
 	t_lemin *lem = (t_lemin*)malloc(sizeof(t_lemin));
 	lem->vert = vert;
-	lem->start_vert = find_vert(vert, "s");
-	lem->end_vert = find_vert(vert, "e");
+	lem->start_vert = find_vert(vert, "1");
+	lem->end_vert = find_vert(vert, "8");
 	lem->graph = graph;
+//	graph->available = 0;
 
 	t_way *way = dijkstra(vert, lem);
+	print_way(way);
 //	print_list(vert, vert->prev);
 //	vert = quick_sort(vert, vert->prev);
 //	print_list(vert, vert->prev);

@@ -5,6 +5,7 @@
 #ifndef LEM_IN_H
 #define LEM_IN_H
 #define INF 2000000000
+#define ERROR_ALLOCATE "Memory didn't allocate ("
 
 #include "ft_printf.h"
 
@@ -16,6 +17,7 @@ typedef struct			s_lemin
 	struct s_mas_ways	*mas_ways;
 	struct s_verticle	*start_vert;
 	struct s_verticle	*end_vert;
+	struct s_used_vert	*used;
 }						t_lemin;
 
 typedef struct			s_verticle
@@ -24,6 +26,7 @@ typedef struct			s_verticle
 	struct s_verticle	*next;
 	struct s_verticle	*prev;
 	struct s_edge		*short_way;
+	int 				light;
 	int					weight;
 	int					x;
 	int					y;
@@ -69,9 +72,9 @@ typedef struct			s_used_vert
 
 typedef struct			s_partition
 {
-	t_verticle	*target;
-	t_verticle	*iter;
-	int			opt;
+	struct s_verticle	*target;
+	struct s_verticle	*iter;
+	int					opt;
 }						t_partition;
 
 void		swap_2link_item(t_verticle *a, t_verticle *b);
@@ -81,14 +84,16 @@ void		add_new_vert(t_verticle **vert, t_verticle *new_vert);
 t_verticle	*create_new_vert(char *name);
 void	swap_pointer(t_verticle **a, t_verticle **b);
 void	quick_sort_for_intmas(int *start, int *finish);
-t_verticle		*get_min_vert(t_verticle *v);
+t_verticle		*get_min_vert(t_verticle *v, t_lemin *lem);
 void	add_new_vert_to_way(t_way **way, t_verticle *vert);
 void	add_new_edge(t_edge **graph, t_edge *edge);
 t_edge	*create_edge(t_verticle *a, t_verticle *b);
 t_way	*dijkstra(t_lemin *lem);
 void	print_way(t_way *way);
 void	add_new_way_to_ways(t_ways **ways, t_way *way);
-t_ways		*find_list_ways(t_lemin *lem);
+t_ways		*find_list_ways(t_lemin *lem, t_mas_ways *mas_ways);
 void	print_ways(t_ways *ways);
+void		get_mas_ways(t_lemin *lem);
+void	print_mas_ways(t_mas_ways *mas_ways);
 
 #endif

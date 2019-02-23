@@ -47,29 +47,30 @@ static void		del_list(t_used_vert **used)
 	*used = NULL;
 }
 
-t_verticle		*get_min_vert(t_verticle *v)
+t_verticle		*get_min_vert(t_verticle *v, t_lemin *lem)
 {
-	static t_used_vert	*used;
 	t_used_vert			*used_tmp;
 
-	if (!used && v && v->weight != INF)
+	if (!lem->used && v && v->weight != INF)
 	{
-		add_to_used(&used, v);
+		add_to_used(&lem->used, v);
 		return (v);
 	}
 	while (v != NULL && v->weight != INF)
 	{
-		used_tmp = used;
+		used_tmp = lem->used;
 		while (used_tmp)
-			if (!is_in_used_list(used, v))
+			if (!is_in_used_list(lem->used, v))
 			{
 				add_to_used(&used_tmp, v);
+				if (v == lem->end_vert)
+					del_list(&lem->used);
 				return (v);
 			}
 			else
 				used_tmp = used_tmp->next;
 		v = v->next;
 	}
-	del_list(&used);
+	del_list(&lem->used);
 	return (NULL);
 }

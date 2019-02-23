@@ -52,3 +52,22 @@ void	print_ways(t_ways *ways)
 	else
 		ft_printf("The ways is not exist\n");
 }
+
+void	print_mas_ways(t_mas_ways *mas_ways)
+{
+	int i;
+
+	i = 0;
+	if (mas_ways)
+	{
+		while (mas_ways)
+		{
+			ft_printf(">>>>> %i <<<<<\n", ++i);
+			print_ways(mas_ways->ways);
+			mas_ways = mas_ways->next;
+		}
+		ft_printf("==============\n");
+	}
+	else
+		ft_printf("The mas_ways is not exist\n");
+}

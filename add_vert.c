@@ -3,7 +3,6 @@
 //
 
 #include "lem_in.h"
-#define ERROR_ALLOCATE "Memory didn't allocate ("
 
 t_verticle	*create_new_vert(char *name)
 {
@@ -14,6 +13,8 @@ t_verticle	*create_new_vert(char *name)
 	{
 		vert->next = NULL;
 		vert->prev = NULL;
+		vert->short_way = NULL;
+		vert->light = 1;
 		vert->name = ft_strdup(name);
 		return (vert);
 	}

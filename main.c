@@ -1,5 +1,5 @@
 #include <fcntl.h>
-#include "lem_in.h"
+#include "lem_in.h" 
 
 t_verticle	*find_vert(t_verticle *v, char *name)
 {
@@ -34,14 +34,14 @@ int main()
 //	add_new_edge(&graph, create_edge(find_vert(vert, "1"), find_vert(vert, "3")));
 
 	add_new_edge(&graph, create_edge(find_vert(vert, "4"), find_vert(vert, "5")));
+	add_new_edge(&graph, create_edge(find_vert(vert, "6"), find_vert(vert, "4")));
+	add_new_edge(&graph, create_edge(find_vert(vert, "6"), find_vert(vert, "5")));
 	add_new_edge(&graph, create_edge(find_vert(vert, "2"), find_vert(vert, "4")));
 	add_new_edge(&graph, create_edge(find_vert(vert, "3"), find_vert(vert, "5")));
-	add_new_edge(&graph, create_edge(find_vert(vert, "1"), find_vert(vert, "2")));
-	add_new_edge(&graph, create_edge(find_vert(vert, "6"), find_vert(vert, "5")));
-	add_new_edge(&graph, create_edge(find_vert(vert, "6"), find_vert(vert, "4")));
 	add_new_edge(&graph, create_edge(find_vert(vert, "3"), find_vert(vert, "4")));
+	add_new_edge(&graph, create_edge(find_vert(vert, "1"), find_vert(vert, "2")));
 	add_new_edge(&graph, create_edge(find_vert(vert, "1"), find_vert(vert, "3")));
-//	add_new_edge(&graph, create_edge(find_vert(vert, "7"), find_vert(vert, "8")));
+
 
 	t_lemin *lem = (t_lemin*)malloc(sizeof(t_lemin));
 	lem->vert = vert;

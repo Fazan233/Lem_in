@@ -67,15 +67,65 @@ void		show_hide_ways(t_ways *ways, int mode)
 	}
 }
 
+int 		identical_way(t_way *way1, t_way *way2)
+{
+	t_way	*end;
+
+	if (!way1 || !way2)
+		return (0);
+	end = way1->prev;
+	while (way1 != end && way2 != end)
+	{
+		if (way1->vert != way2->vert)
+			return (0);
+		way1 = way1->next;
+		way2 = way2->next;
+	}
+	if (way1->vert == way2->vert)
+		return (1);
+	return (0);
+}
+
+int 		is_ident_way_in_ways(t_way *way, t_ways *ways)
+{
+	while (ways)
+	{
+		if (identical_way(way, ways->way))
+			return (1);
+		ways = ways->next;
+	}
+	return (0);
+}
+
+int 		is_ident_way_in_mas_ways(t_way *way, t_mas_ways *mas_ways)
+{
+	while (mas_ways)
+	{
+		if (is_ident_way_in_ways(way, mas_ways->ways))
+			return (1);
+		mas_ways = mas_ways->next;
+	}
+	return (0);
+}
+
 t_ways		*find_list_ways(t_lemin *lem, t_mas_ways *mas_ways)
 {
 	t_ways	*ways;
 	t_way	*way;
+	int 	i;
+
+	i = 0;
 
 	ways = NULL;
 	show_hide_first_edge_ways(mas_ways, 0);
 	while ((way = dijkstra(lem)))
 	{
+		if (i == 0 && is_ident_way_in_mas_ways(way, lem->mas_ways))
+		{
+			free(way);
+			break ;
+		}
+		i++;
 		show_hide_way(way, 0);
 		turn_off_on_light_on_way(way, lem, 0);
 		add_new_way_to_ways(&ways, way);

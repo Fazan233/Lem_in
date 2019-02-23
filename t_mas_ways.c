@@ -34,10 +34,10 @@ void		add_to_mas_ways(t_mas_ways **mas_ways, t_ways *ways)
 void		get_mas_ways(t_lemin *lem)
 {
 	t_ways		*ways;
-	t_mas_ways	*mas_ways;
+//	t_mas_ways	*mas_ways;
 
-	mas_ways = NULL;
-	while ((ways = find_list_ways(lem, mas_ways)))
-		add_to_mas_ways(&mas_ways, ways);
-	lem->mas_ways = mas_ways;
+//	mas_ways = NULL;
+	while ((ways = find_list_ways(lem, lem->mas_ways)))
+		add_to_mas_ways(&lem->mas_ways, ways);
+//	lem->mas_ways = mas_ways;
 }

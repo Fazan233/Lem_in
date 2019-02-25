@@ -39,6 +39,7 @@ typedef struct			s_edge
 //	int					name;
 	int					available;
 	struct s_edge		*next;
+	struct s_edge		*prev;
 }						t_edge;
 
 typedef struct			s_way
@@ -70,6 +71,12 @@ typedef struct			s_used_vert
 	struct s_used_vert	*next;
 }						t_used_vert;
 
+typedef struct			s_used_edge
+{
+	struct s_edge		*edge;
+	struct s_used_edge	*next;
+}						t_used_edge;
+
 typedef struct			s_partition
 {
 	struct s_verticle	*target;
@@ -81,7 +88,7 @@ void		swap_2link_item(t_verticle *a, t_verticle *b);
 t_verticle	*quick_sort(t_verticle *start, t_verticle *finish);
 void		print_list(t_verticle *start, t_verticle *end);
 void		add_new_vert(t_verticle **vert, t_verticle *new_vert);
-t_verticle	*create_new_vert(char *name);
+t_verticle	*create_new_vert(char *name, char *x, char *y);
 void	swap_pointer(t_verticle **a, t_verticle **b);
 void	quick_sort_for_intmas(int *start, int *finish);
 t_verticle		*get_min_vert(t_verticle *v, t_lemin *lem);
@@ -95,5 +102,11 @@ t_ways		*find_list_ways(t_lemin *lem, t_mas_ways *mas_ways);
 void	print_ways(t_ways *ways);
 void		get_mas_ways(t_lemin *lem);
 void	print_mas_ways(t_mas_ways *mas_ways);
+void		show_hide_ways(t_ways *ways, int mode);
+
+void		add_to_used_edges(t_used_edge **used, t_edge *e);
+void		del_list_edges(t_used_edge **used);
+
+void	parsing(int fd, t_lemin *lem);
 
 #endif

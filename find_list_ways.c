@@ -36,8 +36,8 @@ void		show_hide_first_edge_ways(t_mas_ways *mas_ways, int mode)
 	while (mas_ways)
 	{
 		tmp = mas_ways->ways;
-		while (tmp->next)
-			tmp = tmp->next;
+//		while (tmp->next)
+//			tmp = tmp->next;
 		tmp->way->short_way->available = mode == 0 ? 0 : 1;
 		mas_ways = mas_ways->next;
 	}
@@ -120,27 +120,27 @@ t_ways		*find_list_ways(t_lemin *lem, t_mas_ways *mas_ways)
 	show_hide_first_edge_ways(mas_ways, 0);
 	while ((way = dijkstra(lem)))
 	{
-		if (i == 0 && is_ident_way_in_mas_ways(way, lem->mas_ways))
-		{
-			free(way);
-			break ;
-		}
-		i++;
+//		if (i == 0 && is_ident_way_in_mas_ways(way, lem->mas_ways))
+//		{
+//			free(way);
+//			break ;
+//		}
+//		i++;
 		show_hide_way(way, 0);
 		turn_off_on_light_on_way(way, lem, 0);
+		print_way(way);
 		add_new_way_to_ways(&ways, way);
 		ways->len = lem->end_vert->weight;
 	}
 	show_hide_first_edge_ways(mas_ways, 1);
 	if (ways)
-	{
 		while ((way = dijkstra(lem)))
 		{
 			show_hide_way(way, 0);
+			print_way(way);
 			add_new_way_to_ways(&ways, way);
 			ways->len = lem->end_vert->weight;
 		}
-	}
 	turn_off_on_light_on_ways(ways, lem, 1);
 	show_hide_ways(ways, 1);
 	return (ways);

@@ -8,7 +8,7 @@
 
 void	set_begin_vals(t_verticle **v, t_lemin *lem)
 {
-	t_verticle	*begin;
+	t_verticle *begin;
 
 	begin = *v;
 	while (begin != NULL)
@@ -18,16 +18,6 @@ void	set_begin_vals(t_verticle **v, t_lemin *lem)
 		begin = begin->next;
 	}
 	lem->start_vert->weight = 0;
-	if (lem->start_vert->prev)
-	{
-		lem->start_vert->prev->next = lem->start_vert->next;
-		if (lem->start_vert->next)
-			lem->start_vert->next->prev = lem->start_vert->prev;
-		lem->start_vert->next = *v;
-		lem->start_vert->prev = NULL;
-		(*v)->prev = lem->start_vert; //kostyl
-	}
-	*v = lem->start_vert;
 }
 // take second elem of list!!
 void	dijkstra_sort(t_verticle *v)
@@ -74,31 +64,108 @@ t_way	*get_short_way(t_lemin *lem)
 	return (way);
 }
 
+
+t_edge	*put_egle_in_order(t_edge **edge, t_verticle *v)
+{
+	t_edge	*iter;
+	t_edge	*tmp;
+	t_edge	*start;
+
+	start = *edge;
+	iter = *edge;
+	if (start)
+		while (iter)
+		{
+			if (iter->a == v || iter->b == v)
+			{
+				tmp = iter;
+				iter = iter->next;
+				if (tmp->prev)
+					tmp->prev = tmp->next;
+				if (tmp->next)
+					tmp->next = tmp->prev;
+				tmp->next = start;
+				tmp->prev = start->prev;
+				start->prev = tmp;
+				start = tmp;
+				continue ;
+			}
+			iter = iter->next;
+		}
+	return (start);
+}
+
+
+//t_way	*dijkstra(t_lemin *lem)
+//{
+//	t_verticle	*curr_vert;
+//	t_verticle	*other_vert;
+//	t_edge		*edge;
+//	int			i;
+//
+//	i = 0;
+//	set_begin_vals(&lem->vert, lem);
+//	while (1)
+//	{
+//		ft_printf("%d ", i++);
+//		curr_vert = get_min_vert(lem->start_vert, lem);
+//		if (curr_vert == lem->end_vert || curr_vert == NULL)
+//			break ;
+//		edge = lem->graph;
+//		while (edge)
+//		{
+//			if (edge->available && BELONG_TO_EDGE &&
+//			(other_vert = GET_OTHER_VERT(curr_vert, edge)) &&
+//			other_vert->light && curr_vert->weight + 1 < other_vert->weight)
+//			{
+//				other_vert->weight = curr_vert->weight + 1;
+//				dijkstra_sort(lem->vert->next);
+//				other_vert->short_way = edge;
+//			}
+//			edge = edge->next;
+//		}
+//	}
+//	ft_printf("\n");
+//	return (get_short_way(lem));
+//}
+
+
 t_way	*dijkstra(t_lemin *lem)
 {
 	t_verticle	*curr_vert;
 	t_verticle	*other_vert;
-	t_edge		*edge;
+	t_edge		*edge_end;
+	t_edge		*edge_start;
+	t_edge		*tmp;
+	int			i;
 
+	i = 0;
 	set_begin_vals(&lem->vert, lem);
+
+	edge_start = lem->graph;
+	edge_end = edge_start;
 	while (1)
 	{
+		ft_printf("%d ", i++);
+
 		curr_vert = get_min_vert(lem->start_vert, lem);
+		tmp = put_egle_in_order(&edge_end, curr_vert);
+		edge_start = tmp;
 		if (curr_vert == lem->end_vert || curr_vert == NULL)
 			break ;
-		edge = lem->graph;
-		while (edge)
+		while (edge_start != edge_end)
 		{
-			if (edge->available && BELONG_TO_EDGE &&
-			(other_vert = GET_OTHER_VERT(curr_vert, edge)) &&
-			other_vert->light && curr_vert->weight + 1 < other_vert->weight)
+			if (edge_start->available &&
+				(other_vert = GET_OTHER_VERT(curr_vert, edge_start)) &&
+				other_vert->light && curr_vert->weight + 1 < other_vert->weight)
 			{
 				other_vert->weight = curr_vert->weight + 1;
 				dijkstra_sort(lem->vert->next);
-				other_vert->short_way = edge;
+				other_vert->short_way = edge_start;
 			}
-			edge = edge->next;
+			edge_start = edge_start->next;
 		}
 	}
+	ft_printf("\n");
 	return (get_short_way(lem));
 }

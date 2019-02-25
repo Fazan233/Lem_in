@@ -4,13 +4,15 @@
 
 #include "lem_in.h"
 
-t_verticle	*create_new_vert(char *name)
+t_verticle	*create_new_vert(char *name, char *x, char *y)
 {
 	t_verticle	*vert;
 
 	vert = (t_verticle*)malloc(sizeof(t_verticle));
 	if (vert)
 	{
+		vert->x = ft_atoi(x);
+		vert->y = ft_atoi(y);
 		vert->next = NULL;
 		vert->prev = NULL;
 		vert->short_way = NULL;
@@ -51,6 +53,7 @@ t_edge	*create_edge(t_verticle *a, t_verticle *b)
 		edge->b = b;
 		edge->available = 1;
 		edge->next = NULL;
+		edge->prev = NULL;
 		return (edge);
 	}
 	ft_printf(ERROR_ALLOCATE);
@@ -64,6 +67,7 @@ void	add_new_edge(t_edge **graph, t_edge *edge)
 	else
 	{
 		edge->next = *graph;
+		(*graph)->prev = edge;
 		*graph = edge;
 	}
 }
@@ -110,21 +114,21 @@ void	add_new_vert_to_way(t_way **way, t_verticle *vert)
 void	add_new_way_to_ways(t_ways **ways, t_way *way)
 {
 	t_ways	*tmp;
+	t_ways	*tmp_ways;
 
 	tmp = (t_ways*)malloc(sizeof(t_ways));
 	if (tmp)
 	{
 		tmp->way = way;
-		tmp->len = 0;
+		tmp->next = NULL;
 		if (*ways == NULL)
-		{
-			tmp->next = NULL;
 			*ways = tmp;
-		}
 		else
 		{
-			tmp->next = *ways;
-			*ways = tmp;
+			tmp_ways = *ways;
+			while (tmp_ways->next != NULL)
+				tmp_ways = tmp_ways->next;
+			tmp_ways->next = tmp;
 		}
 	}
 	else

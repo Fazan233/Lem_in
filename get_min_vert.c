@@ -22,6 +22,24 @@ static void		add_to_used(t_used_vert **used, t_verticle *v)
 	}
 }
 
+void		add_to_used_edges(t_used_edge **used, t_edge *e)
+{
+	if (*used == NULL)
+	{
+		*used = (t_used_edge*)malloc(sizeof(t_used_edge));
+		(*used)->next = NULL;
+		(*used)->edge = e;
+	}
+	else
+	{
+		while ((*used)->next != NULL)
+			*used = (*used)->next;
+		(*used)->next = (t_used_edge*)malloc(sizeof(t_used_edge));
+		(*used)->next->next = NULL;
+		(*used)->next->edge = e;
+	}
+}
+
 static int 		is_in_used_list(t_used_vert *used, t_verticle *v)
 {
 	while (used)
@@ -47,6 +65,23 @@ static void		del_list(t_used_vert **used)
 	*used = NULL;
 }
 
+void		del_list_edges(t_used_edge **used)
+{
+	t_used_edge			*tmp;
+
+	if (*used)
+	{
+		while ((*used)->next)
+		{
+			tmp = *used;
+			*used = (*used)->next;
+			free(tmp);
+		}
+		free(*used);
+		*used = NULL;
+	}
+}
+
 t_verticle		*get_min_vert(t_verticle *v, t_lemin *lem)
 {
 	t_used_vert			*used_tmp;
@@ -62,6 +97,8 @@ t_verticle		*get_min_vert(t_verticle *v, t_lemin *lem)
 		while (used_tmp)
 			if (!is_in_used_list(lem->used, v))
 			{
+				if (v->weight == lem->end_vert->weight)
+					v = lem->end_vert;
 				add_to_used(&used_tmp, v);
 				if (v == lem->end_vert)
 					del_list(&lem->used);

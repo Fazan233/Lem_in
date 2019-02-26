@@ -44,9 +44,8 @@ int main()
 {
 	t_lemin 	*lem;
 	int 		fd;
-	t_list_v	*list_v;
 
-	fd = open("lemin_test.txt", O_RDONLY);
+	fd = open("superpos.txt", O_RDONLY);
 	lem = (t_lemin*)malloc(sizeof(t_lemin));
 	init_lem(fd, lem);
 

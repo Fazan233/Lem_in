@@ -74,9 +74,11 @@ t_edge	*put_egle_in_order(t_edge **edge, t_verticle *v)
 
 	start = *edge;
 	iter = *edge;
+	if (!v)
+		return (NULL);
 	if (start)
 	{
-		if (start->a == v || start->b == v)
+		while (iter && (iter->a == v || iter->b == v))
 		{
 			*edge = (*edge)->next;
 			iter = iter->next;
@@ -140,12 +142,14 @@ t_list_e	*find_list_e(t_list_v *list_v, t_verticle *v)
 {
 	if (v)
 	{
+		if (v)
 		while (list_v)
 		{
 			if (list_v->v == v)
 				return (list_v->list_e);
 			list_v = list_v->next;
 		}
+		return (list_v->list_e);
 	}
 	return (NULL);
 }
@@ -154,31 +158,34 @@ t_way	*dijkstra(t_lemin *lem)
 {
 	t_verticle	*curr_vert;
 	t_verticle	*other_vert;
-	t_list_e	*list_e;
+	t_edge		*start;
+	t_edge		*end;
 
 	set_begin_vals(&lem->vert, lem);
 
 	while (lem->graph->prev)
 		lem->graph = lem->graph->prev;
 
+	start = lem->graph;
+	end = start;
+
 	while (1)
 	{
-
 		curr_vert = get_min_vert(lem->start_vert);
-		list_e = find_list_e(lem->list_v, curr_vert);
-		if (curr_vert == lem->end_vert || curr_vert == NULL)
+		start = put_egle_in_order(&end, curr_vert);
+		if (curr_vert == lem->end_vert || !start)
 			break ;
-		while (list_e)
+		while (start != end)
 		{
-			if (list_e->e->available &&
-				(other_vert = GET_OTHER_VERT(curr_vert, list_e->e)) &&
+			if (start->available &&
+				(other_vert = GET_OTHER_VERT(curr_vert, start)) &&
 				other_vert->light && curr_vert->weight + 1 < other_vert->weight)
 			{
 				other_vert->weight = curr_vert->weight + 1;
 				dijkstra_sort(lem->vert->next);
-				other_vert->short_way = list_e->e;
+				other_vert->short_way = start;
 			}
-			list_e = list_e->next;
+			start = start->next;
 		}
 	}
 	return (get_short_way(lem));

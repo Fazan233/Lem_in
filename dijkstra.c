@@ -162,7 +162,6 @@ t_way	*dijkstra(t_lemin *lem)
 	t_edge		*end;
 
 	set_begin_vals(&lem->vert, lem);
-
 	while (lem->graph->prev)
 		lem->graph = lem->graph->prev;
 

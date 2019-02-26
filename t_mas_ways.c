@@ -14,6 +14,7 @@ void		add_to_mas_ways(t_mas_ways **mas_ways, t_ways *ways)
 	{
 		tmp->ways = ways;
 		tmp->iter = 0;
+		tmp->lst_lens = NULL;
 		if (*mas_ways == NULL)
 		{
 			tmp->next = NULL;
@@ -27,23 +28,12 @@ void		add_to_mas_ways(t_mas_ways **mas_ways, t_ways *ways)
 			t->next = tmp;
 		}
 	}
-	else
-	{
-		ft_printf(ERROR_ALLOCATE);
-		exit(1);
-	}
 }
 
 void		get_mas_ways(t_lemin *lem)
 {
 	t_ways		*ways;
-//	t_mas_ways	*mas_ways;
 
-//	mas_ways = NULL;
 	while ((ways = find_list_ways(lem, lem->mas_ways)))
-	{
-//		print_ways(ways);
 		add_to_mas_ways(&lem->mas_ways, ways);
-	}
-//	lem->mas_ways = mas_ways;
 }

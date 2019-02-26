@@ -111,7 +111,7 @@ void	add_new_vert_to_way(t_way **way, t_verticle *vert)
 	}
 }
 
-void	add_new_way_to_ways(t_ways **ways, t_way *way)
+void	add_new_way_to_ways(t_ways **ways, t_way *way, t_lemin *lem)
 {
 	t_ways	*tmp;
 	t_ways	*tmp_ways;
@@ -121,6 +121,7 @@ void	add_new_way_to_ways(t_ways **ways, t_way *way)
 	{
 		tmp->way = way;
 		tmp->next = NULL;
+		tmp->len = lem->end_vert->weight;
 		if (*ways == NULL)
 			*ways = tmp;
 		else

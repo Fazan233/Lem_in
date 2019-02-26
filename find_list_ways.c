@@ -129,7 +129,7 @@ t_ways		*find_list_ways(t_lemin *lem, t_mas_ways *mas_ways)
 		show_hide_way(way, 0);
 		turn_off_on_light_on_way(way, lem, 0);
 //		print_way(way);
-		add_new_way_to_ways(&ways, way);
+		add_new_way_to_ways(&ways, way, lem);
 		ways->len = lem->end_vert->weight;
 	}
 	show_hide_first_edge_ways(mas_ways, 1);
@@ -138,7 +138,7 @@ t_ways		*find_list_ways(t_lemin *lem, t_mas_ways *mas_ways)
 		{
 			show_hide_way(way, 0);
 //			print_way(way);
-			add_new_way_to_ways(&ways, way);
+			add_new_way_to_ways(&ways, way, lem);
 			ways->len = lem->end_vert->weight;
 		}
 	turn_off_on_light_on_ways(ways, lem, 1);

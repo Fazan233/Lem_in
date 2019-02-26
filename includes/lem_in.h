@@ -8,6 +8,7 @@
 #define ERROR_ALLOCATE "Memory didn't allocate ("
 
 #include "ft_printf.h"
+#include "test.h"
 
 typedef struct			s_lemin
 {
@@ -17,11 +18,12 @@ typedef struct			s_lemin
 	struct s_mas_ways	*mas_ways;
 	struct s_verticle	*start_vert;
 	struct s_verticle	*end_vert;
-	struct s_used_vert	*used;
+	struct s_list_v		*list_v;
 }						t_lemin;
 
 typedef struct			s_verticle
 {
+	int 				used;
 	char				*name;
 	struct s_verticle	*next;
 	struct s_verticle	*prev;
@@ -84,6 +86,22 @@ typedef struct			s_partition
 	int					opt;
 }						t_partition;
 
+typedef struct 		s_list_v
+{
+	struct s_verticle	*v;
+	struct s_list_e		*list_e;
+	struct s_list_v		*next;
+
+}					t_list_v;
+
+typedef struct		s_list_e
+{
+	struct s_edge		*e;
+	struct s_list_e		*next;
+}					t_list_e;
+
+t_list_v	*get_list_v(struct s_lemin *lem, struct s_verticle *v);
+
 void		swap_2link_item(t_verticle *a, t_verticle *b);
 t_verticle	*quick_sort(t_verticle *start, t_verticle *finish);
 void		print_list(t_verticle *start, t_verticle *end);
@@ -91,7 +109,7 @@ void		add_new_vert(t_verticle **vert, t_verticle *new_vert);
 t_verticle	*create_new_vert(char *name, char *x, char *y);
 void	swap_pointer(t_verticle **a, t_verticle **b);
 void	quick_sort_for_intmas(int *start, int *finish);
-t_verticle		*get_min_vert(t_verticle *v, t_lemin *lem);
+t_verticle		*get_min_vert(t_verticle *v);
 void	add_new_vert_to_way(t_way **way, t_verticle *vert);
 void	add_new_edge(t_edge **graph, t_edge *edge);
 t_edge	*create_edge(t_verticle *a, t_verticle *b);

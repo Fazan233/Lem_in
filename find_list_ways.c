@@ -125,10 +125,10 @@ t_ways		*find_list_ways(t_lemin *lem, t_mas_ways *mas_ways)
 //			free(way);
 //			break ;
 //		}
-//		i++;
+		i++;
 		show_hide_way(way, 0);
 		turn_off_on_light_on_way(way, lem, 0);
-		print_way(way);
+//		print_way(way);
 		add_new_way_to_ways(&ways, way);
 		ways->len = lem->end_vert->weight;
 	}
@@ -137,7 +137,7 @@ t_ways		*find_list_ways(t_lemin *lem, t_mas_ways *mas_ways)
 		while ((way = dijkstra(lem)))
 		{
 			show_hide_way(way, 0);
-			print_way(way);
+//			print_way(way);
 			add_new_way_to_ways(&ways, way);
 			ways->len = lem->end_vert->weight;
 		}

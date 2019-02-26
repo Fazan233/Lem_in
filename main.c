@@ -1,5 +1,6 @@
 #include <fcntl.h>
 #include "lem_in.h"
+#include "test.h"
 
 //t_verticle	*find_vert(t_verticle *v, char *name)
 //{
@@ -36,14 +37,16 @@ void	init_lem(int fd, t_lemin *lem)
 		lem->vert->prev = lem->start_vert; //kostyl
 	}
 	lem->vert = lem->start_vert;
+	lem->list_v = get_list_v(lem, lem->vert);
 }
 
 int main()
 {
-	t_lemin *lem;
-	int 	fd;
+	t_lemin 	*lem;
+	int 		fd;
+	t_list_v	*list_v;
 
-	fd = open("test.txt", O_RDONLY);
+	fd = open("lemin_test.txt", O_RDONLY);
 	lem = (t_lemin*)malloc(sizeof(t_lemin));
 	init_lem(fd, lem);
 

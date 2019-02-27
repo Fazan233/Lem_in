@@ -12,6 +12,7 @@ t_list_lens	*create_list_lens(int len, int repeat)
 	list_lens->next = NULL;
 	list_lens->len = len;
 	list_lens->repeat = repeat;
+	return (list_lens);
 }
 
 void		add_to_list_lens(t_list_lens **list_lens, int len, int repeat)
@@ -79,4 +80,5 @@ t_list_lens	*get_list_lens(t_lemin *lem)
 			}
 		}
 	}
+	return (list_lens);
 }

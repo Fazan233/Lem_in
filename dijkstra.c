@@ -3,14 +3,10 @@
 //
 
 #include "lem_in.h"
-#define BELONG_TO_EDGE (curr_vert == edge->a || curr_vert == edge->b)
 #define GET_OTHER_VERT(curr, edge) curr == edge->a ? edge->b : edge->a
 
-void	set_begin_vals(t_verticle **v, t_lemin *lem)
+void	set_begin_vals(t_verticle *begin, t_lemin *lem)
 {
-	t_verticle *begin;
-
-	begin = *v;
 	while (begin != NULL)
 	{
 		begin->used = 0;
@@ -21,25 +17,28 @@ void	set_begin_vals(t_verticle **v, t_lemin *lem)
 	lem->start_vert->weight = 0;
 }
 // take second elem of list!!
-void	dijkstra_sort(t_verticle *v)
-{
-	t_verticle	*tmp;
+//void	dijkstra_sort(t_verticle *v)
+//{
+//	t_verticle	*tmp;
+//
+//	while (v && v->weight >= v->prev->weight)
+//		v = v->next;
+//	if (!v)
+//		return ;
+//	tmp = v->prev;
+//		while (tmp)
+//		{
+//			if (tmp->weight <= v->weight)
+//			{
+//				swap_2link_item(tmp->next, v);
+//				return ;
+//			}
+//			tmp = tmp->prev;
+//		}
+//}
 
-	while (v && v->weight >= v->prev->weight)
-		v = v->next;
-	if (!v)
-		return ;
-	tmp = v->prev;
-		while (tmp)
-		{
-			if (tmp->weight <= v->weight)
-			{
-				swap_2link_item(tmp->next, v);
-				return ;
-			}
-			tmp = tmp->prev;
-		}
-}
+
+
 
 t_way	*get_short_way(t_lemin *lem)
 {
@@ -66,46 +65,44 @@ t_way	*get_short_way(t_lemin *lem)
 }
 
 
-t_edge	*put_egle_in_order(t_edge **edge, t_verticle *v)
-{
-	t_edge	*iter;
-	t_edge	*tmp;
-	t_edge	*start;
-
-	start = *edge;
-	iter = *edge;
-	if (!v)
-		return (NULL);
-	if (start)
-	{
-		while (iter && (iter->a == v || iter->b == v))
-		{
-			*edge = (*edge)->next;
-			iter = iter->next;
-		}
-		while (iter)
-		{
-			if (iter->a == v || iter->b == v)
-			{
-				tmp = iter;
-				iter = iter->next;
-				if (tmp->prev)
-					tmp->prev->next = tmp->next;
-				if (tmp->next)
-					tmp->next->prev = tmp->prev;
-				tmp->next = start;
-				tmp->prev = start->prev;
-				if (start->prev)
-					start->prev->next = tmp;
-				start->prev = tmp;
-				start = tmp;
-				continue ;
-			}
-			iter = iter->next;
-		}
-	}
-	return (start);
-}
+//t_edge	*put_egle_in_order(t_edge **edge, t_verticle *v)
+//{
+//	t_edge	*iter;
+//	t_edge	*tmp;
+//	t_edge	*start;
+//
+//	start = *edge;
+//	iter = *edge;
+//	if (start)
+//	{
+//		if (start->a == v || start->b == v)
+//		{
+//			*edge = (*edge)->next;
+//			iter = iter->next;
+//		}
+//		while (iter)
+//		{
+//			if (iter->a == v || iter->b == v)
+//			{
+//				tmp = iter;
+//				iter = iter->next;
+//				if (tmp->prev)
+//					tmp->prev->next = tmp->next;
+//				if (tmp->next)
+//					tmp->next->prev = tmp->prev;
+//				tmp->next = start;
+//				tmp->prev = start->prev;
+//				if (start->prev)
+//					start->prev->next = tmp;
+//				start->prev = tmp;
+//				start = tmp;
+//				continue ;
+//			}
+//			iter = iter->next;
+//		}
+//	}
+//	return (start);
+//}
 
 
 //t_way	*dijkstra(t_lemin *lem)
@@ -154,6 +151,76 @@ t_list_e	*find_list_e(t_list_v *list_v, t_verticle *v)
 	return (NULL);
 }
 
+void	paste_a_after_b(t_verticle *a, t_verticle *b)
+{
+	if (b->next)
+		b->next->prev = a;
+	a->next = b->next;
+	b->next = a;
+	a->prev = b;
+}
+
+void	paste_a_before_b(t_verticle *a, t_verticle *b)
+{
+	if (b->prev)
+		b->prev->next = a;
+	a->prev = b->prev;
+	a->next = b;
+	b->prev = a;
+}
+// b - before, a - after
+
+void	for_paste_sort(t_verticle *elem)
+{
+	if (elem->next)
+		elem->next->prev = elem->prev;
+	elem->prev->next = elem->next;
+}
+
+void	paste_and_sort(t_verticle *elem, char mode)
+{
+	t_verticle	*v;
+
+	v = mode == 'b' ? elem->next : elem->prev;
+	if (mode == 'b')
+		while (v)
+		{
+			if (v->weight >= elem->weight)
+			{
+				for_paste_sort(elem);
+				paste_a_before_b(elem, v);
+				break ;
+			}
+			v = v->next;
+		}
+	else
+		while (v)
+		{
+			if (elem->weight >= v->weight)
+			{
+				for_paste_sort(elem);
+				paste_a_after_b(elem, v);
+				break ;
+			}
+			v = v->prev;
+		}
+}
+
+void	dijkstra_sort(t_verticle *elem)
+{
+	if (elem->next)
+	{
+		if (elem->weight > elem->prev->weight &&
+			elem->weight > elem->next->weight)
+			paste_and_sort(elem, 'b');
+		else if (elem->weight < elem->prev->weight &&
+					elem->weight < elem->next->weight)
+			paste_and_sort(elem, 'a');
+	}
+	else if (elem->prev->weight > elem->weight)
+		paste_and_sort(elem, 'a');
+}
+
 t_way	*dijkstra(t_lemin *lem)
 {
 	t_verticle	*curr_vert;
@@ -161,7 +228,7 @@ t_way	*dijkstra(t_lemin *lem)
 	t_edge		*start;
 	t_edge		*end;
 
-	set_begin_vals(&lem->vert, lem);
+	set_begin_vals(lem->vert, lem);
 	while (lem->graph->prev)
 		lem->graph = lem->graph->prev;
 
@@ -181,11 +248,29 @@ t_way	*dijkstra(t_lemin *lem)
 				other_vert->light && curr_vert->weight + 1 < other_vert->weight)
 			{
 				other_vert->weight = curr_vert->weight + 1;
-				dijkstra_sort(lem->vert->next);
-				other_vert->short_way = start;
+				dijkstra_sort(other_vert);
+				other_vert->short_way = list_e->e;
 			}
 			start = start->next;
 		}
 	}
 	return (get_short_way(lem));
+}
+
+t_verticle		*get_min_vert(t_verticle *v)
+{
+	while (v)
+	{
+		if (v->used == 0)
+		{
+			if (v->weight != INF)
+			{
+				v->used = 1;
+				return (v);
+			}
+			break ;
+		}
+		v = v->next;
+	}
+	return (NULL);
 }

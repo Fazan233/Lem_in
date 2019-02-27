@@ -45,7 +45,7 @@ int main()
 	t_lemin 	*lem;
 	int 		fd;
 
-	fd = open("test.txt", O_RDONLY);
+	fd = open("big.txt", O_RDONLY);
 	lem = (t_lemin*)malloc(sizeof(t_lemin));
 	init_lem(fd, lem);
 

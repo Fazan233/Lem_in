@@ -15,11 +15,9 @@ void		add_to_mas_ways(t_mas_ways **mas_ways, t_ways *ways)
 		tmp->ways = ways;
 		tmp->iter = 0;
 		tmp->lst_lens = NULL;
+		tmp->next = NULL;
 		if (*mas_ways == NULL)
-		{
-			tmp->next = NULL;
 			*mas_ways = tmp;
-		}
 		else
 		{
 			t = *mas_ways;

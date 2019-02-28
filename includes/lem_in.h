@@ -24,11 +24,11 @@ typedef struct			s_lemin
 typedef struct			s_verticle
 {
 	int 				used;
+	int 				light;
 	char				*name;
 	struct s_verticle	*next;
 	struct s_verticle	*prev;
 	struct s_edge		*short_way;
-	int 				light;
 	int					weight;
 	int					x;
 	int					y;
@@ -58,6 +58,7 @@ typedef struct			s_ways
 	struct s_way		*way;
 	struct s_ways		*next;
 	int					len;
+	int 				used;
 }						t_ways;
 
 typedef struct			s_mas_ways
@@ -135,5 +136,8 @@ void		add_to_used_edges(t_used_edge **used, t_edge *e);
 void		del_list_edges(t_used_edge **used);
 
 void	parsing(int fd, t_lemin *lem);
+
+int 	get_iter_for_ways(t_ways *ways, int ants);
+void	get_iters(t_mas_ways *mas_ways, t_lemin *lem);
 
 #endif

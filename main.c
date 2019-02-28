@@ -45,12 +45,12 @@ int main()
 	t_lemin 	*lem;
 	int 		fd;
 
-	fd = open("big.txt", O_RDONLY);
+	fd = open("big", O_RDONLY);
 	lem = (t_lemin*)malloc(sizeof(t_lemin));
 	init_lem(fd, lem);
 
 	get_mas_ways(lem);
-
 	print_mas_ways(lem->mas_ways);
+
 	return 0;
 }

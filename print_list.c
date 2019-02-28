@@ -45,6 +45,7 @@ void	print_ways(t_ways *ways)
 	{
 		while (ways)
 		{
+			ft_printf("{CYAN}%d{EOC} ", ways->len);
 			print_way(ways->way);
 			ways = ways->next;
 		}
@@ -63,6 +64,7 @@ void	print_mas_ways(t_mas_ways *mas_ways)
 		while (mas_ways)
 		{
 			ft_printf(">>>>> %i <<<<<\n", ++i);
+			ft_printf("{YELLOW}iters - %d{EOC}\n", mas_ways->iter);
 			print_ways(mas_ways->ways);
 			mas_ways = mas_ways->next;
 		}

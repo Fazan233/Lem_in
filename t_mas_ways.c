@@ -34,4 +34,5 @@ void		get_mas_ways(t_lemin *lem)
 
 	while ((ways = find_list_ways(lem, lem->mas_ways)))
 		add_to_mas_ways(&lem->mas_ways, ways);
+	get_iters(lem->mas_ways, lem);
 }

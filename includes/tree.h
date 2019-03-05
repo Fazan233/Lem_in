@@ -36,8 +36,8 @@ typedef struct			s_top_nodes
 
 typedef struct			s_lema
 {
-	struct s_nodes		*node;
-	struct s_lem		*next;
+	struct s_node		*node;
+	struct s_lema		*next;
 }						t_lema;
 
 typedef struct			s_pretend
@@ -45,5 +45,10 @@ typedef struct			s_pretend
 	struct s_node		*node;
 	struct s_pretend	*next;
 }						t_pretend;
+
+t_node			*find_node(t_verticle *v, t_node *node);
+t_pretend		*create_pretend_list(t_node *node, int color, t_edge *edge);
+t_top_nodes		*create_top_node_list(t_lema *lema, int	color, t_edge *edge);
+
 
 #endif

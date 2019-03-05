@@ -5,6 +5,6 @@ set(CMAKE_C_STANDARD 99)
 add_subdirectory(./libft)
 
 
-add_executable(Lem_in main.c includes/lem_in.h swap_2lnk_item.c quick_sort.c print_list.c add_vert.c sort_list.c quick_sort_for_intmas.c get_min_vert.c find_list_ways.c t_mas_ways.c parsing.c graph_list_for_all_vert.c list_lens.c dijkstraa.c count_iterations.c bubble_sort_list.c graph_normalize.c includes/tree.h "meeting trees/create_node_list.c" "meeting trees/del_node.c" "meeting trees/create_top_nodes.c" "meeting trees/pretendent.c" "meeting trees/find_node.c" "meeting trees/del_top_node.c" "meeting trees/lema.c")
+add_executable(Lem_in main.c includes/lem_in.h swap_2lnk_item.c quick_sort.c print_list.c add_vert.c sort_list.c quick_sort_for_intmas.c get_min_vert.c find_list_ways.c t_mas_ways.c parsing.c graph_list_for_all_vert.c list_lens.c dijkstraa.c count_iterations.c bubble_sort_list.c graph_normalize.c includes/tree.h "meeting trees/create_node_list.c" "meeting trees/del_node.c" "meeting trees/create_top_nodes.c" "meeting trees/pretendent.c" "meeting trees/find_node.c" "meeting trees/del_top_node.c" "meeting trees/lema.c" "meeting trees/count_pow_in_top.c" "meeting trees/meet_tree_algo.c")
 target_include_directories(Lem_in PUBLIC ./includes)
 target_link_libraries(Lem_in LIBFT)

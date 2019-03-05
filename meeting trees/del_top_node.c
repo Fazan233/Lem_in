@@ -17,7 +17,7 @@ void	del_pretend(t_pretend *pret)
 	free(pret);
 }
 
-void	del_top_mode(t_top_nodes **orig, t_top_nodes *top)
+void	del_top_node(t_top_nodes **orig, t_top_nodes *top)
 {
 	t_top_nodes	*tmp;
 

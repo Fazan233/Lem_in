@@ -73,3 +73,18 @@ void	print_mas_ways(t_mas_ways *mas_ways)
 	else
 		ft_printf("The mas_ways is not exist\n");
 }
+
+void	print_min_mas_ways(t_mas_ways *mas_ways)
+{
+	t_mas_ways	*min;
+
+	min = mas_ways;
+	while (mas_ways)
+	{
+		if (mas_ways->iter < min->iter)
+			min = mas_ways;
+		mas_ways = mas_ways->next;
+	}
+	ft_printf("{YELLOW}iters - %d{EOC}\n", min->iter);
+	print_ways(min->ways);
+}

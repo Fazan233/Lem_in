@@ -76,41 +76,144 @@ void	pr_mas(int *mas)
 	ft_printf("\n");
 }
 
-int 	get_iter_for_ways(t_ways *ways, int ants)
-{
-	int 	*mas;
-	int 	i;
-	int 	counter;
-	int 	add;
+//int 	get_iter_for_ways(t_ways *ways, int ants)
+//{
+//	int 	*mas;
+//	int 	i;
+//	int 	counter;
+//	int 	add;
+//
+//	mas = create_mas(ways);
+////	pr_mas(mas);
+//	add = get_add(mas);
+////	pr_mas(mas);
+//	counter = 0;
+//	while (1)
+//	{
+//		i = 0;
+//		if (ants == 0)
+//			break ;
+//		while (mas[i] != 0)
+//			if (i == 0 || mas[i] <= ants)
+//			{
+//				i++;
+//				ants--;
+//			}
+//			else
+//				break ;
+//		counter++;
+//	}
+//	return (counter + add);
+//}
 
-	mas = create_mas(ways);
-//	pr_mas(mas);
-	add = get_add(mas);
-//	pr_mas(mas);
-	counter = 0;
-	while (1)
+//void	get_iters(t_mas_ways *mas_ways, t_lemin *lem)
+//{
+//	while (mas_ways)
+//	{
+//		mas_ways->iter = get_iter_for_ways(mas_ways->ways, lem->ants);
+//		mas_ways = mas_ways->next;
+//	}
+//}
+
+//take len - 1
+void	set_values_minus_min(t_ways *ways, int min, int mode)
+{
+	while (ways)
 	{
-		i = 0;
-		if (ants == 0)
-			break ;
-		while (mas[i] != 0)
-			if (i == 0 || mas[i] <= ants)
-			{
-				i++;
+		if (mode == 0)
+			ways->len = ways->len - (min - 1);
+		else
+			ways->len = ways->len + (min - 1);
+		ways = ways->next;
+	}
+}
+
+int 	number_can_way(t_ways *ways, t_ways *begin, int min)
+{
+	int	sum;
+
+	sum = 0;
+	while (begin != ways)
+	{
+		sum = sum + (begin->len - min);
+		begin = begin->next;
+	}
+	return (sum + (begin->len - min));
+}
+
+int		get_iter(t_ways *ways, int ants)
+{
+	int 	min;
+	int 	counter;
+	t_ways	*begin;
+	int 	tmp;
+
+	begin = ways;
+	counter = 0;
+	min = ways->len;
+//	set_values_minus_min(ways, min, 0);
+	while (ants)
+	{
+		ways = begin;
+		while (ways)
+		{
+			tmp = number_can_way(ways, begin, min);
+			if (ants > tmp)
 				ants--;
-			}
 			else
 				break ;
+			ways = ways->next;
+		}
 		counter++;
 	}
-	return (counter + add);
+//	set_values_minus_min(ways, min, 1);
+	return (counter + min - 1);
 }
 
 void	get_iters(t_mas_ways *mas_ways, t_lemin *lem)
 {
 	while (mas_ways)
 	{
-		mas_ways->iter = get_iter_for_ways(mas_ways->ways, lem->ants);
+		bubble_sort_list(&mas_ways->ways);
+		mas_ways->iter = get_iter(mas_ways->ways, lem->ants);
 		mas_ways = mas_ways->next;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

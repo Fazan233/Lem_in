@@ -11,6 +11,7 @@ t_verticle	*create_new_vert(char *name, char *x, char *y)
 	vert = (t_verticle*)malloc(sizeof(t_verticle));
 	if (vert)
 	{
+		vert->color = 0;
 		vert->x = ft_atoi(x);
 		vert->y = ft_atoi(y);
 		vert->next = NULL;

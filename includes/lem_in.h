@@ -8,7 +8,7 @@
 #define ERROR_ALLOCATE "Memory didn't allocate ("
 
 #include "ft_printf.h"
-#include "test.h"
+
 
 typedef struct			s_lemin
 {
@@ -19,10 +19,12 @@ typedef struct			s_lemin
 	struct s_verticle	*start_vert;
 	struct s_verticle	*end_vert;
 	struct s_list_v		*list_v;
+	struct s_node		*node;
 }						t_lemin;
 
 typedef struct			s_verticle
 {
+	int 				color;
 	int 				used;
 	int 				light;
 	char				*name;
@@ -109,6 +111,13 @@ typedef struct			s_list_lens
 	struct s_list_lens	*next;
 }						t_list_lens;
 
+
+
+
+
+
+
+
 t_list_v	*get_list_v(struct s_lemin *lem, struct s_verticle *v);
 
 void		swap_2link_item(t_verticle *a, t_verticle *b);
@@ -139,5 +148,10 @@ void	parsing(int fd, t_lemin *lem);
 
 int 	get_iter_for_ways(t_ways *ways, int ants);
 void	get_iters(t_mas_ways *mas_ways, t_lemin *lem);
+void	print_min_mas_ways(t_mas_ways *mas_ways);
+
+void		bubble_sort_list(t_ways **begin);
+void 	graph_normalize(t_lemin *lem);
+
 
 #endif

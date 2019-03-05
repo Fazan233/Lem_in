@@ -48,7 +48,7 @@ typedef struct			s_pretend
 
 t_node			*find_node(t_verticle *v, t_node *node);
 t_pretend		*create_pretend_list(t_node *node, int color, t_edge *edge);
-t_top_nodes		*create_top_node_list(t_lema *lema, int	color, t_edge *edge);
+t_top_nodes		*create_top_node_list(t_lema *lema, int	color, t_lemin *lem);
 t_lema			*create_lema_list(t_top_nodes *top);
 t_top_nodes		*create_top_node(t_node *node, t_pretend *pret);
 void			add_top_node(t_top_nodes **top, t_top_nodes *new_top);

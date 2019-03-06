@@ -56,5 +56,8 @@ void			del_top_node(t_top_nodes **orig, t_top_nodes *top);
 void			count_pow_in_top_nodes(t_top_nodes *top, int color);
 t_top_nodes		*get_min_pow_top_node(t_top_nodes *top);
 t_node			*create_node_list(t_verticle *v);
+void			add_to_p_list(t_p_list **p_list, t_p_list *new_p_list);
+t_p_list		*create_p_list(t_node *node);
+void			connect_available(t_top_nodes *top, int color);
 
 #endif

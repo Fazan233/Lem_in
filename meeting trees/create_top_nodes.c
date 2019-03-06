@@ -34,6 +34,7 @@ t_top_nodes		*create_top_node_list(t_lema *lema, int	color, t_lemin *lem)
 	if (lema)
 		while (lema)
 		{
+
 			pretend = create_pretend_list(lema->node, color, lem->graph);
 			add_top_node(&top, create_top_node(lema->node, pretend));
 			lema = lema->next;

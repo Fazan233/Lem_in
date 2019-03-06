@@ -31,7 +31,7 @@ int 		is_in_lema(t_lema *lema, t_node *node)
 	return (0);
 }
 
-t_lema		*create_lema_list(t_top_nodes *top)
+t_lema		*create_lema_list(t_top_nodes *top, )
 {
 	t_lema		*lema;
 	t_pretend	*pret;
@@ -42,7 +42,7 @@ t_lema		*create_lema_list(t_top_nodes *top)
 		pret = top->pretend;
 		while (pret)
 		{
-			if (!is_in_lema(lema, pret->node))
+			if (pret->node->v->color != FOUND && !is_in_lema(lema, pret->node))
 				add_lema(&lema, create_lema(pret->node));
 			pret = pret->next;
 		}

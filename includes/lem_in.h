@@ -19,7 +19,11 @@ typedef struct			s_lemin
 	struct s_verticle	*start_vert;
 	struct s_verticle	*end_vert;
 	struct s_list_v		*list_v;
+
 	struct s_node		*node;
+	struct s_lema		*lema; //must initilizate by NULL
+	struct s_top_nodes	*top_start;
+	struct s_top_nodes	*top_end;
 }						t_lemin;
 
 typedef struct			s_verticle

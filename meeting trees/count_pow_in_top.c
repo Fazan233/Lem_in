@@ -15,7 +15,7 @@ void		count_pow_in_top_nodes(t_top_nodes *top, int color)
 		pret = top->pretend;
 		while (pret)
 		{
-			if (pret->node->v->color != color)
+			if (pret->node->v->color != color && pret->node->v->color != FOUND)
 				i++;
 			pret = pret->next;
 		}

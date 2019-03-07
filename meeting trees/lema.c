@@ -2,6 +2,8 @@
 // Created by Vladyslav USLYSTYI on 2019-03-05.
 //
 
+#define OTHER_COLOR color == START ? END : START;
+
 #include "tree.h"
 
 t_lema		*create_lema(t_node *node)
@@ -31,7 +33,7 @@ int 		is_in_lema(t_lema *lema, t_node *node)
 	return (0);
 }
 
-t_lema		*create_lema_list(t_top_nodes *top, )
+t_lema		*create_lema_list(t_top_nodes *top, int color)
 {
 	t_lema		*lema;
 	t_pretend	*pret;
@@ -42,11 +44,27 @@ t_lema		*create_lema_list(t_top_nodes *top, )
 		pret = top->pretend;
 		while (pret)
 		{
-			if (pret->node->v->color != FOUND && !is_in_lema(lema, pret->node))
+			if (pret->node->v->color == color && !is_in_lema(lema, pret->node))
 				add_lema(&lema, create_lema(pret->node));
 			pret = pret->next;
 		}
 		top = top->next;
 	}
 	return (lema);
+}
+
+void		del_lema_list(t_lema **lema)
+{
+	t_lema		*tmp;
+
+	if (*lema)
+	{
+		while ((*lema)->next)
+		{
+			tmp = *lema;
+			*lema = (*lema)->next;
+			free(tmp);
+		}
+		free(*lema);
+	}
 }

@@ -13,7 +13,7 @@
 
 typedef struct			s_p_list
 {
-	struct s_node		*s_node;
+	struct s_node		*node;
 	struct s_p_list		*next;
 }						t_p_list;
 
@@ -47,9 +47,9 @@ typedef struct			s_pretend
 }						t_pretend;
 
 t_node			*find_node(t_verticle *v, t_node *node);
-t_pretend		*create_pretend_list(t_node *node, int color, t_edge *edge);
+t_pretend		*create_pretend_list(t_node *node, int color, t_lemin *lem);
 t_top_nodes		*create_top_node_list(t_lema *lema, int	color, t_lemin *lem);
-t_lema			*create_lema_list(t_top_nodes *top);
+t_lema		*create_lema_list(t_top_nodes *top, int color);
 t_top_nodes		*create_top_node(t_node *node, t_pretend *pret);
 void			add_top_node(t_top_nodes **top, t_top_nodes *new_top);
 void			del_top_node(t_top_nodes **orig, t_top_nodes *top);
@@ -59,5 +59,7 @@ t_node			*create_node_list(t_verticle *v);
 void			add_to_p_list(t_p_list **p_list, t_p_list *new_p_list);
 t_p_list		*create_p_list(t_node *node);
 void			connect_available(t_top_nodes *top, int color);
+void			del_top_nodes_list(t_top_nodes **top);
+void			del_lema_list(t_lema **lema);
 
 #endif

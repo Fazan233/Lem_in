@@ -27,23 +27,22 @@ void			add_top_node(t_top_nodes **top, t_top_nodes *new_top)
 t_top_nodes		*create_top_node_list(t_lema *lema, int	color, t_lemin *lem)
 {
 	t_top_nodes	*top;
-	t_node		*tmp;
+//	t_node		*tmp;
 	t_pretend	*pretend;
 
 	top = NULL;
-	if (lema)
+//	if (lema)
 		while (lema)
 		{
-
-			pretend = create_pretend_list(lema->node, color, lem->graph);
+			pretend = create_pretend_list(lema->node, color, lem);
 			add_top_node(&top, create_top_node(lema->node, pretend));
 			lema = lema->next;
 		}
-	else
-	{
-		tmp = find_node(lem->start_vert, lem->node);
-		pretend = create_pretend_list(tmp, color, lem->graph);
-		add_top_node(&top, create_top_node(tmp, pretend));
-	}
+//	else
+//	{
+//		tmp = find_node(lem->start_vert, lem->node);
+//		pretend = create_pretend_list(tmp, color, lem->graph);
+//		add_top_node(&top, create_top_node(tmp, pretend));
+//	}
 	return (top);
 }

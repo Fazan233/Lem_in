@@ -24,12 +24,14 @@ void		add_pretend(t_pretend **pret, t_pretend *new_pret)
 	}
 }
 
-t_pretend	*create_pretend_list(t_node *node, int color, t_edge *edge)
+t_pretend	*create_pretend_list(t_node *node, int color, t_lemin *lem)
 {
 	t_pretend	*pret;
 	t_verticle	*vert;
 	t_node		*tmp;
+	t_edge		*edge;
 
+	edge = lem->graph;
 	pret = NULL;
 	while (edge)
 	{
@@ -38,7 +40,7 @@ t_pretend	*create_pretend_list(t_node *node, int color, t_edge *edge)
 			vert = node->v == edge->a ? edge->b : edge->a;
 			if (vert->color != color)
 			{
-				tmp = find_node(vert, node);
+				tmp = find_node(vert, lem->node);
 				add_pretend(&pret, create_pretend(tmp));
 			}
 		}

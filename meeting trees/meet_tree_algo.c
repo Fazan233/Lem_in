@@ -28,7 +28,7 @@ void	first_init(t_lemin *lem)
 	lem->top_end->node->v->color = END;
 }
 
-void	init_lem(int fd, t_lemin *lem)
+static void	init_lem(int fd, t_lemin *lem)
 {
 	ft_bzero(lem, sizeof(t_lemin));
 	parsing(fd, lem);
@@ -101,7 +101,7 @@ int 	main(void)
 //	if (ac)
 //		;
 //	fd = open(av[1], O_TRUNC | O_RDONLY);
-	fd = open("test_2", O_RDONLY);
+	fd = open("test", O_RDONLY);
 	lem = (t_lemin*)malloc(sizeof(t_lemin));
 	init_lem(fd, lem);
 	lem->start_node = find_node(lem->start_vert, lem->node);
@@ -118,14 +118,13 @@ int 	main(void)
 			break ;
 	}
 
-	t_node	*start = find_node(lem->vert, lem->node);
+//	del_half_nodes(&lem->node, lem->node, lem);
+	while (del_half_nodes(&lem->node, lem->node, lem))
+		;
+//	t_node	*start = find_node(lem->vert, lem->node);
 	print_node_and_links_for_all(lem->node);
-//	get_mas_ways(lem);
-//	sort_mas_ways(lem->mas_ways);
-//	get_iters(lem->mas_ways, lem);
-//	print_mas_ways(lem->mas_ways);
 
-//	print_min_mas_ways(lem->mas_ways);
-//	ants_go(get_min_ways(lem->mas_ways), lem);
+	ft_printf("%i\n", count_ways(find_node(lem->end_vert, lem->node), find_node(lem->start_vert, lem->node)   ));
+
 	return 0;
 }

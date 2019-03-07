@@ -156,6 +156,7 @@ void	print_min_mas_ways(t_mas_ways *mas_ways);
 
 void		bubble_sort_list(t_ways **begin);
 void 	graph_normalize(t_lemin *lem);
+int		del_single(t_edge **orig_edge, t_verticle **orig_v);
 
 
 #endif

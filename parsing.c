@@ -79,4 +79,6 @@ void	parsing(int fd, t_lemin *lem)
 		free(line);
 		del_2d_charmas(mas);
 	}
+//	while (del_single(&lem->graph, &lem->vert))
+//		;
 }

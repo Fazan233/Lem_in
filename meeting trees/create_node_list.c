@@ -24,6 +24,7 @@ void		add_node(t_node **node, t_node *new_node)
 	else
 	{
 		new_node->next = *node;
+		(*node)->prev = new_node;
 		new_node->prev = NULL;
 		*node = new_node;
 	}

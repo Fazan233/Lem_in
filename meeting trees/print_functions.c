@@ -16,12 +16,17 @@ void	print_top(t_top_nodes *top_nodes)
 
 void	print_p_list(t_p_list *p_list)
 {
-	while (p_list)
+	if (p_list)
 	{
-		ft_printf("%s ", p_list->node->v->name);
-		p_list = p_list->next;
+		while (p_list)
+		{
+			ft_printf("%s ", p_list->node->v->name);
+			p_list = p_list->next;
+		}
+		ft_printf("\b\n");
 	}
-	ft_printf("\b\n");
+	else
+		ft_printf("NULL\n");
 }
 
 void	print_node_and_links(t_node *node)

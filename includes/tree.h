@@ -61,5 +61,11 @@ t_p_list		*create_p_list(t_node *node);
 void			connect_available(t_top_nodes *top, int color);
 void			del_top_nodes_list(t_top_nodes **top);
 void			del_lema_list(t_lema **lema);
+void			del_p_list(t_p_list *p_list);
+void			del_n_from_p_list(t_p_list **orig, t_p_list *p_list);
+t_p_list		*find_p_list(t_p_list *list, t_node *node);
+void			del_node(t_node *node, t_node **orig_node);
+int				del_half_nodes(t_node **orig_node, t_node *node, t_lemin *lem);
+int		count_ways(t_node *node, t_node *start);
 
 #endif

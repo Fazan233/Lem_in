@@ -21,24 +21,24 @@ char	*ctoa(char c)
 	return (str);
 }
 
-//void	init_lem(int fd, t_lemin *lem)
-//{
-//	ft_bzero(lem, sizeof(t_lemin));
-//	parsing(fd, lem);
-//	lem->start_vert->weight = 0;
-//	if (lem->start_vert->prev)
-//	{
-//		lem->start_vert->prev->next = lem->start_vert->next;
-//		if (lem->start_vert->next)
-//			lem->start_vert->next->prev = lem->start_vert->prev;
-//		lem->start_vert->next = lem->vert;
-//		lem->start_vert->prev = NULL;
-//		lem->vert->prev = lem->start_vert;
-//	}
-//	lem->vert = lem->start_vert;
-////	graph_normalize(lem);
-////	lem->list_v = get_list_v(lem, lem->vert);
-//}
+static void	init_lem(int fd, t_lemin *lem)
+{
+	ft_bzero(lem, sizeof(t_lemin));
+	parsing(fd, lem);
+	lem->start_vert->weight = 0;
+	if (lem->start_vert->prev)
+	{
+		lem->start_vert->prev->next = lem->start_vert->next;
+		if (lem->start_vert->next)
+			lem->start_vert->next->prev = lem->start_vert->prev;
+		lem->start_vert->next = lem->vert;
+		lem->start_vert->prev = NULL;
+		lem->vert->prev = lem->start_vert;
+	}
+	lem->vert = lem->start_vert;
+//	graph_normalize(lem);
+	lem->list_v = get_list_v(lem, lem->vert);
+}
 
 t_ways	*get_min_ways(t_mas_ways *mas_ways)
 {
@@ -138,29 +138,29 @@ void	sort_mas_ways(t_mas_ways *mas_ways)
 }
 
 
-//int main()
-////int main(int ac, char **av)
-//{
-//	t_lemin 	*lem;
-//	int 		fd;
-//
-//
-////	if (ac)
-////		;
-////	fd = open(av[1], O_TRUNC | O_RDONLY);
-//	fd = open("test", O_RDONLY);
-//	lem = (t_lemin*)malloc(sizeof(t_lemin));
-//	init_lem(fd, lem);
-//
-//	get_mas_ways(lem);
-////	sort_mas_ways(lem->mas_ways);
-//	get_iters(lem->mas_ways, lem);
-////	print_mas_ways(lem->mas_ways);
-//
-//	print_min_mas_ways(lem->mas_ways);
-////	ants_go(get_min_ways(lem->mas_ways), lem);
-//	return 0;
-//}
+int maino()
+//int main(int ac, char **av)
+{
+	t_lemin 	*lem;
+	int 		fd;
+
+
+//	if (ac)
+//		;
+//	fd = open(av[1], O_TRUNC | O_RDONLY);
+	fd = open("big.txt", O_RDONLY);
+	lem = (t_lemin*)malloc(sizeof(t_lemin));
+	init_lem(fd, lem);
+
+	get_mas_ways(lem);
+//	sort_mas_ways(lem->mas_ways);
+	get_iters(lem->mas_ways, lem);
+//	print_mas_ways(lem->mas_ways);
+
+	print_min_mas_ways(lem->mas_ways);
+//	ants_go(get_min_ways(lem->mas_ways), lem);
+	return 0;
+}
 
 
 

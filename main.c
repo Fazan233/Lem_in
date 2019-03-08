@@ -138,7 +138,7 @@ void	sort_mas_ways(t_mas_ways *mas_ways)
 }
 
 
-int maino()
+int main()
 //int main(int ac, char **av)
 {
 	t_lemin 	*lem;
@@ -148,7 +148,7 @@ int maino()
 //	if (ac)
 //		;
 //	fd = open(av[1], O_TRUNC | O_RDONLY);
-	fd = open("big.txt", O_RDONLY);
+	fd = open("test", O_RDONLY);
 	lem = (t_lemin*)malloc(sizeof(t_lemin));
 	init_lem(fd, lem);
 

@@ -5,7 +5,7 @@
 #include "lem_in.h"
 #define GET_OTHER_VERT(curr, edge) curr == edge->a ? edge->b : edge->a
 
-void	set_begin_vals(t_verticle *begin, t_lemin *lem)
+static void	set_begin_vals(t_verticle *begin, t_lemin *lem)
 {
 	while (begin != NULL)
 	{
@@ -36,9 +36,6 @@ void	set_begin_vals(t_verticle *begin, t_lemin *lem)
 //			tmp = tmp->prev;
 //		}
 //}
-
-
-
 
 t_way	*get_short_way(t_lemin *lem)
 {
@@ -235,8 +232,8 @@ t_way	*dijkstra(t_lemin *lem)
 		while (list_e)
 		{
 			if (list_e->e->available &&
-				(other_vert = GET_OTHER_VERT(curr_vert, list_e->e)) &&
-				other_vert->light && curr_vert->weight + 1 < other_vert->weight)
+				(other_vert = GET_OTHER_VERT(curr_vert, list_e->e))
+				&& curr_vert->weight + 1 < other_vert->weight)
 			{
 				other_vert->weight = curr_vert->weight + 1;
 				dijkstra_sort(other_vert);

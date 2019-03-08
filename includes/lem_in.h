@@ -20,6 +20,7 @@ typedef struct			s_lemin
 	struct s_verticle	*end_vert;
 	struct s_list_v		*list_v;
 
+
 	struct s_node		*node;
 	struct s_top_nodes	*top_start;
 	struct s_top_nodes	*top_end;
@@ -28,6 +29,9 @@ typedef struct			s_lemin
 
 typedef struct			s_verticle
 {
+	int 				available;
+	int 				gray;
+	int 				visited;
 	int 				color;
 	int 				used;
 	int 				light;
@@ -139,11 +143,12 @@ t_way	*dijkstra(t_lemin *lem);
 void	print_way(t_way *way);
 void	add_new_way_to_ways(t_ways **ways, t_way *way, t_lemin *lem);
 
-t_ways		*find_list_ways(t_lemin *lem, t_mas_ways *mas_ways);
+t_ways		*find_list_ways1(t_lemin *lem, t_mas_ways *mas_ways);
 void	print_ways(t_ways *ways);
 void		get_mas_ways(t_lemin *lem);
 void	print_mas_ways(t_mas_ways *mas_ways);
-void		show_hide_ways(t_ways *ways, int mode);
+void		show_hide_ways1(t_ways *ways, int mode, t_lemin *lem);
+void		show_hide_ways2(t_ways *ways, int mode, t_lemin *lem);
 
 void		add_to_used_edges(t_used_edge **used, t_edge *e);
 void		del_list_edges(t_used_edge **used);
@@ -157,6 +162,8 @@ void	print_min_mas_ways(t_mas_ways *mas_ways);
 void		bubble_sort_list(t_ways **begin);
 void 	graph_normalize(t_lemin *lem);
 int		del_single(t_edge **orig_edge, t_verticle **orig_v);
-
+t_list_e	*find_list_e(t_list_v *list_v, t_verticle *v);
+t_way	*get_short_way(t_lemin *lem);
+t_ways		*find_list_ways2(t_lemin *lem, t_mas_ways *mas_ways);
 
 #endif

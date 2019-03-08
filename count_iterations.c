@@ -115,19 +115,6 @@ void	pr_mas(int *mas)
 //	}
 //}
 
-//take len - 1
-void	set_values_minus_min(t_ways *ways, int min, int mode)
-{
-	while (ways)
-	{
-		if (mode == 0)
-			ways->len = ways->len - (min - 1);
-		else
-			ways->len = ways->len + (min - 1);
-		ways = ways->next;
-	}
-}
-
 int 	number_can_way(t_ways *ways, t_ways *begin, int min)
 {
 	int	sum;
@@ -151,7 +138,6 @@ int		get_iter(t_ways *ways, int ants)
 	begin = ways;
 	counter = 0;
 	min = ways->len;
-//	set_values_minus_min(ways, min, 0);
 	while (ants)
 	{
 		ways = begin;
@@ -166,7 +152,6 @@ int		get_iter(t_ways *ways, int ants)
 		}
 		counter++;
 	}
-//	set_values_minus_min(ways, min, 1);
 	return (counter + min - 1);
 }
 

@@ -92,7 +92,7 @@ int		step_for_start(t_lemin *lem)
 	return (lem->top_start ? 1 : 0);
 }
 
-int 	main(void)
+int 	maino(void)
 {
 	t_lemin 	*lem;
 	int 		fd;

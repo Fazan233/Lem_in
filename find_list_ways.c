@@ -3,6 +3,7 @@
 //
 
 #include "lem_in.h"
+#include "bfs.h"
 
 void		turn_off_on_light_on_way(t_way *way, t_lemin *lem, int mode)
 {
@@ -29,7 +30,7 @@ void		turn_off_on_light_on_ways(t_ways *ways, t_lemin *lem, int mode)
 	}
 }
 
-void		show_hide_first_edge_ways(t_mas_ways *mas_ways, int mode)
+void		show_hide_first_edge_ways1(t_mas_ways *mas_ways, int mode)
 {
 	t_ways	*tmp;
 
@@ -37,30 +38,85 @@ void		show_hide_first_edge_ways(t_mas_ways *mas_ways, int mode)
 	{
 		tmp = mas_ways->ways;
 		tmp->way->short_way->available = mode == 0 ? 0 : 1;
+//		tmp->way->next->vert->available = mode == 0 ? 0 : 1;
 		mas_ways = mas_ways->next;
 	}
 }
 
-void		show_hide_way(t_way *way, int mode)
+void		show_hide_way1(t_way *way, int mode, t_lemin *lem)
 {
-	t_way	*end;
+	t_way		*end;
+	t_list_e	*list_e;
 
 	if (way)
 	{
 		end = way->prev;
+		way = way->next;
 		while (way != end)
 		{
-			way->short_way->available = (mode == 0 ? 0 : 1);
+			list_e = find_list_e(lem->list_v, way->vert);
+			while (list_e)
+			{
+				list_e->e->available = (mode == 0 ? 0 : 1);
+				list_e = list_e->next;
+			}
+//			way->vert->available = (mode == 0 ? 0 : 1);
 			way = way->next;
 		}
 	}
 }
 
-void		show_hide_ways(t_ways *ways, int mode)
+void		show_hide_ways1(t_ways *ways, int mode, t_lemin *lem)
 {
 	while (ways)
 	{
-		show_hide_way(ways->way, mode);
+		show_hide_way1(ways->way, mode, lem);
+		ways = ways->next;
+	}
+}
+
+void		show_hide_first_edge_ways2(t_mas_ways *mas_ways, int mode)
+{
+	t_ways	*tmp;
+
+	while (mas_ways)
+	{
+		tmp = mas_ways->ways;
+		tmp->way->short_way->available = mode == 0 ? 0 : 1;
+//		tmp->way->next->vert->available = mode == 0 ? 0 : 1;
+		mas_ways = mas_ways->next;
+	}
+}
+
+void		show_hide_way2(t_way *way, int mode, t_lemin *lem)
+{
+	t_way		*end;
+	t_list_e	*list_e;
+
+	if (way)
+	{
+		end = way->prev;
+		way = way->next;
+		while (way != end)
+		{
+			list_e = find_list_e(lem->list_v, way->vert);
+			while (list_e)
+			{
+				list_e->e->available = (mode == 0 ? 0 : 1);
+				list_e = list_e->next;
+//				way->short_way->available = (mode == 0 ? 0 : 1);
+			}
+//			way->vert->available = (mode == 0 ? 0 : 1);
+			way = way->next;
+		}
+	}
+}
+
+void		show_hide_ways2(t_ways *ways, int mode, t_lemin *lem)
+{
+	while (ways)
+	{
+		show_hide_way2(ways->way, mode, lem);
 		ways = ways->next;
 	}
 }
@@ -106,28 +162,56 @@ void		show_hide_ways(t_ways *ways, int mode)
 //	return (0);
 //}
 
-t_ways		*find_list_ways(t_lemin *lem, t_mas_ways *mas_ways)
+t_ways		*find_list_ways1(t_lemin *lem, t_mas_ways *mas_ways)
 {
 	t_ways	*ways;
 	t_way	*way;
 
 	ways = NULL;
-	show_hide_first_edge_ways(mas_ways, 0);
+	show_hide_first_edge_ways1(mas_ways, 0);
 	while ((way = dijkstra(lem)))
 	{
-		show_hide_way(way, 0);
-		turn_off_on_light_on_way(way, lem, 0);
+		show_hide_way1(way, 0, lem);
+//		print_way(way);
+//		turn_off_on_light_on_way(way, lem, 0);
 		add_new_way_to_ways(&ways, way, lem);
 	}
-	show_hide_first_edge_ways(mas_ways, 1);
+	show_hide_first_edge_ways1(mas_ways, 1);
 	if (ways)
 		while ((way = dijkstra(lem)))
 		{
-			show_hide_way(way, 0);
-			turn_off_on_light_on_way(way, lem, 0);
+			show_hide_way1(way, 0, lem);
+//			print_way(way);
+//			turn_off_on_light_on_way(way, lem, 0);
 			add_new_way_to_ways(&ways, way, lem);
 		}
-	turn_off_on_light_on_ways(ways, lem, 1);
-	show_hide_ways(ways, 1);
+//	turn_off_on_light_on_ways(ways, lem, 1);
+	show_hide_ways1(ways, 1, lem);
+	return (ways);
+}
+
+t_ways		*find_list_ways2(t_lemin *lem, t_mas_ways *mas_ways)
+{
+	t_ways	*ways;
+	t_way	*way;
+
+	ways = NULL;
+	show_hide_first_edge_ways2(mas_ways, 0);
+	while ((way = bfs(lem)))
+	{
+		show_hide_way2(way, 0, lem);
+//		print_way(way);
+		add_new_way_to_ways(&ways, way, lem);
+	}
+	show_hide_first_edge_ways2(mas_ways, 1);
+	if (ways)
+		while ((way = bfs(lem)))
+		{
+			show_hide_way2(way, 0, lem);
+//			print_way(way);
+			add_new_way_to_ways(&ways, way, lem);
+		}
+//	turn_off_on_light_on_ways(ways, lem, 1);
+	show_hide_ways2(ways, 1, lem);
 	return (ways);
 }

@@ -104,7 +104,7 @@ void		show_hide_way2(t_way *way, int mode, t_lemin *lem)
 			{
 				list_e->e->available = (mode == 0 ? 0 : 1);
 				list_e = list_e->next;
-//				way->short_way->available = (mode == 0 ? 0 : 1);
+				way->short_way->available = (mode == 0 ? 0 : 1);
 			}
 //			way->vert->available = (mode == 0 ? 0 : 1);
 			way = way->next;

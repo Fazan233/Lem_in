@@ -110,7 +110,7 @@ void	ants_go(t_ways *ways, t_lemin *lem)
 	i = 0;
 
 	steps = 1;
-	set_optional_lens_in_ways(ways);
+//	set_optional_lens_in_ways(ways);
 	begin = ways;
 	while (steps)
 	{
@@ -155,52 +155,9 @@ int main()
 	get_mas_ways(lem);
 //	sort_mas_ways(lem->mas_ways);
 	get_iters(lem->mas_ways, lem);
-//	print_mas_ways(lem->mas_ways);
+	print_mas_ways(lem->mas_ways);
 
-	print_min_mas_ways(lem->mas_ways);
+//	print_min_mas_ways(lem->mas_ways);
 //	ants_go(get_min_ways(lem->mas_ways), lem);
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

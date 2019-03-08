@@ -4,78 +4,6 @@
 
 #include "lem_in.h"
 
-int		turn_off_uses_and_get_count(t_ways *ways)
-{
-	int		i;
-
-	i = 0;
-	while (ways)
-	{
-		i++;
-		ways->used = 0;
-		ways = ways->next;
-	}
-	return (i);
-}
-
-int 	get_min_way(t_ways *ways)
-{
-	t_ways	*min;
-
-	min = ways;
-	while (ways)
-	{
-		if ((ways->used == 0 && min->len > ways->len) || min->used == 1)
-			min = ways;
-		ways = ways->next;
-	}
-	if (min->used == 1)
-		return (0);
-	else
-	{
-		min->used = 1;
-		return (min->len);
-	}
-}
-
-int 	*create_mas(t_ways *ways)
-{
-	int		*mas;
-	int 	count;
-	int		i;
-
-	count = turn_off_uses_and_get_count(ways);
-	mas = (int*)ft_memalloc(sizeof(int) * (count + 1));
-	i = 0;
-	while (i < count)
-		mas[i++] = get_min_way(ways);
-	mas[i] = 0;
-	return (mas);
-}
-
-int 	get_add(int *mas)
-{
-	int 	add;
-
-	add = *mas - 1;
-	while (*mas)
-	{
-		*mas = *mas - add;
-		mas++;
-	}
-	return (add);
-}
-
-void	pr_mas(int *mas)
-{
-	while (*mas)
-	{
-		ft_printf("%d ", *mas);
-		mas++;
-	}
-	ft_printf("\n");
-}
-
 //int 	get_iter_for_ways(t_ways *ways, int ants)
 //{
 //	int 	*mas;
@@ -115,35 +43,35 @@ void	pr_mas(int *mas)
 //	}
 //}
 
-int 	number_can_way(t_ways *ways, t_ways *begin, int min)
+int 	number_can_way(t_ways *ways, t_ways *begin)
 {
+	int min;
 	int	sum;
 
 	sum = 0;
 	while (begin != ways)
 	{
-		sum = sum + (begin->len - min);
+		min = begin->len;
+		sum = sum + (ways->len - min);
 		begin = begin->next;
 	}
-	return (sum + (begin->len - min));
+	return (sum);
 }
 
 int		get_iter(t_ways *ways, int ants)
 {
-	int 	min;
 	int 	counter;
 	t_ways	*begin;
 	int 	tmp;
 
 	begin = ways;
 	counter = 0;
-	min = ways->len;
 	while (ants)
 	{
 		ways = begin;
 		while (ways)
 		{
-			tmp = number_can_way(ways, begin, min);
+			tmp = number_can_way(ways, begin);
 			if (ants > tmp)
 				ants--;
 			else
@@ -152,7 +80,7 @@ int		get_iter(t_ways *ways, int ants)
 		}
 		counter++;
 	}
-	return (counter + min - 1);
+	return (counter - 1 + begin->len);
 }
 
 void	get_iters(t_mas_ways *mas_ways, t_lemin *lem)

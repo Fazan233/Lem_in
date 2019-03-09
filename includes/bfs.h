@@ -21,7 +21,7 @@ typedef struct		s_queue
 }					t_queue;
 
 t_verticle	*pop_queue(t_queue *queue);
-void		*push_queue(t_queue *queue, t_verticle *v);
+void		push_queue(t_queue *queue, t_verticle *v);
 t_way		*bfs(t_lemin *lem);
 
 #endif //LEM_IN_BFS_H

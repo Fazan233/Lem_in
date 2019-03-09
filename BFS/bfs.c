@@ -50,3 +50,4 @@ t_way		*bfs(t_lemin *lem)
 	return (get_short_way(lem));
 }
 
+

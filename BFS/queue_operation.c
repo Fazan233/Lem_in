@@ -13,7 +13,7 @@ t_qlist		*create_qlist(t_verticle *v)
 	return (qlist);
 }
 
-void		*push_queue(t_queue *queue, t_verticle *v)
+void		push_queue(t_queue *queue, t_verticle *v)
 {
 	t_qlist	*qlist;
 

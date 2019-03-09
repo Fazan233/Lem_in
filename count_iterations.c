@@ -87,7 +87,7 @@ void	get_iters(t_mas_ways *mas_ways, t_lemin *lem)
 {
 	while (mas_ways)
 	{
-		bubble_sort_list(&mas_ways->ways);
+		bubble_sort_list_l_u(&mas_ways->ways);
 		mas_ways->iter = get_iter(mas_ways->ways, lem->ants);
 		mas_ways = mas_ways->next;
 	}

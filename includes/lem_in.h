@@ -119,7 +119,11 @@ typedef struct			s_list_lens
 	struct s_list_lens	*next;
 }						t_list_lens;
 
-
+typedef struct			s_min_way
+{
+	t_way				*way;
+	struct s_min_way	*next;
+}						t_min_way;
 
 
 
@@ -165,5 +169,10 @@ int		del_single(t_edge **orig_edge, t_verticle **orig_v);
 t_list_e	*find_list_e(t_list_v *list_v, t_verticle *v);
 t_way	*get_short_way(t_lemin *lem);
 t_ways		*find_list_ways2(t_lemin *lem, t_mas_ways *mas_ways);
+int			get_iter(t_ways *ways, int ants);
+t_min_way	*get_min_way_list(t_mas_ways *mas_ways);
+void	del_list_min_way(t_min_way **min_way);
+void		bubble_sort_list_l_u(t_ways **begin);
+void		bubble_sort_list_u_l(t_ways **begin);
 
 #endif

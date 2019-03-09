@@ -128,14 +128,14 @@ void	ants_go(t_ways *ways, t_lemin *lem)
 }
 
 
-void	sort_mas_ways(t_mas_ways *mas_ways)
-{
-	while (mas_ways)
-	{
-		bubble_sort_list(&mas_ways->ways);
-		mas_ways = mas_ways->next;
-	}
-}
+//void	sort_mas_ways(t_mas_ways *mas_ways)
+//{
+//	while (mas_ways)
+//	{
+//		bubble_sort_list(&mas_ways->ways);
+//		mas_ways = mas_ways->next;
+//	}
+//}
 
 
 int main()
@@ -148,7 +148,7 @@ int main()
 //	if (ac)
 //		;
 //	fd = open(av[1], O_TRUNC | O_RDONLY);
-	fd = open("test", O_RDONLY);
+	fd = open("big-superposition4.uu", O_RDONLY);
 	lem = (t_lemin*)malloc(sizeof(t_lemin));
 	init_lem(fd, lem);
 

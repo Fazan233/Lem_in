@@ -28,19 +28,26 @@ t_verticle	*create_new_vert(char *name, char *x, char *y)
 
 void	add_new_vert(t_verticle **vert, t_verticle *new_vert)
 {
+	t_verticle	*iter;
+
+	iter = *vert;
 	if (*vert == NULL)
+	{
+		new_vert->n = 0;
 		*vert = new_vert;
+	}
 	else
 	{
-		(*vert)->prev = new_vert;
-		new_vert->next = (*vert);
-		*vert = new_vert;
-//		new_vert->next = *vert;
-//		new_vert->prev = (*vert)->prev;
-//		(*vert)->prev->next = new_vert;
-//		if (new_vert->prev == (*vert))
-//			(*vert)->next = new_vert;
+		while (iter->next)
+			iter = iter->next;
+		iter->next = new_vert;
+		new_vert->prev = iter;
+		new_vert->n = new_vert->prev->n + 1;
+
+
 //		(*vert)->prev = new_vert;
+//		new_vert->next = (*vert);
+//		*vert = new_vert;
 	}
 }
 

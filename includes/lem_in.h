@@ -12,6 +12,7 @@
 
 typedef struct			s_lemin
 {
+	int 				amount;
 	int					ants;
 	struct s_edge		*graph;
 	struct s_verticle	*vert;
@@ -29,6 +30,7 @@ typedef struct			s_lemin
 
 typedef struct			s_verticle
 {
+	int 				n;
 	int 				available;
 	int 				gray;
 	int 				visited;
@@ -174,5 +176,6 @@ t_min_way	*get_min_way_list(t_mas_ways *mas_ways);
 void	del_list_min_way(t_min_way **min_way);
 void		bubble_sort_list_l_u(t_ways **begin);
 void		bubble_sort_list_u_l(t_ways **begin);
+int 	count_amount_rooms(t_lemin *lem);
 
 #endif

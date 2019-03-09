@@ -100,7 +100,8 @@ void		show_hide_way2(t_way *way, int mode, t_lemin *lem)
 		way = way->next;
 		while (way != end)
 		{
-			list_e = find_list_e(lem->list_v, way->vert);
+//			list_e = find_list_e(lem->list_v, way->vert);
+			list_e = lem->list_v[way->vert->n].list_e;
 			while (list_e)
 			{
 				list_e->e->available = (mode == 0 ? 0 : 1);
@@ -182,6 +183,7 @@ t_ways		*find_list_ways2(t_lemin *lem, t_mas_ways *mas_ways)
 	while ((way = bfs(lem)))
 	{
 		show_hide_way2(way, 0, lem);
+//		print_way(way);
 		add_new_way_to_ways(&ways, way, lem);
 	}
 	show_hide_first_edge_ways2_test(min_way, 1);

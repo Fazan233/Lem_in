@@ -4,45 +4,6 @@
 
 #include "lem_in.h"
 
-//int 	get_iter_for_ways(t_ways *ways, int ants)
-//{
-//	int 	*mas;
-//	int 	i;
-//	int 	counter;
-//	int 	add;
-//
-//	mas = create_mas(ways);
-////	pr_mas(mas);
-//	add = get_add(mas);
-////	pr_mas(mas);
-//	counter = 0;
-//	while (1)
-//	{
-//		i = 0;
-//		if (ants == 0)
-//			break ;
-//		while (mas[i] != 0)
-//			if (i == 0 || mas[i] <= ants)
-//			{
-//				i++;
-//				ants--;
-//			}
-//			else
-//				break ;
-//		counter++;
-//	}
-//	return (counter + add);
-//}
-
-//void	get_iters(t_mas_ways *mas_ways, t_lemin *lem)
-//{
-//	while (mas_ways)
-//	{
-//		mas_ways->iter = get_iter_for_ways(mas_ways->ways, lem->ants);
-//		mas_ways = mas_ways->next;
-//	}
-//}
-
 int 	number_can_way(t_ways *ways, t_ways *begin)
 {
 	int min;

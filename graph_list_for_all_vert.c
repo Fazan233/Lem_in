@@ -4,26 +4,32 @@
 
 #include "lem_in.h"
 
-t_list_v	*create_list_v(t_verticle *v, t_list_e *list_e)
-{
-	t_list_v	*list_v;
+//t_list_v	*create_list_v(t_verticle *v, t_list_e *list_e)
+//{
+//	t_list_v	*list_v;
+//
+//	list_v = (t_list_v*)malloc(sizeof(t_list_v));
+//	list_v->list_e = list_e;
+//	list_v->v = v;
+//	return (list_v);
+//}
 
-	list_v = (t_list_v*)malloc(sizeof(t_list_v));
-	list_v->list_e = list_e;
+//void		add_to_list_v(t_list_v **list_v, t_verticle *v, t_list_e *list_e)
+//{
+//	t_list_v	*tmp;
+//
+//	tmp = create_list_v(v, list_e);
+//	if (*list_v == NULL)
+//		tmp->next = NULL;
+//	else
+//		tmp->next = *list_v;
+//	*list_v = tmp;
+//}
+
+void		add_to_list_v(t_list_v *list_v, t_verticle *v, t_list_e *list_e)
+{
 	list_v->v = v;
-	return (list_v);
-}
-
-void		add_to_list_v(t_list_v **list_v, t_verticle *v, t_list_e *list_e)
-{
-	t_list_v	*tmp;
-
-	tmp = create_list_v(v, list_e);
-	if (*list_v == NULL)
-		tmp->next = NULL;
-	else
-		tmp->next = *list_v;
-	*list_v = tmp;
+	list_v->list_e = list_e;
 }
 
 t_list_e	*create_list_e(t_edge *e)
@@ -74,20 +80,39 @@ int 		is_v_in_list_v(t_list_v *list_v, t_verticle *v)
 	return (0);
 }
 
+//t_list_v	*get_list_v(t_lemin *lem, t_verticle *v)
+//{
+//	t_list_v	*list_v;
+//	t_list_e	*list_e;
+//
+//	list_v = NULL;
+//	while (v)
+//	{
+//		if (!is_v_in_list_v(list_v, v))
+//		{
+//			list_e = get_list_e(lem, v);
+//			if (list_e)
+//				add_to_list_v(&list_v, v, list_e);
+//		}
+//		v = v->next;
+//	}
+//	return (list_v);
+//}
+
 t_list_v	*get_list_v(t_lemin *lem, t_verticle *v)
 {
 	t_list_v	*list_v;
 	t_list_e	*list_e;
+	int 		i;
 
-	list_v = NULL;
+	i = 0;
+	list_v = (t_list_v*)ft_memalloc(sizeof(t_list_v) * lem->amount);
 	while (v)
 	{
-		if (!is_v_in_list_v(list_v, v))
-		{
-			list_e = get_list_e(lem, v);
-			if (list_e)
-				add_to_list_v(&list_v, v, list_e);
-		}
+		list_e = get_list_e(lem, v);
+		(list_v + i)->list_e = list_e;
+		(list_v + i)->v = v;
+		i++;
 		v = v->next;
 	}
 	return (list_v);

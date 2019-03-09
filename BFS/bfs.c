@@ -33,7 +33,8 @@ t_way		*bfs(t_lemin *lem)
 		if (curr_v == lem->end_vert)
 			break ;
 		curr_v->visited = 1;
-		list_e = find_list_e(lem->list_v, curr_v);
+//		list_e = find_list_e(lem->list_v, curr_v);
+		list_e = lem->list_v[curr_v->n].list_e;
 		while (list_e)
 		{
 			other = GET_OTHER_VERT(curr_v, list_e->e);

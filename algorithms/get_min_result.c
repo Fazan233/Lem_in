@@ -4,7 +4,7 @@
 
 #include "lem_in.h"
 #include "lem_algos.h"
-#define	TO 8
+#define	TO 6
 
 t_mas_ways		*get_min_mas_ways(t_mas_ways *mas_ways)
 {
@@ -46,7 +46,7 @@ void		write_result(t_lemin *lem, int algo)
 		{
 			algorithm2(lem, shift);
 			add_res_and_free_memory(lem);
-			if (lem->mas_res->mas_ways->iter <= lem->target + 3)
+			if (lem->mas_res->mas_ways->iter <= lem->target + 2)
 				break ;
 		}
 	}

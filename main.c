@@ -24,7 +24,7 @@ t_ways	*get_min_ways(t_mas_ways *mas_ways)
 	return (min->ways);
 }
 
-void	go_ants_in_way(t_way *way, t_lemin *lem, int *steps, int len)
+void	go_ants_in_way(t_way *way, t_lemin *lem, int *steps, int *ant)
 {
 	t_way	*end;
 
@@ -40,34 +40,12 @@ void	go_ants_in_way(t_way *way, t_lemin *lem, int *steps, int len)
 		}
 		end = end->prev;
 	}
-	if (lem->ants && lem->ants >= len)
+	if (lem->ants)
 	{
-		ft_printf("L%d-%s ", lem->ants, end->vert->name);
-		end->ant = lem->ants;
+		ft_printf("L%d-%s ", ++(*ant), end->vert->name);
+		end->ant = *ant;
 		lem->ants--;
 		(*steps)++;
-	}
-}
-
-void	set_optional_lens_in_ways(t_ways *ways)
-{
-	t_ways	*begin;
-	int 	min;
-
-	begin = ways;
-	min = ways->len;
-	while (ways)
-	{
-		if (min > ways->len)
-			min = ways->len;
-		ways = ways->next;
-	}
-	min--;
-	ways = begin;
-	while (ways)
-	{
-		ways->len = ways->len - min;
-		ways = ways->next;
 	}
 }
 
@@ -76,11 +54,12 @@ void	ants_go(t_ways *ways, t_lemin *lem)
 	t_ways	*begin;
 	int 	steps;
 	int 	i;
+	int 	tmp;
+	int 	ant;
 
+	ant = 0;
 	i = 0;
-
 	steps = 1;
-//	set_optional_lens_in_ways(ways);
 	begin = ways;
 	while (steps)
 	{
@@ -88,7 +67,11 @@ void	ants_go(t_ways *ways, t_lemin *lem)
 		ways = begin;
 		while (ways)
 		{
-			go_ants_in_way(ways->way, lem, &steps, ways->len);
+			tmp = number_can_way(ways, begin);
+			if (lem->ants >= tmp)
+				go_ants_in_way(ways->way, lem, &steps, &ant);
+			else
+				break ;
 			ways = ways->next;
 		}
 		ft_printf("\n");
@@ -144,6 +127,8 @@ int main()
 //	get_mas_ways(lem);
 ////	sort_mas_ways(lem->mas_ways);
 //	print_min_mas_ways(lem->big_mas_ways);
-//	ants_go(get_min_ways(lem->mas_ways), lem);
+	ants_go(result->ways, lem);
+	ft_printf("{YELLOW}iters - %d{EOC}   {RED}target - %d{EOC}\n", result->iter, lem->target);
+	system("leaks Lem_in -q > leaks");
 	return 0;
 }

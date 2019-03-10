@@ -196,7 +196,8 @@ void		add_to_mas_ways(t_mas_ways **mas_ways, t_ways *ways);
 void	del_mas_ways(t_mas_ways **mas_ways, t_mas_ways *exept);
 void		write_result(t_lemin *lem, int algo);
 t_mas_ways		*get_result(t_mas_res *res);
-void	print_result(t_mas_ways *res, target);
+void	print_result(t_mas_ways *res, int target);
 t_mas_ways		*get_min_mas_ways(t_mas_ways *mas_ways);
+int 	number_can_way(t_ways *ways, t_ways *begin);
 
 #endif

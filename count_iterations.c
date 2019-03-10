@@ -27,13 +27,13 @@ int		get_iter(t_ways *ways, int ants)
 
 	begin = ways;
 	counter = 0;
-	while (ants)
+	while (ants > 0)
 	{
 		ways = begin;
 		while (ways)
 		{
 			tmp = number_can_way(ways, begin);
-			if (ants > tmp)
+			if (ants >= tmp)
 				ants--;
 			else
 				break ;

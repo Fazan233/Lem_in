@@ -88,3 +88,9 @@ void	print_min_mas_ways(t_mas_ways *mas_ways)
 	ft_printf("{YELLOW}iters - %d{EOC}\n", min->iter);
 	print_ways(min->ways);
 }
+
+void	print_result(t_mas_ways *res, int target)
+{
+	ft_printf("{YELLOW}iters - %d{EOC}   {RED}target - %d{EOC}\n", res->iter, target);
+	print_ways(res->ways);
+}

@@ -41,6 +41,15 @@ void	for_add_vert(t_lemin *lem, char **line, int fd, char **mas)
 				lem->end_vert = v;
 			del_2d_charmas(tmp);
 		}
+		if (ft_strstr(*line, "#Here is the number of lines required:"))
+		{
+			char	*t;
+			t = *line;
+			while (!ft_isdigit(*t))
+				t++;
+			lem->target = ft_atoi(t);
+		}
+
 	}
 	else
 	{

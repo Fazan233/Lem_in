@@ -70,6 +70,5 @@ int		del_single(t_edge **orig_edge, t_verticle **orig_v)
 		}
 		v = v_tmp;
 	}
-	ft_printf("-> %i\n", count);
 	return (count);
 }

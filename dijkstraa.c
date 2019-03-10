@@ -37,7 +37,7 @@
 //		}
 //}
 
-t_way	*get_short_way(t_lemin *lem)
+t_way	*get_short_way_s(t_lemin *lem)
 {
 	t_way		*way;
 	t_verticle	*v;
@@ -48,8 +48,32 @@ t_way	*get_short_way(t_lemin *lem)
 		return (NULL);
 	while (1)
 	{
-		add_new_vert_to_way(&way, v);
+		add_new_vert_to_way(&way, v, 's');
 		if (v == lem->end_vert)
+			way->short_way = NULL;
+		else
+			way->short_way = way->next->vert->short_way;
+		if (v->short_way == NULL)
+			break ;
+		else
+			v = GET_OTHER_VERT(v, v->short_way);
+	}
+	return (way);
+}
+
+t_way	*get_short_way_e(t_lemin *lem)
+{
+	t_way		*way;
+	t_verticle	*v;
+
+	way = NULL;
+	v = lem->start_vert;
+	if (v->short_way == NULL)
+		return (NULL);
+	while (1)
+	{
+		add_new_vert_to_way(&way, v, 'e');
+		if (v == lem->start_vert)
 			way->short_way = NULL;
 		else
 			way->short_way = way->next->vert->short_way;

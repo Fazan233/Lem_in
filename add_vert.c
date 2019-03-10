@@ -28,9 +28,6 @@ t_verticle	*create_new_vert(char *name, char *x, char *y)
 
 void	add_new_vert(t_verticle **vert, t_verticle *new_vert)
 {
-	t_verticle	*iter;
-
-	iter = *vert;
 	if (*vert == NULL)
 	{
 		new_vert->n = 0;
@@ -38,16 +35,9 @@ void	add_new_vert(t_verticle **vert, t_verticle *new_vert)
 	}
 	else
 	{
-		while (iter->next)
-			iter = iter->next;
-		iter->next = new_vert;
-		new_vert->prev = iter;
-		new_vert->n = new_vert->prev->n + 1;
-
-
-//		(*vert)->prev = new_vert;
-//		new_vert->next = (*vert);
-//		*vert = new_vert;
+		(*vert)->prev = new_vert;
+		new_vert->next = (*vert);
+		*vert = new_vert;
 	}
 }
 
@@ -96,7 +86,10 @@ t_way	*create_new_way(t_verticle *v)
 	exit(1);
 }
 
-void	add_new_vert_to_way(t_way **way, t_verticle *vert)
+/*
+** mode - 's' (push start), mode - 'e' (push end)
+*/
+void	add_new_vert_to_way(t_way **way, t_verticle *vert, char mode)
 {
 	t_way	*new_way;
 
@@ -116,11 +109,11 @@ void	add_new_vert_to_way(t_way **way, t_verticle *vert)
 		else
 			(*way)->prev->next = new_way;
 		(*way)->prev = new_way;
-		*way = new_way;
+		mode == 's' ? *way = new_way : 0;
 	}
 }
 
-void	add_new_way_to_ways(t_ways **ways, t_way *way, t_lemin *lem)
+void	add_new_way_to_ways(t_ways **ways, t_way *way, t_lemin *lem, char mode)
 {
 	t_ways	*tmp;
 	t_ways	*tmp_ways;
@@ -130,7 +123,10 @@ void	add_new_way_to_ways(t_ways **ways, t_way *way, t_lemin *lem)
 	{
 		tmp->way = way;
 		tmp->next = NULL;
-		tmp->len = lem->end_vert->weight;
+		if (mode == 'e')
+			tmp->len = lem->start_vert->weight;
+		else
+			tmp->len = lem->end_vert->weight;
 		if (*ways == NULL)
 			*ways = tmp;
 		else

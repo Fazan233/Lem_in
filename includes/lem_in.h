@@ -12,6 +12,8 @@
 
 typedef struct			s_lemin
 {
+	int 				target;
+
 	int 				amount;
 	int					ants;
 	struct s_edge		*graph;
@@ -20,6 +22,8 @@ typedef struct			s_lemin
 	struct s_verticle	*start_vert;
 	struct s_verticle	*end_vert;
 	struct s_list_v		*list_v;
+	struct s_mas_res	*mas_res;
+	struct s_mas_ways	*big_mas_ways;
 
 
 	struct s_node		*node;
@@ -127,7 +131,11 @@ typedef struct			s_min_way
 	struct s_min_way	*next;
 }						t_min_way;
 
-
+typedef struct			s_mas_res
+{
+	t_mas_ways			*mas_ways;
+	struct s_mas_res	*next;
+}						t_mas_res;
 
 
 
@@ -142,19 +150,18 @@ t_verticle	*create_new_vert(char *name, char *x, char *y);
 void	swap_pointer(t_verticle **a, t_verticle **b);
 void	quick_sort_for_intmas(int *start, int *finish);
 t_verticle		*get_min_vert(t_verticle *v);
-void	add_new_vert_to_way(t_way **way, t_verticle *vert);
+void	add_new_vert_to_way(t_way **way, t_verticle *vert, char mode);
 void	add_new_edge(t_edge **graph, t_edge *edge);
 t_edge	*create_edge(t_verticle *a, t_verticle *b);
 t_way	*dijkstra(t_lemin *lem);
 void	print_way(t_way *way);
-void	add_new_way_to_ways(t_ways **ways, t_way *way, t_lemin *lem);
+void	add_new_way_to_ways(t_ways **ways, t_way *way, t_lemin *lem, char mode);
 
 t_ways		*find_list_ways1(t_lemin *lem, t_mas_ways *mas_ways);
 void	print_ways(t_ways *ways);
 void		get_mas_ways(t_lemin *lem);
 void	print_mas_ways(t_mas_ways *mas_ways);
-void		show_hide_ways1(t_ways *ways, int mode, t_lemin *lem);
-void		show_hide_ways2(t_ways *ways, int mode, t_lemin *lem);
+void		show_hide_ways(t_ways *ways, int mode, t_lemin *lem);
 
 void		add_to_used_edges(t_used_edge **used, t_edge *e);
 void		del_list_edges(t_used_edge **used);
@@ -177,5 +184,19 @@ void	del_list_min_way(t_min_way **min_way);
 void		bubble_sort_list_l_u(t_ways **begin);
 void		bubble_sort_list_u_l(t_ways **begin);
 int 	count_amount_rooms(t_lemin *lem);
+
+t_way	*get_short_way_e(t_lemin *lem);
+t_way	*get_short_way_s(t_lemin *lem);
+
+t_ways		*find_list_ways_s(t_lemin *lem, t_mas_ways *mas_ways);
+t_ways		*find_list_ways_e(t_lemin *lem, t_mas_ways *mas_ways);
+
+void		add_to_mas_res(t_mas_res **mas_res, t_mas_ways *res);
+void		add_to_mas_ways(t_mas_ways **mas_ways, t_ways *ways);
+void	del_mas_ways(t_mas_ways **mas_ways, t_mas_ways *exept);
+void		write_result(t_lemin *lem, int algo);
+t_mas_ways		*get_result(t_mas_res *res);
+void	print_result(t_mas_ways *res, target);
+t_mas_ways		*get_min_mas_ways(t_mas_ways *mas_ways);
 
 #endif

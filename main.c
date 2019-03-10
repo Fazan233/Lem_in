@@ -7,6 +7,7 @@ static void	init_lem(int fd, t_lemin *lem)
 	parsing(fd, lem);
 	lem->amount = count_amount_rooms(lem);
 	lem->list_v = get_list_v(lem, lem->vert);
+	lem->mas_res = NULL;
 }
 
 t_ways	*get_min_ways(t_mas_ways *mas_ways)
@@ -112,21 +113,37 @@ int main()
 {
 	t_lemin 	*lem;
 	int 		fd;
+	int 		i;
+	t_mas_ways	*result;
 
 
 //	if (ac)
 //		;
 //	fd = open(av[1], O_TRUNC | O_RDONLY);
-	fd = open("big-superposition4.uu", O_RDONLY);
+	fd = open("test", O_RDONLY);
 	lem = (t_lemin*)malloc(sizeof(t_lemin));
 	init_lem(fd, lem);
 
-	get_mas_ways(lem);
-//	sort_mas_ways(lem->mas_ways);
-	get_iters(lem->mas_ways, lem);
-//	print_mas_ways(lem->mas_ways);
+	i = 1;
+//	write_result(lem, i);
 
-	print_min_mas_ways(lem->mas_ways);
+
+	write_result(lem, 5);
+//	while (i <= 4)
+//	{
+//		write_result(lem, i);
+//		i++;
+//	}
+//	get_iters(lem->big_mas_ways, lem);
+	result = get_result(lem->mas_res);
+//	result = get_min_mas_ways(lem->big_mas_ways);
+	print_result(result, lem->target);
+
+//	print_mas_ways(lem->big_mas_ways);
+
+//	get_mas_ways(lem);
+////	sort_mas_ways(lem->mas_ways);
+//	print_min_mas_ways(lem->big_mas_ways);
 //	ants_go(get_min_ways(lem->mas_ways), lem);
 	return 0;
 }

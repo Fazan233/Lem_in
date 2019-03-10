@@ -13,6 +13,7 @@ int 	count_amount_rooms(t_lemin *lem)
 	count = 0;
 	while (v)
 	{
+		v->n = count;
 		count++;
 		v = v->next;
 	}

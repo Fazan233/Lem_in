@@ -90,7 +90,6 @@ t_min_way	*get_min_way_list(t_mas_ways *mas_ways)
 }
 
 
-
 //int 	is_ident_way(t_way *way1, t_way *way2)
 //{
 //	t_way	*end;

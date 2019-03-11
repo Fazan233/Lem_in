@@ -8,7 +8,7 @@
 #define ERROR_ALLOCATE "Memory didn't allocate ("
 
 #include "ft_printf.h"
-
+#include "parsing.h"
 
 typedef struct			s_lemin
 {
@@ -23,13 +23,12 @@ typedef struct			s_lemin
 	struct s_verticle	*end_vert;
 	struct s_list_v		*list_v;
 	struct s_mas_res	*mas_res;
-	struct s_mas_ways	*big_mas_ways;
+	struct s_pars		*pars;
 
 
 	struct s_node		*node;
 	struct s_top_nodes	*top_start;
 	struct s_top_nodes	*top_end;
-	struct s_node		*start_node;
 }						t_lemin;
 
 typedef struct			s_verticle
@@ -39,8 +38,6 @@ typedef struct			s_verticle
 	int 				gray;
 	int 				visited;
 	int 				color;
-	int 				used;
-	int 				light;
 	char				*name;
 	struct s_verticle	*next;
 	struct s_verticle	*prev;

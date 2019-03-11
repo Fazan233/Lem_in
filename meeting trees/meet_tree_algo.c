@@ -92,39 +92,39 @@ int		step_for_start(t_lemin *lem)
 	return (lem->top_start ? 1 : 0);
 }
 
-int 	maino(void)
-{
-	t_lemin 	*lem;
-	int 		fd;
-
-
-//	if (ac)
-//		;
-//	fd = open(av[1], O_TRUNC | O_RDONLY);
-	fd = open("test", O_RDONLY);
-	lem = (t_lemin*)malloc(sizeof(t_lemin));
-	init_lem(fd, lem);
-	lem->start_node = find_node(lem->start_vert, lem->node);
-	while (1)
-	{
-//		ft_printf("TOP START -> ");
-//		print_top(lem->top_start);
-		if (!step_for_start(lem))
-			break ;
-//		print_node_and_links(lem->top_start->node);
-//		ft_printf("TOP END   -> ");
-//		print_top(lem->top_end);
-		if (!step_for_end(lem))
-			break ;
-	}
+//int 	maino(void)
+//{
+//	t_lemin 	*lem;
+//	int 		fd;
+//
+//
+////	if (ac)
+////		;
+////	fd = open(av[1], O_TRUNC | O_RDONLY);
+//	fd = open("test", O_RDONLY);
+//	lem = (t_lemin*)malloc(sizeof(t_lemin));
+//	init_lem(fd, lem);
+//	lem->start_node = find_node(lem->start_vert, lem->node);
+//	while (1)
+//	{
+////		ft_printf("TOP START -> ");
+////		print_top(lem->top_start);
+//		if (!step_for_start(lem))
+//			break ;
+////		print_node_and_links(lem->top_start->node);
+////		ft_printf("TOP END   -> ");
+////		print_top(lem->top_end);
+//		if (!step_for_end(lem))
+//			break ;
+//	}
 
 //	del_half_nodes(&lem->node, lem->node, lem);
-	while (del_half_nodes(&lem->node, lem->node, lem))
-		;
-//	t_node	*start = find_node(lem->vert, lem->node);
-	print_node_and_links_for_all(lem->node);
-
-	ft_printf("%i\n", count_ways(find_node(lem->end_vert, lem->node), find_node(lem->start_vert, lem->node)   ));
-
-	return 0;
-}
+//	while (del_half_nodes(&lem->node, lem->node, lem))
+//		;
+////	t_node	*start = find_node(lem->vert, lem->node);
+//	print_node_and_links_for_all(lem->node);
+//
+//	ft_printf("%i\n", count_ways(find_node(lem->end_vert, lem->node), find_node(lem->start_vert, lem->node)   ));
+//
+//	return 0;
+//}

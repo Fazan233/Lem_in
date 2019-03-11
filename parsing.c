@@ -70,6 +70,9 @@ void	for_add_edge(t_lemin *lem, char *str)
 	free(mas);
 }
 
+
+
+
 void	parsing(int fd, t_lemin *lem)
 {
 	char		*line;
@@ -91,3 +94,4 @@ void	parsing(int fd, t_lemin *lem)
 //	while (del_single(&lem->graph, &lem->vert))
 //		;
 }
+

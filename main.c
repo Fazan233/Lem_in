@@ -5,6 +5,7 @@ static void	init_lem(int fd, t_lemin *lem)
 {
 	ft_bzero(lem, sizeof(t_lemin));
 	parsing(fd, lem);
+//	system("leaks Lem_in -q > leaks");
 	lem->amount = count_amount_rooms(lem);
 	lem->list_v = get_list_v(lem, lem->vert);
 	lem->mas_res = NULL;
@@ -103,12 +104,13 @@ int main()
 //	if (ac)
 //		;
 //	fd = open(av[1], O_TRUNC | O_RDONLY);
-	fd = open("test", O_RDONLY);
+	fd = open("superpos", O_RDONLY);
 	lem = (t_lemin*)malloc(sizeof(t_lemin));
 	init_lem(fd, lem);
 
 	i = 1;
 //	write_result(lem, i);
+
 
 
 	write_result(lem, 5);
@@ -129,6 +131,6 @@ int main()
 //	print_min_mas_ways(lem->big_mas_ways);
 	ants_go(result->ways, lem);
 	ft_printf("{YELLOW}iters - %d{EOC}   {RED}target - %d{EOC}\n", result->iter, lem->target);
-	system("leaks Lem_in -q > leaks");
+
 	return 0;
 }

@@ -18,7 +18,6 @@ t_verticle	*create_new_vert(char *name, char *x, char *y)
 		vert->next = NULL;
 		vert->prev = NULL;
 		vert->short_way = NULL;
-		vert->light = 1;
 		vert->name = ft_strdup(name);
 		return (vert);
 	}

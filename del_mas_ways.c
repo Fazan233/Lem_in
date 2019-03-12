@@ -39,22 +39,25 @@ void	del_mas_ways(t_mas_ways **mas_ways, t_mas_ways *exept)
 {
 	t_mas_ways	*tmp;
 
-	while ((*mas_ways)->next)
+	if (*mas_ways)
 	{
-		if (*mas_ways == exept)
+		while ((*mas_ways)->next)
 		{
+			if (*mas_ways == exept)
+			{
+				*mas_ways = (*mas_ways)->next;
+				continue;
+			}
+			tmp = *mas_ways;
 			*mas_ways = (*mas_ways)->next;
-			continue ;
+			del_ways(&tmp->ways);
+			free(tmp);
 		}
-		tmp = *mas_ways;
-		*mas_ways = (*mas_ways)->next;
-		del_ways(&tmp->ways);
-		free(tmp);
+		if (*mas_ways != exept)
+		{
+			del_ways(&(*mas_ways)->ways);
+			free(*mas_ways);
+		}
+		*mas_ways = NULL;
 	}
-	if (*mas_ways != exept)
-	{
-		del_ways(&(*mas_ways)->ways);
-		free(*mas_ways);
-	}
-	*mas_ways = NULL;
 }

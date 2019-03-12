@@ -34,21 +34,13 @@ void		write_result(t_lemin *lem, int algo)
 {
 	int 		shift;
 
-	if (algo >= 1 && algo <= 4)
+	shift = 0;
+	while (++shift < TO)
 	{
-		algorithm1(lem, algo);
+		algorithm2(lem, shift);
 		add_res_and_free_memory(lem);
-	}
-	else
-	{
-		shift = 0;
-		while (++shift < TO)
-		{
-			algorithm2(lem, shift);
-			add_res_and_free_memory(lem);
-			if (lem->mas_res->mas_ways->iter <= lem->target + 2)
-				break ;
-		}
+//		if (lem->mas_res->mas_ways->iter <= lem->target + 2)
+//			break;
 	}
 }
 

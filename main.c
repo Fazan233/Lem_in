@@ -4,8 +4,8 @@
 static void	init_lem(int fd, t_lemin *lem)
 {
 	ft_bzero(lem, sizeof(t_lemin));
+	lem->pars.map = (char*)ft_memalloc(200000);
 	parsing(fd, lem);
-//	system("leaks Lem_in -q > leaks");
 	lem->amount = count_amount_rooms(lem);
 	lem->list_v = get_list_v(lem, lem->vert);
 	lem->mas_res = NULL;
@@ -54,12 +54,10 @@ void	ants_go(t_ways *ways, t_lemin *lem)
 {
 	t_ways	*begin;
 	int 	steps;
-	int 	i;
 	int 	tmp;
 	int 	ant;
 
 	ant = 0;
-	i = 0;
 	steps = 1;
 	begin = ways;
 	while (steps)
@@ -76,9 +74,7 @@ void	ants_go(t_ways *ways, t_lemin *lem)
 			ways = ways->next;
 		}
 		ft_printf("\n");
-		i++;
 	}
-	ft_printf("{RED}%i iters\n{EOC}", i - 1);
 }
 
 
@@ -97,40 +93,17 @@ int main()
 {
 	t_lemin 	*lem;
 	int 		fd;
-	int 		i;
 	t_mas_ways	*result;
-
-
 //	if (ac)
 //		;
 //	fd = open(av[1], O_TRUNC | O_RDONLY);
 	fd = open("superpos", O_RDONLY);
 	lem = (t_lemin*)malloc(sizeof(t_lemin));
 	init_lem(fd, lem);
-
-	i = 1;
-//	write_result(lem, i);
-
-
-
 	write_result(lem, 5);
-//	while (i <= 4)
-//	{
-//		write_result(lem, i);
-//		i++;
-//	}
-//	get_iters(lem->big_mas_ways, lem);
 	result = get_result(lem->mas_res);
-//	result = get_min_mas_ways(lem->big_mas_ways);
-	print_result(result, lem->target);
-
-//	print_mas_ways(lem->big_mas_ways);
-
-//	get_mas_ways(lem);
-////	sort_mas_ways(lem->mas_ways);
-//	print_min_mas_ways(lem->big_mas_ways);
+	ft_printf("%s\n", lem->pars.map);
 	ants_go(result->ways, lem);
 	ft_printf("{YELLOW}iters - %d{EOC}   {RED}target - %d{EOC}\n", result->iter, lem->target);
-
 	return 0;
 }

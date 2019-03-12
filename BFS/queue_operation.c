@@ -43,10 +43,31 @@ t_verticle	*pop_queue(t_queue *queue)
 		if (queue->last->prev)
 			queue->last->prev->next = NULL;
 		else
+		{
+			free(queue->qlist);
 			queue->qlist = NULL;
+			queue->last = NULL;
+			return (v);
+		}
 		tmp = queue->last->prev;
 		free(queue->last);
 		queue->last = tmp;
 	}
 	return (v);
+}
+
+void 		del_queue_list(t_queue *queue)
+{
+	t_qlist		*tmp;
+
+	if (queue->qlist)
+	{
+		while (queue->qlist->next)
+		{
+			tmp = queue->qlist;
+			queue->qlist = queue->qlist->next;
+			free(tmp);
+		}
+		free(queue->qlist);
+	}
 }

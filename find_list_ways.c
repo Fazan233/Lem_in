@@ -23,6 +23,11 @@ void		show_hide_way(t_way *way, int mode, t_lemin *lem)
 	{
 		end = way->prev;
 		way = way->next;
+		if (way == end)
+		{
+			way->short_way->available = (mode == 0 ? 0 : 1);
+			return ;
+		}
 		while (way != end)
 		{
 			list_e = lem->list_v[way->vert->n].list_e;

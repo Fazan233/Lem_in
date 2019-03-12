@@ -2,8 +2,8 @@
 // Created by Vladyslav USLYSTYI on 2019-03-08.
 //
 
-#ifndef LEM_IN_BFS_H
-#define LEM_IN_BFS_H
+#ifndef BFS_H
+#define BFS_H
 
 #include "lem_in.h"
 
@@ -25,5 +25,6 @@ void		push_queue(t_queue *queue, t_verticle *v);
 t_way		*bfs(t_lemin *lem);
 t_way		*bfs_e(t_lemin *lem);
 t_way		*bfs_s(t_lemin *lem);
+void 		del_queue_list(t_queue *queue);
 
-#endif //LEM_IN_BFS_H
+#endif

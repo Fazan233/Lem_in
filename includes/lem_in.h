@@ -6,9 +6,15 @@
 #define LEM_IN_H
 #define INF 2000000000
 #define ERROR_ALLOCATE "Memory didn't allocate ("
+#define ERROR "ERROR"
 
 #include "ft_printf.h"
-#include "parsing.h"
+
+typedef struct			s_pars
+{
+	char 				*map;
+	int 				iter;
+}						t_pars;
 
 typedef struct			s_lemin
 {
@@ -23,7 +29,7 @@ typedef struct			s_lemin
 	struct s_verticle	*end_vert;
 	struct s_list_v		*list_v;
 	struct s_mas_res	*mas_res;
-	struct s_pars		*pars;
+	struct s_pars		pars;
 
 
 	struct s_node		*node;
@@ -163,6 +169,7 @@ void		show_hide_ways(t_ways *ways, int mode, t_lemin *lem);
 void		add_to_used_edges(t_used_edge **used, t_edge *e);
 void		del_list_edges(t_used_edge **used);
 
+//void	parsing(int fd, t_lemin *lem);
 void	parsing(int fd, t_lemin *lem);
 
 int 	get_iter_for_ways(t_ways *ways, int ants);
@@ -196,5 +203,17 @@ t_mas_ways		*get_result(t_mas_res *res);
 void	print_result(t_mas_ways *res, int target);
 t_mas_ways		*get_min_mas_ways(t_mas_ways *mas_ways);
 int 	number_can_way(t_ways *ways, t_ways *begin);
+
+
+void 	is_valid_link(t_lemin *lem, char **line);
+void	room_validation(t_lemin *lem, char ***mas);
+void	add_to_map(char *str, t_lemin *lem);
+int		is_valid_room(t_lemin *lem, char **line);
+int 	get_target(char *str);
+int		str_only_digits(char *str);
+int 	is_forbidden_chars(char *str);
+int		count_delims(char *str, char c);
+void	ft_error(char *message);
+void	parsing(int fd, t_lemin *lem);
 
 #endif

@@ -27,17 +27,22 @@ void		check_sharp(t_lemin *lem, char **line, int fd)
 		free(*line);
 		if (get_next_line(fd, line))
 			if (is_valid_room(lem, line))
-			{
-				flag == 0 ? lem->start_vert = lem->vert : 0;
-				flag == 1 ? lem->end_vert = lem->vert : 0;
-				return ;
-			}
+				if ((flag == 0 && !lem->start_vert) ||
+					(flag == 1 && !lem->end_vert))
+				{
+					flag == 0 ? lem->start_vert = lem->vert : 0;
+					flag == 1 ? lem->end_vert = lem->vert : 0;
+					return;
+				}
+		free(*line);
 		ft_error(ERROR);
 	}
 	else
 	{
-		if (ft_strstr(*line, "#Here is the number of lines required:"))
+		if (!lem->target &&
+			ft_strstr(*line, "#Here is the number of lines required:"))
 			lem->target = get_target(*line);
+		free(*line);
 	}
 }
 
@@ -51,10 +56,26 @@ void 		valid_rooms(t_lemin *lem, int fd, char **line)
 			add_to_map(*line, lem);
 			check_sharp(lem, line, fd);
 		}
-		if (!is_valid_room(lem, line))
+		else if (!is_valid_room(lem, line))
 			break ;
 	}
 }
+
+void 		valid_links(t_lemin *lem, int fd, char **line)
+{
+	is_valid_link(lem, line);
+	while (get_next_line(fd, line) > 0)
+	{
+		if (**line == '#')
+		{
+			add_to_map(*line, lem);
+			check_sharp(lem, line, fd);
+		}
+		else
+			is_valid_link(lem, line);
+	}
+}
+
 
 void	parsing(int fd, t_lemin *lem)
 {
@@ -62,5 +83,10 @@ void	parsing(int fd, t_lemin *lem)
 
 	valid_num_of_ants(lem, fd, &line);
 	valid_rooms(lem, fd, &line);
-	
+	if (lem->start_vert == NULL || lem->end_vert == NULL)
+	{
+		free(line);
+		ft_error(ERROR);
+	}
+	valid_links(lem, fd, &line);
 }

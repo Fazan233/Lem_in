@@ -5,7 +5,7 @@
 #include "bfs.h"
 #define GET_OTHER_VERT(curr, edge) curr == edge->a ? edge->b : edge->a
 
-static void	set_begin_vals(t_verticle *begin, t_queue **queue,
+static void	set_begin_vals(t_verticle *begin, t_queue *queue,
 							t_verticle *start_from)
 {
 	while (begin != NULL)
@@ -16,23 +16,27 @@ static void	set_begin_vals(t_verticle *begin, t_queue **queue,
 		begin->short_way = NULL;
 		begin = begin->next;
 	}
-	*queue = (t_queue*)ft_memalloc(sizeof(t_queue));
-	push_queue(*queue, start_from);
+//	*queue = (t_queue*)ft_memalloc(sizeof(t_queue));
 }
 
 t_way		*bfs_s(t_lemin *lem)
 {
-	t_queue		*queue;
+	t_queue		queue;
 	t_verticle	*curr_v;
 	t_list_e	*list_e;
 	t_verticle	*other;
 
+	ft_bzero(&queue, sizeof(t_queue));
+	push_queue(&queue, lem->start_vert);
 	set_begin_vals(lem->vert, &queue, lem->start_vert);
-	while (queue->last)
+	while (queue.last)
 	{
-		curr_v = pop_queue(queue);
+		curr_v = pop_queue(&queue);
 		if (curr_v == lem->end_vert)
+		{
+			del_queue_list(&queue);
 			break ;
+		}
 		curr_v->visited = 1;
 		list_e = lem->list_v[curr_v->n].list_e;
 		while (list_e)
@@ -43,7 +47,7 @@ t_way		*bfs_s(t_lemin *lem)
 				other->gray = 1;
 				other->short_way = list_e->e;
 				other->weight = curr_v->weight + 1;
-				push_queue(queue, other);
+				push_queue(&queue, other);
 			}
 			list_e = list_e->next;
 		}

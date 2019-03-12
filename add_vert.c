@@ -4,7 +4,7 @@
 
 #include "lem_in.h"
 
-t_verticle	*create_new_vert(char *name, char *x, char *y)
+t_verticle	*create_new_vert(char *name, int x, int y)
 {
 	t_verticle	*vert;
 
@@ -13,8 +13,8 @@ t_verticle	*create_new_vert(char *name, char *x, char *y)
 	{
 		vert->available = 1;
 		vert->color = 0;
-		vert->x = ft_atoi(x);
-		vert->y = ft_atoi(y);
+		vert->x = x;
+		vert->y = y;
 		vert->next = NULL;
 		vert->prev = NULL;
 		vert->short_way = NULL;

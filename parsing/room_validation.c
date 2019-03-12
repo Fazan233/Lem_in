@@ -20,7 +20,7 @@ int 	is_in_vert_list(t_lemin *lem, char *name, int x, int y)
 	return (0);
 }
 
-void	del_2d_charmas(char ***mas)
+static void	del_2d_charmas(char ***mas)
 {
 	int			i;
 
@@ -46,11 +46,14 @@ void	room_validation(t_lemin *lem, char ***mas)
 			y = ft_atoi((*mas)[2]);
 			if (!(error = is_in_vert_list(lem, name, x, y)))
 				add_new_vert(&lem->vert, create_new_vert(name, x, y));
-			del_2d_charmas(mas);
-			if (error == 1)
-				return ;
+			if (error == 0)
+			{
+				del_2d_charmas(mas);
+				return;
+			}
 		}
 	}
+	del_2d_charmas(mas);
 	ft_error(ERROR);
 }
 
@@ -63,12 +66,11 @@ int		is_valid_room(t_lemin *lem, char **line)
 		room = ft_strsplit(*line, ' ');
 		add_to_map(*line, lem);
 		free(*line);
+
+
 		room_validation(lem, &room);
 		return (1);
 	}
 	else
-	{
-		free(*line);
 		return (0);
-	}
 }

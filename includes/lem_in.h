@@ -143,7 +143,7 @@ void		swap_2link_item(t_verticle *a, t_verticle *b);
 t_verticle	*quick_sort(t_verticle *start, t_verticle *finish);
 void		print_list(t_verticle *start, t_verticle *end);
 void		add_new_vert(t_verticle **vert, t_verticle *new_vert);
-t_verticle	*create_new_vert(char *name, char *x, char *y);
+t_verticle	*create_new_vert(char *name, int x, int y);
 void	swap_pointer(t_verticle **a, t_verticle **b);
 void	quick_sort_for_intmas(int *start, int *finish);
 t_verticle		*get_min_vert(t_verticle *v);

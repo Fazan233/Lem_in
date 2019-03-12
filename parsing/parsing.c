@@ -5,18 +5,6 @@
 #include "lem_in.h"
 #include "parsing.h"
 
-void		valid_num_of_ants(t_lemin *lem, int fd, char **line)
-{
-	get_next_line(fd, line);
-	if (str_only_digits(*line))
-		lem->ants = ft_atoi(*line);
-	if (lem->ants != 0)
-		add_to_map(*line, lem);
-	free(*line);
-	if (lem->ants == 0)
-		ft_error(ERROR);
-}
-
 void		check_sharp(t_lemin *lem, char **line, int fd)
 {
 	int 	flag;
@@ -44,6 +32,35 @@ void		check_sharp(t_lemin *lem, char **line, int fd)
 			lem->target = get_target(*line);
 		free(*line);
 	}
+}
+
+void		valid_num_of_ants(t_lemin *lem, int fd, char **line)
+{
+	char 	*num;
+
+	while (get_next_line(fd, line))
+		if (**line == '#')
+		{
+			add_to_map(*line, lem);
+			check_sharp(lem, line, fd);
+		}
+		else
+			break ;
+	if (str_only_digits(*line))
+	{
+		lem->ants = ft_atoi(*line);
+		num = ft_itoa(lem->ants);
+		if (ft_strcmp(*line, num))
+		{
+			free(num);
+			ft_error(ERROR);
+		}
+		free(num);
+	}
+	add_to_map(*line, lem);
+	free(*line);
+	if (lem->ants <= 0)
+		ft_error(ERROR);
 }
 
 

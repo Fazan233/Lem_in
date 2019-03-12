@@ -8,21 +8,6 @@ static void	init_lem(int fd, t_lemin *lem)
 	parsing(fd, lem);
 	lem->amount = count_amount_rooms(lem);
 	lem->list_v = get_list_v(lem, lem->vert);
-	lem->mas_res = NULL;
-}
-
-t_ways	*get_min_ways(t_mas_ways *mas_ways)
-{
-	t_mas_ways	*min;
-
-	min = mas_ways;
-	while (mas_ways)
-	{
-		if (mas_ways->iter < min->iter)
-			min = mas_ways;
-		mas_ways = mas_ways->next;
-	}
-	return (min->ways);
 }
 
 void	go_ants_in_way(t_way *way, t_lemin *lem, int *steps, int *ant)
@@ -73,20 +58,9 @@ void	ants_go(t_ways *ways, t_lemin *lem)
 				break ;
 			ways = ways->next;
 		}
-		ft_printf("\n");
+		ft_printf("\b\n");
 	}
 }
-
-
-//void	sort_mas_ways(t_mas_ways *mas_ways)
-//{
-//	while (mas_ways)
-//	{
-//		bubble_sort_list(&mas_ways->ways);
-//		mas_ways = mas_ways->next;
-//	}
-//}
-
 
 int main()
 //int main(int ac, char **av)

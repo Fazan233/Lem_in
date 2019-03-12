@@ -38,9 +38,11 @@ void		write_result(t_lemin *lem, int algo)
 	while (++shift < TO)
 	{
 		algorithm2(lem, shift);
+		if (lem->mas_ways == NULL)
+			ft_error(ERROR);
 		add_res_and_free_memory(lem);
-//		if (lem->mas_res->mas_ways->iter <= lem->target + 2)
-//			break;
+		if (lem->mas_res->mas_ways->iter <= lem->target + 2)
+			break;
 	}
 }
 

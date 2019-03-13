@@ -41,7 +41,7 @@ int		get_iter(t_ways *ways, int ants)
 		}
 		counter++;
 	}
-	return (counter - 1 + begin->len);
+	return (counter + begin->len - 1);
 }
 
 void	get_iters(t_mas_ways *mas_ways, t_lemin *lem)

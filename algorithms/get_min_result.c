@@ -5,6 +5,7 @@
 #include "lem_in.h"
 #include "lem_algos.h"
 #define	TO 6
+#define ALMOST_COUNT 2
 
 t_mas_ways		*get_min_mas_ways(t_mas_ways *mas_ways)
 {
@@ -30,18 +31,18 @@ static void		add_res_and_free_memory(t_lemin *lem)
 	add_to_mas_res(&lem->mas_res, min);
 }
 
-void		write_result(t_lemin *lem, int algo)
+void		write_result(t_lemin *lem)
 {
 	int 		shift;
 
 	shift = 0;
 	while (++shift < TO)
 	{
-		algorithm2(lem, shift);
+		algorithm(lem, shift);
 		if (lem->mas_ways == NULL)
 			ft_error(ERROR);
 		add_res_and_free_memory(lem);
-		if (lem->mas_res->mas_ways->iter <= lem->target + 2)
+		if (lem->mas_res->mas_ways->iter <= lem->target + ALMOST_COUNT)
 			break;
 	}
 }

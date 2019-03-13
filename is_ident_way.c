@@ -23,7 +23,7 @@ int 		identical_way(t_way *way1, t_way *way2)
 	return (0);
 }
 
-void	add_min_way(t_min_way **min_way, t_way *way)
+void		add_min_way(t_min_way **min_way, t_way *way)
 {
 	t_min_way	*new_mw;
 
@@ -38,7 +38,7 @@ void	add_min_way(t_min_way **min_way, t_way *way)
 	}
 }
 
-void	del_list_min_way(t_min_way **min_way)
+void		del_list_min_way(t_min_way **min_way)
 {
 	t_min_way	*tmp;
 
@@ -88,20 +88,4 @@ t_min_way	*get_min_way_list(t_mas_ways *mas_ways)
 	}
 	return (min_way);
 }
-
-
-//int 	is_ident_way(t_way *way1, t_way *way2)
-//{
-//	t_way	*end;
-//
-//	end = way1->prev;
-//	while (way1 != end)
-//	{
-//		if (way1->vert != way2->vert)
-//			return (0);
-//		way1 = way1->next;
-//		way2 = way2->next;
-//	}
-//	return (way1 == way2);
-//}
 

@@ -8,5 +8,6 @@ void	ft_error(char *message)
 {
 	if (message)
 		ft_printf("%s\n", message);
+	system("leaks -q Lem_in");
 	exit(1);
 }

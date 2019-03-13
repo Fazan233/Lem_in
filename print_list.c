@@ -4,16 +4,6 @@
 
 #include "lem_in.h"
 
-void	print_list(t_verticle *start, t_verticle *end)
-{
-	while (start != end)
-	{
-		ft_printf("%d ", start->weight);
-		start = start->next;
-	}
-	ft_printf("%d\n", end->weight);
-}
-
 void	print_way(t_way *way)
 {
 	t_way	*end;
@@ -91,6 +81,7 @@ void	print_min_mas_ways(t_mas_ways *mas_ways)
 
 void	print_result(t_mas_ways *res, int target)
 {
-	ft_printf("{YELLOW}iters - %d{EOC}   {RED}target - %d{EOC}\n", res->iter, target);
+	ft_printf("{YELLOW}iters - %d{EOC}   {RED}target - %d{EOC}\n",
+			res->iter, target);
 	print_ways(res->ways);
 }

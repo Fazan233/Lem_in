@@ -2,7 +2,7 @@
 // Created by Vladyslav USLYSTYI on 2019-03-12.
 //
 
-#include "parsing.h"
+#include "lem_in.h"
 
 int 	is_verts_in_list(t_lemin *lem, char *room1, char *room2,
 							t_verticle *mas[])
@@ -19,7 +19,7 @@ int 	is_verts_in_list(t_lemin *lem, char *room1, char *room2,
 			mas[i] = v;
 			i++;
 		}
-		else if (!ft_strcmp(v->name, room2))
+		if (!ft_strcmp(v->name, room2))
 		{
 			mas[i] = v;
 			i++;
@@ -59,17 +59,13 @@ int		is_link_in_graph(t_lemin *lem, char *room1, char *room2)
 void	link_validation(t_lemin *lem, char ***mas)
 {
 	t_verticle	*verts[2];
-	int 		error;
 
 	if (is_verts_in_list(lem, (*mas)[0], (*mas)[1], verts))
 	{
-		if (!(error = is_link_in_graph(lem, (*mas)[0], (*mas)[1])))
+		if (!is_link_in_graph(lem, (*mas)[0], (*mas)[1]))
 			add_new_edge(&lem->graph, create_edge(verts[0], verts[1]));
-		if (error == 0)
-		{
-			del_2d_charmas(mas);
-			return ;
-		}
+		del_2d_charmas(mas);
+		return ;
 	}
 	del_2d_charmas(mas);
 	ft_error(ERROR);

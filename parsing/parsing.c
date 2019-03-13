@@ -3,7 +3,6 @@
 //
 
 #include "lem_in.h"
-#include "parsing.h"
 
 void		check_sharp(t_lemin *lem, char **line, int fd)
 {
@@ -22,7 +21,6 @@ void		check_sharp(t_lemin *lem, char **line, int fd)
 					flag == 1 ? lem->end_vert = lem->vert : 0;
 					return;
 				}
-		free(*line);
 		ft_error(ERROR);
 	}
 	else

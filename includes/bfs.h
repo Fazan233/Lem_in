@@ -23,8 +23,6 @@ typedef struct		s_queue
 t_verticle	*pop_queue(t_queue *queue);
 void		push_queue(t_queue *queue, t_verticle *v);
 t_way		*bfs(t_lemin *lem);
-t_way		*bfs_e(t_lemin *lem);
-t_way		*bfs_s(t_lemin *lem);
 void 		del_queue_list(t_queue *queue);
 
 #endif

@@ -51,7 +51,7 @@ void		show_hide_ways(t_ways *ways, int mode, t_lemin *lem)
 }
 
 
-t_ways		*find_list_ways_s(t_lemin *lem, t_mas_ways *mas_ways)
+t_ways		*find_list_ways(t_lemin *lem, t_mas_ways *mas_ways)
 {
 	t_ways		*ways;
 	t_way		*way;
@@ -60,44 +60,18 @@ t_ways		*find_list_ways_s(t_lemin *lem, t_mas_ways *mas_ways)
 	min_way = get_min_way_list(mas_ways);
 	ways = NULL;
 	show_hide_first_edge_ways(min_way, 0);
-	while ((way = bfs_s(lem)))
+	while ((way = bfs(lem)))
 	{
 		show_hide_way(way, 0, lem);
-		add_new_way_to_ways(&ways, way, lem, 's');
+		add_new_way_to_ways(&ways, way, lem);
 	}
 	show_hide_first_edge_ways(min_way, 1);
 	del_list_min_way(&min_way);
 	if (ways)
-		while ((way = bfs_s(lem)))
+		while ((way = bfs(lem)))
 		{
 			show_hide_way(way, 0, lem);
-			add_new_way_to_ways(&ways, way, lem, 's');
-		}
-	show_hide_ways(ways, 1, lem);
-	return (ways);
-}
-
-t_ways		*find_list_ways_e(t_lemin *lem, t_mas_ways *mas_ways)
-{
-	t_ways		*ways;
-	t_way		*way;
-	t_min_way	*min_way;
-
-	min_way = get_min_way_list(mas_ways);
-	ways = NULL;
-	show_hide_first_edge_ways(min_way, 0);
-	while ((way = bfs_e(lem)))
-	{
-		show_hide_way(way, 0, lem);
-		add_new_way_to_ways(&ways, way, lem, 'e');
-	}
-	show_hide_first_edge_ways(min_way, 1);
-	del_list_min_way(&min_way);
-	if (ways)
-		while ((way = bfs_e(lem)))
-		{
-			show_hide_way(way, 0, lem);
-			add_new_way_to_ways(&ways, way, lem, 'e');
+			add_new_way_to_ways(&ways, way, lem);
 		}
 	show_hide_ways(ways, 1, lem);
 	return (ways);

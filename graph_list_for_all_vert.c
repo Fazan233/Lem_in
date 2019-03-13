@@ -45,7 +45,6 @@ t_list_v	*get_list_v(t_lemin *lem, t_verticle *v)
 	{
 		list_e = get_list_e(lem, v);
 		(list_v + i)->list_e = list_e;
-		(list_v + i)->v = v;
 		i++;
 		v = v->next;
 	}

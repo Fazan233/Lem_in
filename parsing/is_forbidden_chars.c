@@ -4,11 +4,8 @@
 
 int 	is_forbidden_chars(char *str)
 {
-	while (*str != '\0')
-	{
-		if (*str == '#' || *str == 'L')
-			return (1);
-		str++;
-	}
+
+	if (*str == '#' || *str == 'L')
+		return (1);
 	return (0);
 }

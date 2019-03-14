@@ -3,6 +3,8 @@
 //
 
 #include "lem_in.h"
+#define ERR_WAY "Couldn't allocate memory for list of way.\n"
+#define ERR_WAYS "Couldn't allocate memory for list of ways.\n"
 
 t_way	*create_new_way(t_verticle *v)
 {
@@ -15,13 +17,10 @@ t_way	*create_new_way(t_verticle *v)
 		way->ant = 0;
 		return (way);
 	}
-	ft_printf(ERROR_ALLOCATE);
-	exit(1);
+	ft_error(ERR_WAY);
+	return (0);
 }
 
-/*
-** mode - 's' (push start), mode - 'e' (push end)
-*/
 void	add_new_vert_to_way(t_way **way, t_verticle *vert)
 {
 	t_way	*new_way;
@@ -52,6 +51,8 @@ void	add_new_way_to_ways(t_ways **ways, t_way *way, t_lemin *lem)
 	t_ways	*tmp_ways;
 
 	tmp = (t_ways*)malloc(sizeof(t_ways));
+	if (!tmp)
+		ft_error(ERR_WAYS);
 	if (tmp)
 	{
 		tmp->way = way;

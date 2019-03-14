@@ -21,7 +21,7 @@ void	print_way(t_way *way)
 			if (way == end->next)
 				ft_printf("{GREEN}%s{EOC} -> ", way->vert->name);
 			else
-				ft_printf("%s -> ", way->vert->name);
+				ft_printf("{YELLOW}%s{EOC} -> ", way->vert->name);
 			way = way->next;
 		}
 	}
@@ -33,12 +33,15 @@ void	print_ways(t_ways *ways)
 {
 	if (ways)
 	{
+		ft_printf(" {YELLOW}Lenght{EOC} | {YELLOW}Parallel Ways{EOC}\n");
+		ft_printf("-------------------------------\n");
 		while (ways)
 		{
-			ft_printf("{CYAN}%d{EOC} ", ways->len);
+			ft_printf("{CYAN}%7d{EOC} | ", ways->len);
 			print_way(ways->way);
 			ways = ways->next;
 		}
+		ft_printf("-------------------------------\n\n");
 	}
 	else
 		ft_printf("The ways is not exist\n");
@@ -46,22 +49,16 @@ void	print_ways(t_ways *ways)
 
 void	print_mas_ways(t_mas_ways *mas_ways)
 {
-	int i;
-
-	i = 0;
 	if (mas_ways)
 	{
 		while (mas_ways)
 		{
-			ft_printf(">>>>> %i <<<<<\n", ++i);
 			ft_printf("{YELLOW}iters - %d{EOC}\n", mas_ways->iter);
 			print_ways(mas_ways->ways);
 			mas_ways = mas_ways->next;
 		}
-		ft_printf("==============\n");
+		ft_printf("\n");
 	}
-	else
-		ft_printf("The mas_ways is not exist\n");
 }
 
 void	print_min_mas_ways(t_mas_ways *mas_ways)
@@ -84,4 +81,43 @@ void	print_result(t_mas_ways *res, int target)
 	ft_printf("{YELLOW}iters - %d{EOC}   {RED}target - %d{EOC}\n",
 			res->iter, target);
 	print_ways(res->ways);
+}
+
+void	print_list_ants(t_lemin *lem)
+{
+	int 		i;
+	int 		ant;
+
+	i = 0;
+	ant = lem->ants;
+	p_ants_go(lem->result->ways, lem, lem->ants);
+	lem->ants = ant;
+	while (i < lem->ants)
+	{
+		ft_printf("L%-4d | ", i + 1);
+		print_way(lem->list_ants[i].way);
+		i++;
+	}
+	ft_printf("\n");
+}
+
+void	print_choosed_ant(t_lemin *lem)
+{
+	t_wish_list	*wish;
+	int 		ant;
+
+	wish = lem->wish_list;
+	ant = lem->ants;
+	p_ants_go(lem->result->ways, lem, lem->ants);
+	lem->ants = ant;
+	while (wish)
+	{
+		ft_printf("L%-4d | ", wish->ant);
+		if (wish->ant > 0 && wish->ant <= lem->ants)
+			print_way(lem->list_ants[wish->ant - 1].way);
+		else
+			ft_printf("{RED}THE ANT IS NOT EXIST!{EOC}\n");
+		wish = wish->next;
+	}
+	ft_printf("\n");
 }

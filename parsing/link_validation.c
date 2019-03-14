@@ -3,6 +3,9 @@
 //
 
 #include "lem_in.h"
+#define ER_NO_VER "You are trying to add a non-existent room to the link!"
+#define ER_INCOR_LINK "There should be two rooms in the link!"
+#define ER_NO_DELIM "Links should be entered with delimiter \'-\'!"
 
 int 	is_verts_in_list(t_lemin *lem, char *room1, char *room2,
 							t_verticle *mas[])
@@ -68,7 +71,7 @@ void	link_validation(t_lemin *lem, char ***mas)
 		return ;
 	}
 	del_2d_charmas(mas);
-	ft_error(ERROR);
+	ft_error_mode(ERROR, ER_NO_VER, lem->flag.debug);
 }
 
 void 	is_valid_link(t_lemin *lem, char **line)
@@ -87,12 +90,12 @@ void 	is_valid_link(t_lemin *lem, char **line)
 		else
 		{
 			free(*line);
-			ft_error(ERROR);
+			ft_error_mode(ERROR, ER_INCOR_LINK, lem->flag.debug);
 		}
 	}
 	else
 	{
 		free(*line);
-		ft_error(ERROR);
+		ft_error_mode(ERROR, ER_NO_DELIM, lem->flag.debug);
 	}
 }

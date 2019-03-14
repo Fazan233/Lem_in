@@ -3,6 +3,9 @@
 //
 
 #include "lem_in.h"
+#define ERR_ST_END "The start and end rooms must be specified!"
+#define ERR_ANT_NUM "Number of ants must be digit: 0 < ANT_NUM <= INT_MAX"
+#define ERR_PROBL_ST_END "WOW you have some problem with start or end. FIX IT!"
 
 void		check_sharp(t_lemin *lem, char **line, int fd)
 {
@@ -19,9 +22,9 @@ void		check_sharp(t_lemin *lem, char **line, int fd)
 				{
 					flag == 0 ? lem->start_vert = lem->vert : 0;
 					flag == 1 ? lem->end_vert = lem->vert : 0;
-					return;
+					return ;
 				}
-		ft_error(ERROR);
+		ft_error_mode(ERROR, ERR_PROBL_ST_END, lem->flag.debug);
 	}
 	else
 	{
@@ -51,14 +54,14 @@ void		valid_num_of_ants(t_lemin *lem, int fd, char **line)
 		if (ft_strcmp(*line, num))
 		{
 			free(num);
-			ft_error(ERROR);
+			ft_error_mode(ERROR, ERR_ANT_NUM, lem->flag.debug);
 		}
 		free(num);
 	}
 	add_to_map(*line, lem);
 	free(*line);
 	if (lem->ants <= 0)
-		ft_error(ERROR);
+		ft_error_mode(ERROR, ERR_ANT_NUM, lem->flag.debug);
 }
 
 
@@ -92,7 +95,7 @@ void 		valid_links(t_lemin *lem, int fd, char **line)
 }
 
 
-void	parsing(int fd, t_lemin *lem)
+void		parsing(int fd, t_lemin *lem)
 {
 	char	*line;
 
@@ -101,7 +104,7 @@ void	parsing(int fd, t_lemin *lem)
 	if (lem->start_vert == NULL || lem->end_vert == NULL)
 	{
 		free(line);
-		ft_error(ERROR);
+		ft_error_mode(ERROR, ERR_ST_END, lem->flag.debug);
 	}
 	valid_links(lem, fd, &line);
 }

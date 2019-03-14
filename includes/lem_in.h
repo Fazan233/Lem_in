@@ -6,16 +6,32 @@
 #define LEM_IN_H
 #define ERROR_ALLOCATE "Memory didn't allocate ("
 #define ERROR "ERROR"
+#define FLAG_LIST "ewamgitL"
 
 #include "ft_printf.h"
-#include "flags.h"
 
-typedef struct		s_flags
+typedef struct			s_wish_list
 {
-	unsigned int 	debug:1;
-	unsigned int 	ways:1;
-	unsigned int 	all:1;
-}					t_flags;
+	int 				ant;
+	struct s_wish_list	*next;
+}						t_wish_list;
+
+typedef struct			s_ant
+{
+	struct s_way		*way;
+}						t_ant;
+
+typedef struct			s_flags
+{
+	unsigned int		lem:1;
+	unsigned int 		debug:1;
+	unsigned int 		ways:1;
+	unsigned int 		all:1;
+	unsigned int		map:1;
+	unsigned int		go:1;
+	unsigned int		iter:1;
+	unsigned int		target:1;
+}						t_flags;
 
 typedef struct			s_pars
 {
@@ -32,11 +48,14 @@ typedef struct			s_lemin
 	struct s_edge		*graph;
 	struct s_verticle	*vert;
 	struct s_mas_ways	*mas_ways;
+	struct s_mas_ways	*result;
 	struct s_verticle	*start_vert;
 	struct s_verticle	*end_vert;
 	struct s_list_v		*list_v;
 	struct s_mas_res	*mas_res;
 	struct s_pars		pars;
+	struct s_ant		*list_ants;
+	struct s_wish_list	*wish_list;
 }						t_lemin;
 
 typedef struct			s_verticle
@@ -111,7 +130,14 @@ typedef struct			s_mas_res
 	struct s_mas_res	*next;
 }						t_mas_res;
 
+void		add_wish_list(t_wish_list **wish, int ant);
 void		check_flags(int ac, char **av, t_lemin *lem);
+void		print_mas_ways(t_mas_ways *mas_ways);
+void		print_data(t_lemin *lem);
+void		ft_error_mode(char *std_mess, char *mode_mess, int mode);
+void		print_list_ants(t_lemin *lem);
+void		print_choosed_ant(t_lemin *lem);
+void	p_ants_go(t_ways *ways, t_lemin *lem, int ant);
 
 t_list_v	*get_list_v(struct s_lemin *lem, struct s_verticle *v);
 void		add_new_vert(t_verticle **vert, t_verticle *new_vert);
@@ -149,7 +175,7 @@ int 		is_forbidden_chars(char *str);
 int			count_delims(char *str, char c);
 void		ft_error(char *message);
 void		parsing(int fd, t_lemin *lem);
-void		ants_go(t_ways *ways, t_lemin *lem);
+void		ants_go(t_ways *ways, t_lemin *lem, int ant);
 int 		start_link_end(t_lemin *lem);
 void		ants_go_one_way(t_lemin *lem);
 

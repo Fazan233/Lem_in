@@ -1,10 +1,10 @@
 //
-// Created by Vladyslav USLYSTYI on 2019-03-13.
+// Created by Vladyslav USLYSTYI on 2019-03-14.
 //
 
 #include "lem_in.h"
 
-void	go_ants_in_way(t_way *way, t_lemin *lem, int *steps, int *ant)
+void	p_go_ants_in_way(t_way *way, t_lemin *lem, int *steps, int *ant)
 {
 	t_way	*end;
 
@@ -13,7 +13,7 @@ void	go_ants_in_way(t_way *way, t_lemin *lem, int *steps, int *ant)
 	{
 		if (end->prev->ant)
 		{
-			ft_printf("L%d-%s ", end->prev->ant, end->vert->name);
+//			ft_printf("L%d-%s ", end->prev->ant, end->vert->name);
 			end->ant = end->prev->ant;
 			end->prev->ant = 0;
 			(*steps)++;
@@ -23,14 +23,15 @@ void	go_ants_in_way(t_way *way, t_lemin *lem, int *steps, int *ant)
 	if (lem->ants)
 	{
 		lem->list_ants[*ant].way = way;
-		ft_printf("L%d-%s ", ++(*ant), end->vert->name);
+//		ft_printf("L%d-%s ", ++(*ant), end->vert->name);
+		++(*ant);
 		end->ant = *ant;
 		lem->ants--;
 		(*steps)++;
 	}
 }
 
-void	ants_go_one_way(t_lemin *lem)
+void	p_ants_go_one_way(t_lemin *lem)
 {
 	int 	ants;
 
@@ -39,19 +40,19 @@ void	ants_go_one_way(t_lemin *lem)
 	while (ants <= lem->ants)
 	{
 		lem->list_ants[ants - 1].way = lem->mas_res->mas_ways->ways->way;
-		ft_printf("L%d-%s ", ants, lem->end_vert->name);
+//		ft_printf("L%d-%s ", ants, lem->end_vert->name);
 		ants++;
 	}
 	ft_printf("\b\n\n");
 }
 
-void	ants_go(t_ways *ways, t_lemin *lem, int ant)
+void	p_ants_go(t_ways *ways, t_lemin *lem, int ant)
 {
 	t_ways	*begin;
 	int 	steps;
 
 	if (ways->way->next->vert == lem->end_vert)
-		ants_go_one_way(lem);
+		p_ants_go_one_way(lem);
 	else
 	{
 		ant = 0;
@@ -64,12 +65,12 @@ void	ants_go(t_ways *ways, t_lemin *lem, int ant)
 			while (ways)
 			{
 				if (lem->ants >= number_can_way(ways, begin))
-					go_ants_in_way(ways->way, lem, &steps, &ant);
+					p_go_ants_in_way(ways->way, lem, &steps, &ant);
 				else
 					break ;
 				ways = ways->next;
 			}
-			ft_printf("\b\n");
+//			ft_printf("\b\n");
 		}
 	}
 }

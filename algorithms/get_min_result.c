@@ -6,6 +6,7 @@
 #include "lem_algos.h"
 #define	TO 6
 #define ALMOST_COUNT 2
+#define NO_ONE_WAY "You have no one way from START room to END!"
 
 t_mas_ways		*get_min_mas_ways(t_mas_ways *mas_ways)
 {
@@ -40,7 +41,7 @@ void		write_result(t_lemin *lem)
 	{
 		algorithm(lem, shift);
 		if (lem->mas_ways == NULL)
-			ft_error(ERROR);
+			ft_error_mode(ERROR, NO_ONE_WAY, lem->flag.debug);
 		add_res_and_free_memory(lem);
 		if (lem->mas_res->mas_ways->iter <= lem->target + ALMOST_COUNT)
 			break;

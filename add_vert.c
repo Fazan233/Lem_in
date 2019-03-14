@@ -3,6 +3,8 @@
 //
 
 #include "lem_in.h"
+#define ERR_VER "Error!\nAllocation memory is no available for vertices!\n"
+#define ERR_EDGE "Error!\nAllocation memory is no available for edges!\n"
 
 t_verticle	*create_new_vert(char *name, int x, int y)
 {
@@ -19,8 +21,8 @@ t_verticle	*create_new_vert(char *name, int x, int y)
 		vert->name = ft_strdup(name);
 		return (vert);
 	}
-	ft_printf(ERROR_ALLOCATE);
-	exit(1);
+	ft_error(ERR_VER);
+	return (0);
 }
 
 void	add_new_vert(t_verticle **vert, t_verticle *new_vert)
@@ -52,8 +54,8 @@ t_edge	*create_edge(t_verticle *a, t_verticle *b)
 		edge->prev = NULL;
 		return (edge);
 	}
-	ft_printf(ERROR_ALLOCATE);
-	exit(1);
+	ft_error(ERR_EDGE);
+	return (0);
 }
 
 void	add_new_edge(t_edge **graph, t_edge *edge)

@@ -3,6 +3,7 @@
 //
 
 #include "lem_in.h"
+#define ERR_MW "Couldn't allocate memory for list of min_ways.\n"
 
 int 		identical_way(t_way *way1, t_way *way2)
 {
@@ -28,6 +29,8 @@ void		add_min_way(t_min_way **min_way, t_way *way)
 	t_min_way	*new_mw;
 
 	new_mw = (t_min_way*)ft_memalloc(sizeof(t_min_way));
+	if (!new_mw)
+		ft_error(ERR_MW);
 	new_mw->way = way;
 	if (*min_way == NULL)
 		*min_way = new_mw;

@@ -3,12 +3,16 @@
 //
 
 #include "lem_in.h"
+#define ERR_LIST_V "Couldn't allocate memory for massive of vertices.\n"
+#define ERR_LIST_E "Couldn't allocate memory for list of edges.\n"
 
 void		add_to_list_e(t_list_e **list_e, t_edge *e)
 {
 	t_list_e	*tmp;
 
 	tmp = (t_list_e*)malloc(sizeof(t_list_e));
+	if (!list_e)
+		ft_error(ERR_LIST_E);
 	tmp->e = e;
 	if (*list_e == NULL)
 		tmp->next = NULL;
@@ -41,6 +45,8 @@ t_list_v	*get_list_v(t_lemin *lem, t_verticle *v)
 
 	i = 0;
 	list_v = (t_list_v*)ft_memalloc(sizeof(t_list_v) * lem->amount);
+	if (!list_v)
+		ft_error(ERR_LIST_V);
 	while (v)
 	{
 		list_e = get_list_e(lem, v);

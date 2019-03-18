@@ -20,7 +20,7 @@ static void	set_begin_vals(t_verticle *begin, t_queue *queue,
 	push_queue(queue, start_from);
 }
 
-void		push_vert_in_queue(t_list_e *list_e, t_verticle *other,
+static void		push_vert_in_queue(t_list_e *list_e, t_verticle *other,
 								t_verticle *curr_v, t_queue *queue)
 {
 	if (list_e->e->available && other->gray == 0 && other->visited == 0)
@@ -55,13 +55,7 @@ t_way		*bfs(t_lemin *lem)
 		while (list_e)
 		{
 			other = GET_OTHER_VERT(curr_v, list_e->e);
-			if (list_e->e->available && other->gray == 0 && other->visited == 0)
-			{
-				other->gray = 1;
-				other->short_way = list_e->e;
-				other->weight = curr_v->weight + 1;
-				push_queue(&queue, other);
-			}
+			push_vert_in_queue(list_e, other, curr_v, &queue);
 			list_e = list_e->next;
 		}
 	}

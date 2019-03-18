@@ -4,7 +4,7 @@
 
 #include "lem_in.h"
 
-void	del_way(t_way **way)
+static void	del_way(t_way **way)
 {
 	t_way	*tmp;
 
@@ -19,7 +19,7 @@ void	del_way(t_way **way)
 	*way = NULL;
 }
 
-void	del_ways(t_ways **ways)
+static void	del_ways(t_ways **ways)
 {
 	t_ways	*tmp;
 

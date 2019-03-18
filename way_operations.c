@@ -6,7 +6,7 @@
 #define ERR_WAY "Couldn't allocate memory for list of way.\n"
 #define ERR_WAYS "Couldn't allocate memory for list of ways.\n"
 
-t_way	*create_new_way(t_verticle *v)
+static t_way	*create_new_way(t_verticle *v)
 {
 	t_way	*way;
 

@@ -6,8 +6,10 @@
 #define ER_NO_VER "You are trying to add a non-existent room to the link!"
 #define ER_INCOR_LINK "There should be two rooms in the link!"
 #define ER_NO_DELIM "Links should be entered with delimiter \'-\'!"
+#define EMTY_LINE " And maybe you have empty line, if it is true - delete it!"
+#define NO_DELIM_EMPT_LINE ER_NO_DELIM EMTY_LINE
 
-int 	is_verts_in_list(t_lemin *lem, char *room1, char *room2,
+static int 	is_verts_in_list(t_lemin *lem, char *room1, char *room2,
 							t_verticle *mas[])
 {
 	t_verticle	*v;
@@ -42,7 +44,7 @@ static void	del_2d_charmas(char ***mas)
 	free(*mas);
 }
 
-int		is_link_in_graph(t_lemin *lem, char *room1, char *room2)
+static int		is_link_in_graph(t_lemin *lem, char *room1, char *room2)
 {
 	t_edge		*edge;
 
@@ -59,7 +61,7 @@ int		is_link_in_graph(t_lemin *lem, char *room1, char *room2)
 	return (0);
 }
 
-void	link_validation(t_lemin *lem, char ***mas)
+static void	link_validation(t_lemin *lem, char ***mas)
 {
 	t_verticle	*verts[2];
 
@@ -96,6 +98,6 @@ void 	is_valid_link(t_lemin *lem, char **line)
 	else
 	{
 		free(*line);
-		ft_error_mode(ERROR, ER_NO_DELIM, lem->flag.debug);
+		ft_error_mode(ERROR, NO_DELIM_EMPT_LINE, lem->flag.debug);
 	}
 }

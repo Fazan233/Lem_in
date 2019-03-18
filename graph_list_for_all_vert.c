@@ -6,7 +6,7 @@
 #define ERR_LIST_V "Couldn't allocate memory for massive of vertices.\n"
 #define ERR_LIST_E "Couldn't allocate memory for list of edges.\n"
 
-void		add_to_list_e(t_list_e **list_e, t_edge *e)
+static void		add_to_list_e(t_list_e **list_e, t_edge *e)
 {
 	t_list_e	*tmp;
 
@@ -21,7 +21,7 @@ void		add_to_list_e(t_list_e **list_e, t_edge *e)
 	*list_e = tmp;
 }
 
-t_list_e	*get_list_e(t_lemin *lem, t_verticle *v)
+static t_list_e	*get_list_e(t_lemin *lem, t_verticle *v)
 {
 	t_list_e	*list_e;
 	t_edge		*edge;

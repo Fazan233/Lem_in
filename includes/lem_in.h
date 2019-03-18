@@ -137,7 +137,8 @@ void		print_data(t_lemin *lem);
 void		ft_error_mode(char *std_mess, char *mode_mess, int mode);
 void		print_list_ants(t_lemin *lem);
 void		print_choosed_ant(t_lemin *lem);
-void	p_ants_go(t_ways *ways, t_lemin *lem, int ant);
+void		p_ants_go(t_ways *ways, t_lemin *lem, int ant);
+void		help(char *help);
 
 t_list_v	*get_list_v(struct s_lemin *lem, struct s_verticle *v);
 void		add_new_vert(t_verticle **vert, t_verticle *new_vert);
@@ -176,7 +177,6 @@ int			count_delims(char *str, char c);
 void		ft_error(char *message);
 void		parsing(int fd, t_lemin *lem);
 void		ants_go(t_ways *ways, t_lemin *lem, int ant);
-int 		start_link_end(t_lemin *lem);
 void		ants_go_one_way(t_lemin *lem);
 
 #endif

@@ -65,30 +65,3 @@ void		bubble_sort_list_l_u(t_ways **begin)
 		len--;
 	}
 }
-
-void		bubble_sort_list_u_l(t_ways **begin)
-{
-	t_ways	*t;
-	int		len;
-	int		i;
-
-	len = list_size(*begin);
-	while (len >= 2)
-	{
-		i = 0;
-		while (++i < len)
-		{
-			if (i == 1 && (*begin)->len < (*begin)->next->len)
-				firstswap(begin);
-			if (i == 2)
-				t = *begin;
-			if (i >= 2)
-			{
-				if (t->next->len < t->next->next->len)
-					secondswap(t);
-				t = t->next;
-			}
-		}
-		len--;
-	}
-}

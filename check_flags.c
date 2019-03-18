@@ -4,7 +4,7 @@
 
 #include "lem_in.h"
 
-void		init_flags(char c, t_flags *f)
+static void		init_flags(char c, t_flags *f)
 {
 	c == 'e' ? f->debug = 1 : 0;
 	c == 'w' ? f->ways = 1 : 0;
@@ -16,20 +16,22 @@ void		init_flags(char c, t_flags *f)
 	c == 'L' ? f->lem = 1 : 0;
 }
 
-void		show_usage(void)
+static void		show_usage(void)
 {
-	ft_printf("usage: ./generator [option]\n");
+	ft_printf("usage: ./lem-in [{BOLD}-ewamgitL{EOC}]\n");
+	ft_printf("If you want to see what means that flags ");
+	ft_printf("enter {BOLD}--help{EOC}\n");
 	exit (1);
 }
 
-void		ckeck_ant(char **flags, t_lemin *lem)
+static void		ckeck_ant(char **flags, t_lemin *lem)
 {
 	add_wish_list(&lem->wish_list, ft_atoi(*flags));
 	while (ft_isdigit(**flags))
 		(*flags)++;
 }
 
-void		read_flags(char *flags, t_flags *f, t_lemin *lem)
+static void		read_flags(char *flags, t_flags *f, t_lemin *lem)
 {
 	char	prev;
 

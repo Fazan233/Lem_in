@@ -4,7 +4,7 @@
 
 #include "lem_in.h"
 
-void	go_ants_in_way(t_way *way, t_lemin *lem, int *steps, int *ant)
+static void	go_ants_in_way(t_way *way, t_lemin *lem, int *steps, int *ant)
 {
 	t_way	*end;
 

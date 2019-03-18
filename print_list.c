@@ -47,42 +47,6 @@ void	print_ways(t_ways *ways)
 		ft_printf("The ways is not exist\n");
 }
 
-void	print_mas_ways(t_mas_ways *mas_ways)
-{
-	if (mas_ways)
-	{
-		while (mas_ways)
-		{
-			ft_printf("{YELLOW}iters - %d{EOC}\n", mas_ways->iter);
-			print_ways(mas_ways->ways);
-			mas_ways = mas_ways->next;
-		}
-		ft_printf("\n");
-	}
-}
-
-void	print_min_mas_ways(t_mas_ways *mas_ways)
-{
-	t_mas_ways	*min;
-
-	min = mas_ways;
-	while (mas_ways)
-	{
-		if (mas_ways->iter < min->iter)
-			min = mas_ways;
-		mas_ways = mas_ways->next;
-	}
-	ft_printf("{YELLOW}iters - %d{EOC}\n", min->iter);
-	print_ways(min->ways);
-}
-
-void	print_result(t_mas_ways *res, int target)
-{
-	ft_printf("{YELLOW}iters - %d{EOC}   {RED}target - %d{EOC}\n",
-			res->iter, target);
-	print_ways(res->ways);
-}
-
 void	print_list_ants(t_lemin *lem)
 {
 	int 		i;
@@ -90,14 +54,18 @@ void	print_list_ants(t_lemin *lem)
 
 	i = 0;
 	ant = lem->ants;
-	p_ants_go(lem->result->ways, lem, lem->ants);
+	if (lem->flag.go == 0)
+		p_ants_go(lem->result->ways, lem, lem->ants);
 	lem->ants = ant;
+	ft_printf("{YELLOW}Ant num{EOC} | {YELLOW}Ant's way{EOC}\n");
+	ft_printf("-------------------------------\n");
 	while (i < lem->ants)
 	{
-		ft_printf("L%-4d | ", i + 1);
+		ft_printf("{PURPLE} L%-4d{EOC}  | ", i + 1);
 		print_way(lem->list_ants[i].way);
 		i++;
 	}
+	ft_printf("-------------------------------\n");
 	ft_printf("\n");
 }
 
@@ -108,16 +76,20 @@ void	print_choosed_ant(t_lemin *lem)
 
 	wish = lem->wish_list;
 	ant = lem->ants;
-	p_ants_go(lem->result->ways, lem, lem->ants);
+	if (lem->flag.go == 0)
+		p_ants_go(lem->result->ways, lem, lem->ants);
 	lem->ants = ant;
+	ft_printf("{YELLOW}Ant num{EOC} | {YELLOW}Ant's way{EOC}\n");
+	ft_printf("-------------------------------\n");
 	while (wish)
 	{
-		ft_printf("L%-4d | ", wish->ant);
+		ft_printf("{PURPLE} L%-4d{EOC}  | ", wish->ant);
 		if (wish->ant > 0 && wish->ant <= lem->ants)
 			print_way(lem->list_ants[wish->ant - 1].way);
 		else
 			ft_printf("{RED}THE ANT IS NOT EXIST!{EOC}\n");
 		wish = wish->next;
 	}
+	ft_printf("-------------------------------\n");
 	ft_printf("\n");
 }

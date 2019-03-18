@@ -5,7 +5,7 @@
 #include "lem_in.h"
 #include "bfs.h"
 
-void		show_hide_first_edge_ways(t_min_way *min_way, int mode)
+static void		show_hide_first_edge_ways(t_min_way *min_way, int mode)
 {
 	while (min_way)
 	{
@@ -14,7 +14,7 @@ void		show_hide_first_edge_ways(t_min_way *min_way, int mode)
 	}
 }
 
-void		show_hide_way(t_way *way, int mode, t_lemin *lem)
+static void		show_hide_way(t_way *way, int mode, t_lemin *lem)
 {
 	t_way		*end;
 	t_list_e	*list_e;
@@ -42,7 +42,7 @@ void		show_hide_way(t_way *way, int mode, t_lemin *lem)
 	}
 }
 
-void		show_hide_ways(t_ways *ways, int mode, t_lemin *lem)
+static void		show_hide_ways(t_ways *ways, int mode, t_lemin *lem)
 {
 	while (ways)
 	{

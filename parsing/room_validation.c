@@ -8,7 +8,7 @@
 #define IDENT_ROOMS "There can be no two identical name of rooms!"
 #define IDENT_COORD "You have two rooms with identical coordinates!"
 
-int 	is_in_vert_list(t_lemin *lem, char *name, int x, int y)
+static int 	is_in_vert_list(t_lemin *lem, char *name, int x, int y)
 {
 	t_verticle	*v;
 

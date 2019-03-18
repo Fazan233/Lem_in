@@ -6,8 +6,10 @@
 #define ERR_ST_END "The start and end rooms must be specified!"
 #define ERR_ANT_NUM "Number of ants must be digit: 0 < ANT_NUM <= INT_MAX"
 #define ERR_PROBL_ST_END "WOW you have some problem with start or end. FIX IT!"
+#define EMTY_LINE " And maybe you have empty line, if it is true - delete it!"
+#define PROBL_ST_END_EMPT_LINE ERR_PROBL_ST_END EMTY_LINE
 
-void		check_sharp(t_lemin *lem, char **line, int fd)
+static void		check_sharp(t_lemin *lem, char **line, int fd)
 {
 	int 	flag;
 
@@ -35,7 +37,7 @@ void		check_sharp(t_lemin *lem, char **line, int fd)
 	}
 }
 
-void		valid_num_of_ants(t_lemin *lem, int fd, char **line)
+static void		valid_num_of_ants(t_lemin *lem, int fd, char **line)
 {
 	char 	*num;
 
@@ -65,7 +67,7 @@ void		valid_num_of_ants(t_lemin *lem, int fd, char **line)
 }
 
 
-void 		valid_rooms(t_lemin *lem, int fd, char **line)
+static void 		valid_rooms(t_lemin *lem, int fd, char **line)
 {
 	while (get_next_line(fd, line) > 0)
 	{
@@ -79,7 +81,7 @@ void 		valid_rooms(t_lemin *lem, int fd, char **line)
 	}
 }
 
-void 		valid_links(t_lemin *lem, int fd, char **line)
+static void 		valid_links(t_lemin *lem, int fd, char **line)
 {
 	is_valid_link(lem, line);
 	while (get_next_line(fd, line) > 0)
@@ -104,7 +106,7 @@ void		parsing(int fd, t_lemin *lem)
 	if (lem->start_vert == NULL || lem->end_vert == NULL)
 	{
 		free(line);
-		ft_error_mode(ERROR, ERR_ST_END, lem->flag.debug);
+		ft_error_mode(ERROR, PROBL_ST_END_EMPT_LINE, lem->flag.debug);
 	}
 	valid_links(lem, fd, &line);
 }

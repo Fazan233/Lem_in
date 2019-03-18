@@ -23,7 +23,8 @@ static void	set_begin_vals(t_verticle *begin, t_queue *queue,
 static void		push_vert_in_queue(t_list_e *list_e, t_verticle *other,
 								t_verticle *curr_v, t_queue *queue)
 {
-	if (list_e->e->available && other->gray == 0 && other->visited == 0)
+	if (list_e->e->available && other->gray == 0 && other->visited == 0
+		&& other->block == 0)
 	{
 		other->gray = 1;
 		other->short_way = list_e->e;

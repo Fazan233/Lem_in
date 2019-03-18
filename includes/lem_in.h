@@ -76,6 +76,8 @@ typedef struct			s_verticle
 {
 	int 				gray:1;
 	int 				visited:1;
+	int 				block:1;
+	int 				mult:1;
 	int 				n;
 	int					weight;
 	int					x;
@@ -143,6 +145,8 @@ typedef struct			s_mas_res
 	t_mas_ways			*mas_ways;
 	struct s_mas_res	*next;
 }						t_mas_res;
+
+void		check_sharp(t_lemin *lem, char **line, int fd);
 
 void		add_wish_list(t_wish_list **wish, int ant);
 void		check_flags(int ac, char **av, t_lemin *lem);

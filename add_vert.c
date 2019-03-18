@@ -13,6 +13,8 @@ t_verticle	*create_new_vert(char *name, int x, int y)
 	vert = (t_verticle*)malloc(sizeof(t_verticle));
 	if (vert)
 	{
+		vert->block = 0;
+		vert->mult = 0;
 		vert->x = x;
 		vert->y = y;
 		vert->next = NULL;

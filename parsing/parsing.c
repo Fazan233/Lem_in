@@ -9,33 +9,33 @@
 #define EMTY_LINE " And maybe you have empty line, if it is true - delete it!"
 #define PROBL_ST_END_EMPT_LINE ERR_PROBL_ST_END EMTY_LINE
 
-static void		check_sharp(t_lemin *lem, char **line, int fd)
-{
-	int 	flag;
-
-	if (!ft_strcmp(*line, "##start") || !ft_strcmp(*line, "##end"))
-	{
-		flag = (*line)[2] == 's' ? 0 : 1;
-		free(*line);
-		if (get_next_line(fd, line))
-			if (is_valid_room(lem, line))
-				if ((flag == 0 && !lem->start_vert) ||
-					(flag == 1 && !lem->end_vert))
-				{
-					flag == 0 ? lem->start_vert = lem->vert : 0;
-					flag == 1 ? lem->end_vert = lem->vert : 0;
-					return ;
-				}
-		ft_error_mode(ERROR, ERR_PROBL_ST_END, lem->flag.debug);
-	}
-	else
-	{
-		if (!lem->target &&
-			ft_strstr(*line, "#Here is the number of lines required:"))
-			lem->target = get_target(*line);
-		free(*line);
-	}
-}
+//static void		check_sharp(t_lemin *lem, char **line, int fd)
+//{
+//	int 	flag;
+//
+//	if (!ft_strcmp(*line, "##start") || !ft_strcmp(*line, "##end"))
+//	{
+//		flag = (*line)[2] == 's' ? 0 : 1;
+//		free(*line);
+//		if (get_next_line(fd, line))
+//			if (is_valid_room(lem, line))
+//				if ((flag == 0 && !lem->start_vert) ||
+//					(flag == 1 && !lem->end_vert))
+//				{
+//					flag == 0 ? lem->start_vert = lem->vert : 0;
+//					flag == 1 ? lem->end_vert = lem->vert : 0;
+//					return ;
+//				}
+//		ft_error_mode(ERROR, ERR_PROBL_ST_END, lem->flag.debug);
+//	}
+//	else
+//	{
+//		if (!lem->target &&
+//			ft_strstr(*line, "#Here is the number of lines required:"))
+//			lem->target = get_target(*line);
+//		free(*line);
+//	}
+//}
 
 static void		valid_num_of_ants(t_lemin *lem, int fd, char **line)
 {

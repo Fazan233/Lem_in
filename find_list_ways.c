@@ -31,7 +31,7 @@ static void		show_hide_way(t_way *way, int mode, t_lemin *lem)
 		while (way != end)
 		{
 			list_e = lem->list_v[way->vert->n].list_e;
-			while (list_e)
+			while (way->vert->mult == 0 && list_e)
 			{
 				list_e->e->available = (mode == 0 ? 0 : 1);
 				list_e = list_e->next;

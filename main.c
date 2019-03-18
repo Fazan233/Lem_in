@@ -21,7 +21,7 @@ int main(int ac, char **av)
 {
 	t_lemin 	*lem;
 
-	int fd = open("sr", O_RDONLY);
+	int fd = open("test_5", O_RDONLY);
 	if (!(lem = (t_lemin*)malloc(sizeof(t_lemin))))
 		ft_error(ERR_LEM);
 	ft_bzero(lem, sizeof(t_lemin));

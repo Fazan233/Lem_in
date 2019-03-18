@@ -3,7 +3,6 @@
 //
 
 #include "lem_in.h"
-#include "bfs.h"
 
 static void		show_hide_first_edge_ways(t_min_way *min_way, int mode)
 {

@@ -21,6 +21,7 @@ int main(int ac, char **av)
 {
 	t_lemin 	*lem;
 
+	int fd = open("sr", O_RDONLY);
 	if (!(lem = (t_lemin*)malloc(sizeof(t_lemin))))
 		ft_error(ERR_LEM);
 	ft_bzero(lem, sizeof(t_lemin));
@@ -30,7 +31,7 @@ int main(int ac, char **av)
 		check_flags(ac, av, lem);
 	else
 		set_standart_flags(lem);
-	init_lem(0, lem);
+	init_lem(fd, lem);
 	write_result(lem);
 	lem->result = get_result(lem->mas_res);
 	print_data(lem);

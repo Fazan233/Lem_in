@@ -101,6 +101,7 @@ void		parsing(int fd, t_lemin *lem)
 {
 	char	*line;
 
+	line = NULL;
 	valid_num_of_ants(lem, fd, &line);
 	valid_rooms(lem, fd, &line);
 	if (lem->start_vert == NULL || lem->end_vert == NULL)

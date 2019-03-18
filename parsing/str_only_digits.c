@@ -6,7 +6,7 @@
 
 int		str_only_digits(char *str)
 {
-	if (str)
+	if (str && *str)
 	{
 		while (*str != '\0')
 		{

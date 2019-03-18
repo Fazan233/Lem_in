@@ -2,7 +2,7 @@
 // Created by Vladyslav USLYSTYI on 2019-03-08.
 //
 
-#include "bfs.h"
+#include "lem_in.h"
 #define GET_OTHER_VERT(curr, edge) curr == edge->a ? edge->b : edge->a
 
 static void	set_begin_vals(t_verticle *begin, t_queue *queue,
@@ -34,20 +34,19 @@ static void		push_vert_in_queue(t_list_e *list_e, t_verticle *other,
 
 t_way		*bfs(t_lemin *lem)
 {
-	t_queue		queue;
 	t_verticle	*curr_v;
 	t_list_e	*list_e;
 	t_verticle	*other;
 
-	ft_bzero(&queue, sizeof(t_queue));
-	push_queue(&queue, lem->start_vert);
-	set_begin_vals(lem->vert, &queue, lem->start_vert);
-	while (queue.last)
+	ft_bzero(&lem->queue, sizeof(t_queue));
+	push_queue(&lem->queue, lem->start_vert);
+	set_begin_vals(lem->vert, &lem->queue, lem->start_vert);
+	while (lem->queue.last)
 	{
-		curr_v = pop_queue(&queue);
+		curr_v = pop_queue(&lem->queue);
 		if (curr_v == lem->end_vert)
 		{
-			del_queue_list(&queue);
+			del_queue_list(&lem->queue);
 			break ;
 		}
 		curr_v->visited = 1;
@@ -55,37 +54,9 @@ t_way		*bfs(t_lemin *lem)
 		while (list_e)
 		{
 			other = GET_OTHER_VERT(curr_v, list_e->e);
-			push_vert_in_queue(list_e, other, curr_v, &queue);
+			push_vert_in_queue(list_e, other, curr_v, &lem->queue);
 			list_e = list_e->next;
 		}
 	}
 	return (get_short_way(lem));
 }
-
-//t_way		*bfs(t_lemin *lem)
-//{
-//	t_queue		queue;
-//	t_verticle	*curr_v;
-//	t_list_e	*list_e;
-//	t_verticle	*other;
-//
-//	set_begin_vals(lem->vert, &queue, lem->start_vert);
-//	while (queue.last)
-//	{
-//		curr_v = pop_queue(&queue);
-//		if (curr_v == lem->end_vert)
-//		{
-//			del_queue_list(&queue);
-//			break ;
-//		}
-//		curr_v->visited = 1;
-//		list_e = lem->list_v[curr_v->n].list_e;
-//		while (list_e)
-//		{
-//			other = GET_OTHER_VERT(curr_v, list_e->e);
-//			push_vert_in_queue(list_e, other, curr_v, &queue);
-//			list_e = list_e->next;
-//		}
-//	}
-//	return (get_short_way(lem));
-//}

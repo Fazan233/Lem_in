@@ -112,6 +112,5 @@ int				get_next_line(const int fd, char **line)
 	delete_unused_fd(&list, tmp);
 	if (**line != 0)
 		return (1);
-	free(*line);
 	return (rd == -1 ? -1 : 0);
 }

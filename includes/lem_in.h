@@ -10,6 +10,19 @@
 
 #include "ft_printf.h"
 
+typedef struct			s_qlist
+{
+	struct s_verticle	*v;
+	struct s_qlist		*next;
+	struct s_qlist		*prev;
+}						t_qlist;
+
+typedef struct			s_queue
+{
+	struct s_qlist		*qlist;
+	struct s_qlist		*last;
+}						t_queue;
+
 typedef struct			s_wish_list
 {
 	int 				ant;
@@ -45,6 +58,7 @@ typedef struct			s_lemin
 	int 				target;
 	int 				amount;
 	int					ants;
+	struct s_queue		queue;
 	struct s_edge		*graph;
 	struct s_verticle	*vert;
 	struct s_mas_ways	*mas_ways;
@@ -139,6 +153,11 @@ void		print_list_ants(t_lemin *lem);
 void		print_choosed_ant(t_lemin *lem);
 void		p_ants_go(t_ways *ways, t_lemin *lem, int ant);
 void		help(char *help);
+t_verticle	*pop_queue(t_queue *queue);
+void		push_queue(t_queue *queue, t_verticle *v);
+t_way		*bfs(t_lemin *lem);
+void 		del_queue_list(t_queue *queue);
+
 
 t_list_v	*get_list_v(struct s_lemin *lem, struct s_verticle *v);
 void		add_new_vert(t_verticle **vert, t_verticle *new_vert);
